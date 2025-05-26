@@ -7,8 +7,8 @@ public class PlayerStats : MonoBehaviour
     private float _health;
     public float Health
     {
-        get;
-        set;
+        get{ return _health; }
+        set{ _health = value; }
     }
 
     void Awake()
