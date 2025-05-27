@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Attacking",
                     "type": "Button",
                     "id": "2d5ceb9e-218d-4c5f-8aaf-8eebd219e002",
                     "expectedControlType": "Button",
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CraftMenu",
+                    "type": "Button",
+                    "id": "6c89a1bb-6d0b-4d36-9f93-93e97a205588",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -136,7 +145,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Attacking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b5b6f00-1ed5-4bcb-870b-ce6d1f98c167",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CraftMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
