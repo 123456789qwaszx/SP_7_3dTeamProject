@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,8 +16,8 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
  
-                // NPCSearch ¿ÀºêÁ§Æ®¸¦ MarkNPCNameÀÇ ÀÚ½ÄÀ¸·Î ¼³Á¤
-                // TextMeshPro ÄÄÆ÷³ÍÆ®¸¦ Ã£¾Æ ÀÌ¸§ ¼³Á¤
+                // NPCSearch ì˜¤ë¸Œì íŠ¸ë¥¼ MarkNPCNameì˜ ìì‹ìœ¼ë¡œ ì„¤ì •
+                // TextMeshPro ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì•„ ì´ë¦„ ì„¤ì •
                 Instantiate(NPCSearch, MarkNPCName. transform).GetComponentInChildren<TextMeshProUGUI>().text = npcName;
                     NPCSearch.gameObject.name = npcName;
 
@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
         {
             string npcName = this.gameObject.name;
 
-            // ÀÚ½Ä Áß¿¡ npcNameÀ» °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ Á¦°Å
+            // ìì‹ ì¤‘ì— npcNameì„ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì„œ ì œê±°
 
             Destroy(MarkNPCName.transform.Find(npcName + "(Clone)").gameObject);
 
