@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class UIPlayerStats : MonoBehaviour
 {
-    public PlayerStats uiStat;
+    public UICondition uiCondition;
 
 
-    Stat health { get { return uiStat.Health; } }
-    Stat hydration { get { return uiStat.Hydration; } }
-    Stat hunger { get { return uiStat.Hunger; } }
+    Condition health { get { return uiCondition.health; } }
+    Condition hydration { get { return uiCondition.hydration; } }
+    Condition hunger { get { return uiCondition.hunger; } }
     private float playerHealth;
     public float noHydrationHealthDecay;
     public float noHungerHealthDecay;
