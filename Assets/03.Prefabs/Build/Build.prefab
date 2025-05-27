@@ -3070,7 +3070,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  rayRange: 6
+  rayRange: 15
 --- !u!1 &9076869946712714324
 GameObject:
   m_ObjectHideFlags: 0

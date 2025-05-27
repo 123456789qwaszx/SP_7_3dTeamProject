@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ea5978b6b73934daaa536cf2c794f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerGround: 7
+  layerGround: 10
   green: {fileID: 2100000, guid: 307d88e98d916cd4baa42cf39c3c7ccc, type: 2}
   red: {fileID: 2100000, guid: 42eb6850f313c4644bccba50efc618c9, type: 2}
