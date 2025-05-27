@@ -6,23 +6,23 @@ public class PlayerStats : MonoBehaviour
 {
     
     [SerializeField]
-    private float _health;
-    public float Health // 체력
+    private Condition _health;
+    public Condition Health // 체력
     {
         get{ return _health; }
         set{ _health = value; }
     }
     [SerializeField]
-    private float _hunger;
-    public float Hunger             // 배고픔
+    private Condition _hunger;
+    public Condition Hunger             // 배고픔
     {
         get{return _hunger; }
         set { _hunger = value; }
     }
     [SerializeField]
-    private float _hydration;
+    private Condition _hydration;
 
-    public float Hydration          // 수분
+    public Condition Hydration          // 수분
     {
         get{return _hydration; }
         set{_hydration = value;}
