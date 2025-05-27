@@ -16,8 +16,8 @@ MonoBehaviour:
   health: 150
   damage: 15
   attackRate: 1.5
-  detectDistance: 10
-  attackDistance: 5
+  detectDistance: 5
+  attackDistance: 2.5
   walkSpeed: 2
   runSpeed: 4
   dropItems:

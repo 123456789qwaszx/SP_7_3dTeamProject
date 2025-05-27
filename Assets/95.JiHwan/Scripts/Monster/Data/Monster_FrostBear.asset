@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cdc7c8de9f3d9459b6cb509774c264, type: 3}
   m_Name: Monster_FrostBear
   m_EditorClassIdentifier: 
-  monsterName: 
-  health: 0
-  damage: 0
-  attackRate: 0
-  detectDistance: 0
-  attackDistance: 0
-  walkSpeed: 0
-  runSpeed: 0
-  dropItems: []
+  monsterName: FrostBear
+  health: 300
+  damage: 30
+  attackRate: 1
+  detectDistance: 7
+  attackDistance: 2.5
+  walkSpeed: 3
+  runSpeed: 6
+  dropItems:
+  - itemPrefab: {fileID: 0}
+    dropRate: 0
+    minQuantity: 1
+    maxQuantity: 1

@@ -17,6 +17,9 @@ public class MonsterData : ScriptableObject
     [Header("Movement")] public float walkSpeed;
     public float runSpeed;
     
+    [Header("Abilities")]
+    public MonsterAbility[] abilities;
+    
     [Header("Rewards")]
     public DropItem[] dropItems;
 
@@ -29,4 +32,11 @@ public class DropItem
     public float dropRate;
     public int minQuantity = 1;
     public int maxQuantity = 1;
+}
+
+[System.Serializable]
+public class MonsterAbility
+{
+    public string abilityName;
+    public float duration;
 }

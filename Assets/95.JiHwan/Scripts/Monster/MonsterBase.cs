@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -38,7 +37,6 @@ public class MonsterBase : MonoBehaviour
         OnMonsterStart();
     }
 
-    // Update is called once per frame
     protected virtual void Update()
     {
         if (isDead) return;
@@ -107,18 +105,34 @@ public class MonsterBase : MonoBehaviour
 
         animator.speed = agent.speed/monsterData.walkSpeed;
     }
+
+    
+    private void PassiveUpdate()
+    {
+        if (currentState == AIState.Wandering && agent.remainingDistance < 0.1f)
+        {
+            SetState(AIState.Idle);
+            Invoke("WanderToNewLocation", Random.Range(minWanderWaitTime, maxWanderWaitTime));
+        }
+
+        if (playerDistance < monsterData.detectDistance)
+        {
+            SetState(AIState.Attacking);
+        }
+    }
     void WanderToNewLocation()
     {
         if (currentState != AIState.Idle) return;
         
-        SetState((AIState.Wandering));
+        SetState(AIState.Wandering);
         agent.SetDestination(GetWanderLocation());
     }
 
+    
     Vector3 GetWanderLocation()
     {
         NavMeshHit hit;
-
+        
         NavMesh.SamplePosition(
             transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit,
             maxWanderDistance, NavMesh.AllAreas);
@@ -136,20 +150,6 @@ public class MonsterBase : MonoBehaviour
         
         return hit.position;
     }
-    
-    private void PassiveUpdate()
-    {
-        if (currentState == AIState.Wandering && agent.remainingDistance < 0.1f)
-        {
-            SetState(AIState.Idle);
-            Invoke("WanderToNewLocation", Random.Range(minWanderWaitTime, maxWanderWaitTime));
-        }
-
-        if (playerDistance < monsterData.detectDistance)
-        {
-            SetState(AIState.Attacking);
-        }
-    }
     private void AttackingUpdate()
     {
         if (playerDistance < monsterData.attackDistance && IsPlayerInFieldOfView())
@@ -160,8 +160,13 @@ public class MonsterBase : MonoBehaviour
                 lastAttackTime = Time.time;
                 //CharacterManager.Instance.Player.controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
                 animator.speed = 1;
+
+                int index = Random.Range(0, 4);
+                animator.SetInteger("AttackIndex", index);
+                
                 animator.SetTrigger("Attack");
             }
+            
         }
         else
         {
