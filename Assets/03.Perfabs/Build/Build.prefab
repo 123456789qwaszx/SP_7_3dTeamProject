@@ -847,7 +847,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3375834582439751099}
+        m_TargetAssemblyTypeName: BuildManual, Assembly-CSharp
+        m_MethodName: SlotClick
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1469470752472186458
 GameObject:
   m_ObjectHideFlags: 0
@@ -3400,7 +3412,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_BaseUI: {fileID: 2500906918705368560}
-  builds: []
+  builds:
+  - buildName: Panel
+    go_Prefabs: {fileID: 7539615883743782861, guid: fc1d2821a4a394c4d960ab461a198a40, type: 3}
+    go_PreviewPrefabs: {fileID: 3001666245541303330, guid: 738479ba5aca65944b361e5a7023bf4d, type: 3}
+  tf_Player: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  rayRange: 10
 --- !u!1 &8495380748056174953
 GameObject:
   m_ObjectHideFlags: 0
