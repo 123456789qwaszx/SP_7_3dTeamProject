@@ -34,7 +34,7 @@ public class BuildManual : MonoBehaviour
             Quaternion.identity
         );
 
-        go_Prefab = builds[_slotNumber].go_Prefabs; // 테스트용용
+        go_Prefab = builds[_slotNumber].go_Prefabs; // 테스트용
 
         // if (_slotNumber < buildList.Length)
         // {
@@ -79,14 +79,13 @@ public class BuildManual : MonoBehaviour
 
     private void Build()
     {
-        Debug.Log("Build 실행 확인");
-        //  && go_Preview.GetComponent<PreviewObject>().isBuildable()
+        Quaternion lockRot = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
+
         if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().isBuildable())
         {
-            Debug.Log("null 추적 중. go_Prefab 값: " + go_Prefab);
             if (go_Prefab != null)
             {
-                Instantiate(go_Prefab, hitInfo.point, Quaternion.identity);
+                Instantiate(go_Prefab, hitInfo.point, lockRot);
                 Destroy(go_Preview);
             }
             else
@@ -117,10 +116,12 @@ public class BuildManual : MonoBehaviour
     {
         if (Physics.Raycast(tf_Player.position, tf_Player.forward, out hitInfo, rayRange, layerMask))
         {
+
             if (hitInfo.transform != null)
             {
                 Vector3 _location = hitInfo.point;
                 go_Preview.transform.position = _location;
+                go_Preview.transform.rotation = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금금
             }
         }
     }
