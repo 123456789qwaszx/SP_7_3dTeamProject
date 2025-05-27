@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdb47ef7955ea9043854e0e0b46e9b50, type: 3}
-  m_Name: item_Wood
+  m_Name: resourceData_02_iron
   m_EditorClassIdentifier: 
-  ResourceName: "\uD1B5\uB098\uBB34"
+  ResourceName: "\uCCA0"
   description: "\uAC74\uCD95 \uC7AC\uB8CC"
-  dropPrefab: {fileID: 311559682905318926, guid: 556f9541574b8be4fb29661e49522cf2, type: 3}
+  dropPrefab: {fileID: 4072097796904942486, guid: a6532794431e7d34a95c64c6d1b8cf0a, type: 3}
   canStack: 1
   maxStackAmout: 99
   consumables: []

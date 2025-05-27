@@ -8,9 +8,15 @@ public class ResourceManager
 {
     // 원본 'GameObject prefab'을 참조하여 씬에 복사를 해줌
     // 풀을 뒤져서 있으면 그걸 활성화 시킴
-    public GameObject Instantiate(GameObject prefab, Transform parent = null)
+
+    public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject original = GameObject.Instantiate(prefab);
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
+        if (original == null)
+        {
+            Debug.Log($"Failed to load prefab : {path}");
+            return null;
+        }
 
         if (original.GetComponent<Poolable>() != null)
             return Managers.Pool.Pop(original, parent).gameObject;
@@ -35,5 +41,23 @@ public class ResourceManager
         }
 
         Object.Destroy(go);
+    }
+    
+
+    public T Load<T>(string path) where T : Object
+    {
+        if (typeof(T) == typeof(GameObject))
+        {
+            string name = path;
+            int index = name.LastIndexOf('/');
+            if (index >= 0)
+                name = name.Substring(index + 1);
+
+            GameObject go = Managers.Pool.GetOriginal(name);
+            if (go != null)
+                return go as T;
+        }
+
+        return Resources.Load<T>(path);
     }
 }

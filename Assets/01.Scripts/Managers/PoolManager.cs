@@ -14,7 +14,7 @@ public class PoolManager
 
         Stack<Poolable> _poolStack = new Stack<Poolable>();
 
-        public void Init(GameObject original, int count = 3)
+        public void Init(GameObject original, int count = 14)
         {
             Original = original;
             Root = new GameObject().transform;
@@ -101,7 +101,7 @@ public class PoolManager
     }
 
 
-    public void CreatePool(GameObject original, int count = 3)
+    public void CreatePool(GameObject original, int count = 20)
     {
         Pool pool = new Pool();
         pool.Init(original, count);
