@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawningPool : MonoBehaviour
 {
+    public GameObject tree;
+
     [SerializeField]
     int _treeCount = 0;
     [SerializeField]
@@ -30,7 +32,7 @@ public class SpawningPool : MonoBehaviour
         _reserveCount++;
 
         yield return new WaitForSeconds(_spawnTime);
-        GameObject go = Managers.Resource.Instantiate("Tree");
+        GameObject go = Managers.Resource.Instantiate(tree);
         _treeCount++;
 
         Vector3 randPos;
