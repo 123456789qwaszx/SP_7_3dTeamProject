@@ -29,5 +29,32 @@ public class GameManager : Singleton<GameManager>
         go.transform.parent = LogRoot;
         return go;
     }
+
+    #endregion
+    #region Rock
+    public GameObject RockPrefab;
+
+    public Transform _rockRoot;
+    public Transform RockRoot
+    {
+        get
+        {
+            if (_rockRoot == null)
+            {
+                GameObject go = new GameObject("@RockRoot");
+                _rockRoot = go.transform;
+            }
+            return _rockRoot;
+        }
+    }
+
+    public GameObject SpawnRock()
+    {
+        Debug.Log("돌생성");
+        GameObject go = GameObject.Instantiate(RockPrefab, _rockRoot);
+        go.name = RockPrefab.name;
+        go.transform.parent = RockRoot;
+        return go;
+    }
     #endregion
 }
