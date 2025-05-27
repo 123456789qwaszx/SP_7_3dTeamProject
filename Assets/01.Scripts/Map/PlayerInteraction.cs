@@ -6,9 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class PlayerInteraction : MonoBehaviour
 {
-    public Action<PlayerController> OnPlayerInteraction;
+    public Action<Player> OnPlayerInteraction;
     public float InteractInterval = 0.5f;
-    private PlayerController _player;
+    private Player _player;
 
     private void Start()
     {
@@ -25,11 +25,11 @@ public class PlayerInteraction : MonoBehaviour
                 OnPlayerInteraction(_player);
         }
     }
-    
+
 
     void OnTriggerEnter(Collider other)
     {
-        PlayerController pc = other.GetComponent<PlayerController>();
+        Player pc = other.GetComponent<Player>();
         if (pc == null)
             return;
 
@@ -38,7 +38,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        PlayerController pc = other.GetComponent<PlayerController>();
+        Player pc = other.GetComponent<Player>();
         if (pc == null)
             return;
 

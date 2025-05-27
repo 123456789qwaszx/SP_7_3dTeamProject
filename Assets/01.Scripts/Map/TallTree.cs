@@ -4,59 +4,23 @@ using UnityEngine;
 
 public class TallTree : MonoBehaviour
 {
-    private GetTree _tree;
+    public GetTree _tree;
+    public PlayerInteraction interaction;
+
+    private float workSpeed = 2;
+
 
     void Start()
     {
-        _tree = FindChild<GetTree>(gameObject);
-
-        PlayerInteraction interaction = _tree.GetComponent<PlayerInteraction>();
-        interaction.InteractInterval = 0.2f;
+        interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerTreeInteraction;
     }
 
-    void OnPlayerTreeInteraction(PlayerController pc)
+    void OnPlayerTreeInteraction(Player pc)
     {
+        // 나중에 Ax를 들었을 때만 동작.
+        // 혹은 특정 키값입력 or 능력 등등
         GameManager.Instance.SpawnLog();
-    }
-
-
-
-    public GameObject FindChild(GameObject go, string name = null, bool recursive = false)
-    {
-        Transform transform = FindChild<Transform>(go, name, recursive);
-        if (transform == null)
-            return null;
-
-        return transform.gameObject;
-    }
-
-    public T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
-    {
-        if (go == null)
-            return null;
-
-        if (recursive == false)
-        {
-            for (int i = 0; i < go.transform.childCount; i++)
-            {
-                Transform transform = go.transform.GetChild(i);
-                if (string.IsNullOrEmpty(name) || transform.name == name)
-                {
-                    T component = transform.GetComponent<T>();
-                    if (component != null)
-                        return component;
-                }
-            }
-        }
-        else
-        {
-            foreach (T component in go.GetComponentsInChildren<T>())
-            {
-                if (string.IsNullOrEmpty(name) || component.name == name)
-                    return component;
-            }
-        }
-        return null;
+        // 생성하고 나무위치로 이동
     }
 }
