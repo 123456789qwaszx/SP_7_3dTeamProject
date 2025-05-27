@@ -33,7 +33,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Attacking",
                     "type": "Button",
                     "id": "2d5ceb9e-218d-4c5f-8aaf-8eebd219e002",
                     "expectedControlType": "Button",
@@ -136,7 +136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Attack",
+                    "action": "Attacking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
