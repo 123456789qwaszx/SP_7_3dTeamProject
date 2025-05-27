@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: fence-doorway
   m_EditorClassIdentifier: 
   buildingName: fence-doorway
-  prefab: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  prefab: {fileID: 3320445888353815105, guid: 1a7bf9e4581273b4781eb3cd13bf8381, type: 3}
+  previewPrefab: {fileID: 3320445888353815105, guid: 97bc89569e589b6409ec27c44ed2a975, type: 3}
   icon: {fileID: 0}
   cost: 0

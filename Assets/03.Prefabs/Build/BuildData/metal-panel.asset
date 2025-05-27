@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: metal-panel
   m_EditorClassIdentifier: 
   buildingName: metal-panel
-  prefab: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  prefab: {fileID: 7539615883743782861, guid: fc1d2821a4a394c4d960ab461a198a40, type: 3}
+  previewPrefab: {fileID: 3001666245541303330, guid: 28e9c54b397cea3459cf44b08418b5c7, type: 3}
   icon: {fileID: 0}
   cost: 0

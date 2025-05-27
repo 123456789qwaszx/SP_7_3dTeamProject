@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tree-log_Down
   m_EditorClassIdentifier: 
   buildingName: tree-log_Down
-  prefab: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  prefab: {fileID: 5879751579135381479, guid: 521dcc63b0d79c448a50c8d2ae841b03, type: 3}
+  previewPrefab: {fileID: 5879751579135381479, guid: d2990dc23c0ad494791239b9cf4d6d7c, type: 3}
   icon: {fileID: 0}
   cost: 0
