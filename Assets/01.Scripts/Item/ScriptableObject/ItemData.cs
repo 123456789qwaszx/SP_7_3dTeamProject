@@ -10,20 +10,6 @@ public enum ItemType
     Resource
 }
 
-public enum ConsumableType
-{
-    Health,
-    Hunger
-}
-
-[SerializeField]
-public class ItemDataConsumable
-{
-    public ConsumableType type;
-    public float value;
-}
-
-
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
