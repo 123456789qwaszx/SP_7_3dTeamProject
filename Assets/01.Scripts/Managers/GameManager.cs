@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField]
-    SpawningPool spawningPool;
-
     #region Log
     public GameObject LogPrefab;
 
@@ -26,11 +23,10 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject SpawnLog()
     {
-        Debug.Log("나무생성");
+        Debug.Log("wood_resource");
         GameObject go = GameObject.Instantiate(LogPrefab, _logRoot);
         go.name = LogPrefab.name;
         go.transform.parent = LogRoot;
-        spawningPool.AddTreeCount(1);
         return go;
     }
     #endregion
@@ -54,7 +50,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject SpawnRock()
     {
-        Debug.Log("돌생성");
+        Debug.Log("rock_resource");
         GameObject go = GameObject.Instantiate(RockPrefab, _rockRoot);
         go.name = RockPrefab.name;
         go.transform.parent = RockRoot;

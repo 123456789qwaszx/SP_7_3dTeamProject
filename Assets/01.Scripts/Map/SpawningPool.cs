@@ -27,7 +27,6 @@ public class SpawningPool : MonoBehaviour
 
     IEnumerator CoTreeSpawn()
     {
-        Debug.Log("Tree");
         _reserveCount++;
 
         yield return new WaitForSeconds(_spawnTime);
@@ -44,10 +43,8 @@ public class SpawningPool : MonoBehaviour
         _reserveCount--;
     }
 
-
     public void AddTreeCount(int value)
     {
         _treeCount += value;
     }
-
 }
