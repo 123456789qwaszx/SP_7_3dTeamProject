@@ -18,7 +18,6 @@ public class TallTree : MonoBehaviour
 
     void OnPlayerTreeInteraction(Player pc)
     {
-        Managers.Resource.Instantiate("Tree");
         // 나중에 Ax를 들었을 때만 동작.
         // 혹은 특정 키값입력 or 능력 등등
         GameManager.Instance.SpawnLog();
