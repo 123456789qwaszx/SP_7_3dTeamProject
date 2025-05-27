@@ -4320,7 +4320,7 @@ MonoBehaviour:
   curValue: 0
   maxValue: 500
   startValue: 400
-  passiveValue: -20
+  passiveValue: 20
   uiBar: {fileID: 865658755}
 --- !u!1 &871469133
 GameObject:
@@ -4648,7 +4648,7 @@ PrefabInstance:
     - target: {fileID: 5849981441600765475, guid: 0dd7be1a6c90239428f0302e66ebfcfa, type: 3}
       propertyPath: playerStats
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 997308434}
     - target: {fileID: 5849981441600765475, guid: 0dd7be1a6c90239428f0302e66ebfcfa, type: 3}
       propertyPath: cameraContainer
       value: 
@@ -4746,8 +4746,8 @@ MonoBehaviour:
   _hydration: {fileID: 1200548186}
   _attack: 0
   _armor: 0
-  _speed: 0
-  _jumpFoce: 0
+  _speed: 5
+  _jumpFoce: 80
 --- !u!1 &1007110076
 GameObject:
   m_ObjectHideFlags: 0
