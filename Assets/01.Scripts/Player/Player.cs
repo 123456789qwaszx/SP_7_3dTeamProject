@@ -5,12 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController Controller;
-    public PlayerStats PlayerStats;
+    public UIPlayerStats PlayerStats;
 
     void Awake()
     {
         Managers.Player.Player = this;
         Controller = GetComponent<PlayerController>();
-        PlayerStats = GetComponent<PlayerStats>();
+        PlayerStats = GetComponent<UIPlayerStats>();
     }
 }

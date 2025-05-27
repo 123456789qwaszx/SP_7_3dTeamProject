@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     #region Log
     public GameObject LogPrefab;
 
-    private Transform _logRoot;
+    public Transform _logRoot;
     public Transform LogRoot
     {
         get
@@ -23,16 +23,38 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject SpawnLog()
     {
-        Debug.Log("나무생성");
-        GameObject go = GameObject.Instantiate(LogPrefab);
+        Debug.Log("wood_resource");
+        GameObject go = GameObject.Instantiate(LogPrefab, _logRoot);
         go.name = LogPrefab.name;
         go.transform.parent = LogRoot;
         return go;
     }
+    #endregion
 
-    public void DespawnBurger(GameObject burger)
+    #region Rock
+    public GameObject RockPrefab;
+
+    public Transform _rockRoot;
+    public Transform RockRoot
     {
-        GameManager.Destroy(burger);
+        get
+        {
+            if (_rockRoot == null)
+            {
+                GameObject go = new GameObject("@RockRoot");
+                _rockRoot = go.transform;
+            }
+            return _rockRoot;
+        }
+    }
+
+    public GameObject SpawnRock()
+    {
+        Debug.Log("rock_resource");
+        GameObject go = GameObject.Instantiate(RockPrefab, _rockRoot);
+        go.name = RockPrefab.name;
+        go.transform.parent = RockRoot;
+        return go;
     }
     #endregion
 }

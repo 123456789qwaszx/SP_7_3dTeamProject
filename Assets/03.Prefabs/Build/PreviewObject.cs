@@ -28,7 +28,7 @@ public class PreviewObject : MonoBehaviour
     private void ChangeColor()
     {
         if (colliderList.Count > 0) ;
-        else;
+        else ;
     }
 
     private void SetColor(Material mat) // 자식 렌더러에서 material 컬러를 불러오고 변경하는 함수. >> 그런데 현재 사용하는 모델링에는 자식 컴포넌트가 없음.
