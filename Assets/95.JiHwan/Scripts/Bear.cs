@@ -116,7 +116,7 @@ public class Bear : MonoBehaviour//, IDamageable
         if (aiState != AIState.Idle) return;
         
         SetState((AIState.Wandering));
-        agent.SetDestination(Random.insideUnitSphere * Random.Range(minWanderDistance, maxWanderDistance));
+        agent.SetDestination(GetWanderLocation());
     }
 
     Vector3 GetWanderLocation()
