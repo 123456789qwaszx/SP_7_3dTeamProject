@@ -6,23 +6,23 @@ public class PlayerStats : MonoBehaviour
 {
     
     [SerializeField]
-    private float _health;
-    public float Health // 체력
+    private Stat _health;
+    public Stat Health // 체력
     {
         get{ return _health; }
         set{ _health = value; }
     }
     [SerializeField]
-    private float _hunger;
-    public float Hunger             // 배고픔
+    private Stat _hunger;
+    public Stat Hunger             // 배고픔
     {
         get{return _hunger; }
         set { _hunger = value; }
     }
     [SerializeField]
-    private float _hydration;
+    private Stat _hydration;
 
-    public float Hydration          // 수분
+    public Stat Hydration          // 수분
     {
         get{return _hydration; }
         set{_hydration = value;}
@@ -62,7 +62,7 @@ public class PlayerStats : MonoBehaviour
 
     void Awake()
     {
-        //Managers.Player.Player.PlayerStats = this;
+        Managers.Player.Player.PlayerStats = this;
     }
 
 }
