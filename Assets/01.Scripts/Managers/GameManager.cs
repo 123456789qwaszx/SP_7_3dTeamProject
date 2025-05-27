@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField]
+    SpawningPool spawningPool;
+
     #region Log
     public GameObject LogPrefab;
 
@@ -27,10 +30,11 @@ public class GameManager : Singleton<GameManager>
         GameObject go = GameObject.Instantiate(LogPrefab, _logRoot);
         go.name = LogPrefab.name;
         go.transform.parent = LogRoot;
+        spawningPool.AddTreeCount(1);
         return go;
     }
-
     #endregion
+
     #region Rock
     public GameObject RockPrefab;
 
