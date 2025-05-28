@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffa2b60be89d3842bd8fa692f16961d, type: 3}
+  m_Name: metal-panel
+  m_EditorClassIdentifier: 
+  buildingName: metal-panel
+  prefab: {fileID: 7539615883743782861, guid: fc1d2821a4a394c4d960ab461a198a40, type: 3}
+  previewPrefab: {fileID: 3001666245541303330, guid: 28e9c54b397cea3459cf44b08418b5c7, type: 3}
+  icon: {fileID: 0}
+  cost: 0

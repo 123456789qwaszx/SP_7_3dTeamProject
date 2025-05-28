@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1637620751395756031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8526257289867222476}
+  - component: {fileID: 1947050636912972749}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8526257289867222476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637620751395756031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9147319663612536914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1947050636912972749
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637620751395756031}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5051772411238663713
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1921771625734807920, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -89.98021
@@ -580,6 +637,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8774700000564567073}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8526257289867222476}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       insertIndex: -1
@@ -602,6 +662,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2421785142005746307}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 50034199435353636}
   m_SourcePrefab: {fileID: 100100000, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
 --- !u!1 &8483126281844716264 stripped
 GameObject:
@@ -701,6 +764,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 23c12d36-0539-48f3-acb2-3b0891021546
     m_ActionName: Player/PlayerLook[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c89a1bb-6d0b-4d36-9f93-93e97a205588
+    m_ActionName: Player/CraftMenu[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -720,6 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 1194962173620376949}
   PlayerStats: {fileID: 0}
+  itemData: {fileID: 0}
 --- !u!114 &1194962173620376949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,6 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 2404234221295657825}
+  attackRange: {fileID: 1947050636912972749}
   IsGround: 0
   groundCheckTr: {fileID: 8774700000564567073}
   groundDistance: 0.1
@@ -754,6 +823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f2f32ed32c38f4f9d34db7859a5624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiOpenClose: {fileID: 0}
+  noHungerHealthDecay: 5
+  uiStat: {fileID: 0}
   _health: {fileID: 0}
   _hunger: {fileID: 0}
   _hydration: {fileID: 0}
@@ -832,6 +904,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &50034199435353636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483126281844716264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe2b92f6d6e5df4781aed60f980897b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curInteractGameObject: {fileID: 0}
+  promptText: {fileID: 0}
 --- !u!4 &9147319663612536914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}

@@ -24,7 +24,7 @@ public class MonsterBase : MonoBehaviour
     
     public float fieldOfView = 120f;
     private SkinnedMeshRenderer[] meshRenderers;
-    public enum AIState {Idle, Wandering, Attacking}
+    public enum AIState {Idle, Wandering, Attacking, Fleeing}
 
     public AIState currentState;
     public event Action onTakeDamage;
@@ -41,9 +41,9 @@ public class MonsterBase : MonoBehaviour
     {
         if (isDead) return;
         
-        //playerDistance = Vector3.Distance(transform.position, CharacterManager.Instance.Player.transform.position);
-        
-        animator.SetBool("Moving", currentState != AIState.Idle);
+        playerDistance = Vector3.Distance(transform.position, player.position);       
+        float speed = agent.velocity.magnitude / agent.speed;
+        animator.SetFloat("Blend", speed);
 
         switch (currentState)
         {
@@ -54,8 +54,10 @@ public class MonsterBase : MonoBehaviour
             case AIState.Attacking:
                 AttackingUpdate();
                 break;
+            case AIState.Fleeing:
+                FleeingUpdate();
+                break;
         }
-            
         OnMonsterUpdate();
     }
 
@@ -89,7 +91,7 @@ public class MonsterBase : MonoBehaviour
         switch (currentState)
         {
             case AIState.Idle:
-                agent.speed = monsterData.walkSpeed;
+                agent.speed = 0;
                 agent.isStopped = true;
                 break;
             case AIState.Wandering:
@@ -100,10 +102,12 @@ public class MonsterBase : MonoBehaviour
                 agent.speed = monsterData.runSpeed;
                 agent.isStopped = false;
                 break;
+            case AIState.Fleeing:
+                agent.speed = monsterData.runSpeed * 1.2f;
+                agent.isStopped = false;
+                break;
             default: break;
         }
-
-        animator.speed = agent.speed/monsterData.walkSpeed;
     }
 
     
@@ -150,23 +154,40 @@ public class MonsterBase : MonoBehaviour
         
         return hit.position;
     }
+    private void FleeingUpdate()
+    {
+        Vector3 fleeDirection = (transform.position - player.position).normalized;
+        Vector3 fleeTarget = transform.position + fleeDirection * 10f;
+        
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(fleeTarget, out hit, 10f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
+        
+        // 충분히 멀어지면 일반 상태로 복귀
+        if (playerDistance > monsterData.detectDistance * 1.5f)
+        {
+            SetState(AIState.Wandering);
+        }
+    }
     private void AttackingUpdate()
     {
         if (playerDistance < monsterData.attackDistance && IsPlayerInFieldOfView())
         {
             agent.isStopped = true;
+            agent.SetDestination(transform.position);
+            
             if (Time.time - lastAttackTime > monsterData.attackRate)
             {
                 lastAttackTime = Time.time;
-                //CharacterManager.Instance.Player.controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
-                animator.speed = 1;
+                //Managers.Player.Player.Controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
 
                 int index = Random.Range(0, 4);
                 animator.SetInteger("AttackIndex", index);
                 
                 animator.SetTrigger("Attack");
             }
-            
         }
         else
         {
@@ -174,16 +195,16 @@ public class MonsterBase : MonoBehaviour
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
-                // if (agent.CalculatePath(CharacterManager.Instance.Player.transform.position, path))
-                // {
-                //     agent.SetDestination(CharacterManager.Instance.Player.transform.position);
-                // }
-                // else
-                // {
-                //     agent.SetDestination(transform.position);
-                //     agent.isStopped = true;
-                //     SetState(AIState.Wandering);
-                // }
+                if (agent.CalculatePath(player.position, path))
+                {
+                    agent.SetDestination(player.position);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                    agent.isStopped = true;
+                    SetState(AIState.Wandering);
+                }
             }
             else
             {
@@ -195,12 +216,12 @@ public class MonsterBase : MonoBehaviour
     }
     bool IsPlayerInFieldOfView()
     {
-        //Vector3 directionToPlayer = CharacterManager.Instance.Player.transform.position - transform.position;
-        //float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        return false; //angle < fieldOfView * 0.5f;
+        Vector3 directionToPlayer = player.position - transform.position;
+        float angle = Vector3.Angle(transform.forward, directionToPlayer);
+        return angle < fieldOfView * 0.5f;
     }
 
-    public void TakePhysicalDamage(int damage)
+    public void TakePhysicalDamage(float damage)
     {
          currentHp -= damage;
         
@@ -209,6 +230,13 @@ public class MonsterBase : MonoBehaviour
         if (currentHp <= 0)
         {
             Die();
+        }
+        else
+        {
+            if (currentHp < monsterData.health * 0.1f)
+            {
+                SetState(AIState.Fleeing);
+            }
         }
         
         StartCoroutine((DamageFlash()));
@@ -222,7 +250,7 @@ public class MonsterBase : MonoBehaviour
             meshRenderers[i].material.color = new Color(1.0f, 0.6f, 0.6f);
         }
         
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         
         for (int i = 0; i < meshRenderers.Length; i++)
         {
@@ -234,6 +262,12 @@ public class MonsterBase : MonoBehaviour
     void Die()
     {
         isDead = true;
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+        }
+        animator.SetTrigger("Death");
         for (int i = 0; i <monsterData.dropItems.Length; i++)
         {
             if (Random.value <= monsterData.dropItems[i].dropRate)
@@ -244,11 +278,18 @@ public class MonsterBase : MonoBehaviour
                     Instantiate(monsterData.dropItems[i].itemPrefab, transform.position+ Vector3.up *2, Quaternion.identity);
                 }
             }
-            
         }
-        
-        Destroy(gameObject);
+        StartCoroutine(DelayDeath());
     }
+
+    IEnumerator DelayDeath()
+    {
+        yield return new WaitForSeconds(2f);
+        
+        OnDeath();
+        Destroy(gameObject);
+     }
+    
     protected virtual void OnMonsterStart() { }
     protected virtual void OnMonsterUpdate() { }
     protected virtual void OnDeath() { }
