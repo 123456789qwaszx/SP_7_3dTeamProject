@@ -29,6 +29,7 @@ public class Resource : MonoBehaviour
     {
         interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
+        
     }
 
     void OnCollisionEnter(Collision collision)
