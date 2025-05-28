@@ -121,7 +121,7 @@ public class BuildManual : MonoBehaviour
             {
                 Vector3 _location = hitInfo.point;
                 go_Preview.transform.position = _location;
-                go_Preview.transform.rotation = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금금
+                go_Preview.transform.rotation = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금
             }
         }
     }
