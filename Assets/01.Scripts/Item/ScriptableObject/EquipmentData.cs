@@ -34,7 +34,7 @@ public class ItemDataResourceHp
 }
 
 
-public enum EquipmenType
+public enum EquipmentType
 {
     Weapon,
     Resource,
@@ -62,7 +62,7 @@ public class EquipmentData : ScriptableObject
     public string displayName;
     public string description;
     public Sprite icon;
-    public EquipmenType type;
+    public EquipmentType type;
     public GameObject dropPrefab;
 
     [Header("Equip")]

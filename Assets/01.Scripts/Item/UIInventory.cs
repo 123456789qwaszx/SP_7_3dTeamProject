@@ -82,10 +82,10 @@ public class UIInventory : MonoBehaviour
     {
         EquipmentData data = Managers.Player.Player.itemData;
 
-        if (data.canStack)
-        {
-            ItemSlot slot = GetItemStack(data);
-            ItemSlot emptySlot = GetEmptySlot(data);
+        // if (data.canStack)
+        // {
+        //     ItemSlot slot = GetItemStack(data);
+             ItemSlot emptySlot = GetEmptySlot(data);
 
             // 있다면
             if (emptySlot != null)
@@ -96,10 +96,10 @@ public class UIInventory : MonoBehaviour
                 Managers.Player.Player.itemData = null;
                 return;
             }
-        }
+       // }
 
-        ThrowItem(data);
-        Managers.Player.Player.itemData = null;
+        //ThrowItem(data);
+        //Managers.Player.Player.itemData = null;
     }
 
 
@@ -174,15 +174,15 @@ public class UIInventory : MonoBehaviour
             selectedStatValue.text += selectedItem.weaponDamages[i].value.ToString() + "\n";
         }
 
-        useButton.SetActive(selectedItem.type == EquipmenType.Food);
-        equipButton.SetActive(selectedItem.type == EquipmenType.Weapon && !slots[index].equipped);
-        unequipButton.SetActive(selectedItem.type == EquipmenType.Weapon && slots[index].equipped);
+        useButton.SetActive(selectedItem.type == EquipmentType.Food);
+        equipButton.SetActive(selectedItem.type == EquipmentType.Weapon && !slots[index].equipped);
+        unequipButton.SetActive(selectedItem.type == EquipmentType.Weapon && slots[index].equipped);
         dropButton.SetActive(true);
     }
 
     public void OnUseButton()
     {
-        if (selectedItem.type == EquipmenType.Weapon)
+        if (selectedItem.type == EquipmentType.Weapon)
         {
             for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
             {
