@@ -71,7 +71,7 @@ public class PlayerStats : MonoBehaviour
     {
 
         //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
-        Hunger.Add(Hunger.passiveValue * Time.deltaTime);
+        Hunger.Subtract(Hunger.passiveValue * Time.deltaTime);
         Hydration.Subtract(Hydration.passiveValue * Time.deltaTime);
 
         if (Hydration.curValue <= 0f)
