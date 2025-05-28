@@ -1,27 +1,28 @@
 
 using UnityEngine;
 
-[System.Serializable] // 직렬화
+[System.Serializable]
 public class Building
 {
     public string buildName; //이름
-    public GameObject go_Prefabs; // 설치물
-    public GameObject go_PreviewPrefabs; // 미리보기
+    public GameObject go_Prefabs; // 설치물 프리팹
+    public GameObject go_PreviewPrefabs; // 미리보기 프리팹
 }
 
 public class BuildManual : MonoBehaviour
 {
-    private bool isActivated = false;
-    private bool isPreviewActivated = false;
-    [SerializeField] private GameObject go_BaseUI;
+    private bool isActivated = false; //
+    private bool isPreviewActivated = false; // 미리보기 상태
+    [SerializeField] private GameObject go_BaseUI; // 건축 UI
     [SerializeField] private Building[] builds; // 설치물 저장
 
     private GameObject go_Preview; // 미리보기 프리팹을 담을 변수
     private GameObject go_Prefab; // 실제 생성 프리팹을 담을 변수
-    [SerializeField] private Transform tf_Player; // Player 위치에 생성
+    [SerializeField] private Transform tf_PlayerCam; // Player Camera 위치로 생성
 
+    // Ray로 설치 지점을 지정.
     private RaycastHit hitInfo;
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask; // 설치 가능or불가능 필터링할 레이어
     [SerializeField] private float rayRange;
 
     // [SerializeField] private BuildData[] buildList; // 건축물(SO) 리스트
@@ -30,12 +31,13 @@ public class BuildManual : MonoBehaviour
     {
         go_Preview = Instantiate(
             builds[_slotNumber].go_PreviewPrefabs,
-            tf_Player.position + tf_Player.forward,
+            tf_PlayerCam.position + tf_PlayerCam.forward,
             Quaternion.identity
         );
 
         go_Prefab = builds[_slotNumber].go_Prefabs; // 테스트용
 
+        //SO 전용
         // if (_slotNumber < buildList.Length)
         // {
         //     BuildData selectedBuilding = buildList[_slotNumber];
@@ -79,24 +81,24 @@ public class BuildManual : MonoBehaviour
 
     private void Build()
     {
-        Quaternion lockRot = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
+        Quaternion lockRot = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
 
-        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().isBuildable())
+        //미리보기 활성화 되고 미리보기 오브젝트가 설치 가능한 상태일 때
+        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
         {
-            if (go_Prefab != null)
-            {
-                Instantiate(go_Prefab, hitInfo.point, lockRot);
-                Destroy(go_Preview);
-            }
-            else
-            {
-                Debug.LogError("오류: go_Prefab >> null");
-            }
+            Debug.Log("건축 완료");
+            
+            Instantiate(go_Prefab, hitInfo.point, lockRot);
+            Destroy(go_Preview);
 
             isActivated = false;
             isPreviewActivated = false;
             go_Preview = null;
             go_Prefab = null;
+        }
+        else
+        {
+            Debug.Log("건축 불가: 장애물 확인");
         }
     }
 
@@ -112,21 +114,21 @@ public class BuildManual : MonoBehaviour
         }
     }
 
-    private void PreviewPosUpdate()
+    private void PreviewPosUpdate() // 
     {
-        if (Physics.Raycast(tf_Player.position, tf_Player.forward, out hitInfo, rayRange, layerMask))
+        if (Physics.Raycast(tf_PlayerCam.position, tf_PlayerCam.forward, out hitInfo, rayRange, layerMask))
         {
 
             if (hitInfo.transform != null)
             {
                 Vector3 _location = hitInfo.point;
                 go_Preview.transform.position = _location;
-                go_Preview.transform.rotation = Quaternion.Euler(0, tf_Player.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금
+                go_Preview.transform.rotation = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금
             }
         }
     }
 
-    private void Cancel() // 제작탭 지우기
+    private void Cancel() // 미리보기 상태 취소
     {
         if (isPreviewActivated)
         {
@@ -141,13 +143,13 @@ public class BuildManual : MonoBehaviour
         go_BaseUI.SetActive(false);
     }
 
-    private void OpenWindow()
+    private void OpenWindow() // 제작탭 열기
     {
         isActivated = true;
         go_BaseUI.SetActive(true);
     }
 
-    private void CloseWindow()
+    private void CloseWindow() // 제작탭 닫기
     {
         isActivated = false;
         go_BaseUI.SetActive(false);

@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             _playerInput = context.ReadValue<Vector2>();
-            Debug.Log($"Cheak{_playerInput}");
+            // Debug.Log($"Cheak{_playerInput}");
         }
         else
         {
@@ -96,15 +96,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log("Jump입력 됨");
+        // Debug.Log("Jump입력 됨");
         if (context.performed && IsGround)
         {
-            Debug.Log("true로 못 들어오는 중");
+            // Debug.Log("true로 못 들어오는 중");
             
             animator.SetBool("IsJump", true);
             
         }
-        Debug.Log("현재 땅이 아닙니다.");
+        // Debug.Log("현재 땅이 아닙니다.");
     }
 
     public void AddJump()
@@ -137,10 +137,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("마우스 좌클릭");
+            // Debug.Log("마우스 좌클릭");
             animator.SetTrigger("IsAttack");
         }
-        Debug.Log("마우스 좌클릭이 안됨");
+        // Debug.Log("마우스 좌클릭이 안됨");
     }
 
     private void HandleMove()

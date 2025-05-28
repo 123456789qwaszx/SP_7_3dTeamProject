@@ -6,7 +6,7 @@ public class PreviewObject : MonoBehaviour
 {
     //충돌한 오브젝트의 정보가 담기는 리스트.
     private List<Collider> colliderList = new List<Collider>();
-    [SerializeField] private int layerGround; //땅 레이어(설치 가능)
+    [SerializeField] private int layerGround; //설치 가능한 레이어 넘버.
     private const int IGNORE_RAYCAST_LAYER = 2; // 무시할 레이어
 
     //충돌 시 설치 불가를 시각적으로 나타낼 변수.
@@ -14,13 +14,6 @@ public class PreviewObject : MonoBehaviour
     [SerializeField] private Material red;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         ChangeColor();
@@ -29,6 +22,7 @@ public class PreviewObject : MonoBehaviour
     private void ChangeColor()
     {
         if (colliderList.Count > 0) {
+            Debug.Log("설치 불가: 레드");
             SetColor(red);
         }
         else {
@@ -40,19 +34,22 @@ public class PreviewObject : MonoBehaviour
     {
         foreach (Transform tf_Obj in this.transform)
         {
+            Debug.Log("설치 불가: 머테리얼 감지");
             var newMaterials = new Material[tf_Obj.GetComponent<Renderer>().materials.Length];
 
             for (int i = 0; i < newMaterials.Length; i++)
             {
+                Debug.Log("머테리얼 변경 중");
                 newMaterials[i] = mat;
             }
-
+            Debug.Log("변경 완료.");
             tf_Obj.GetComponent<Renderer>().materials = newMaterials;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("충돌 확인: 건축 불가");
         // Ground(설치 가능)
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
         {
@@ -62,13 +59,14 @@ public class PreviewObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("충돌 없음: 건축 가능");
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
         {
             colliderList.Remove(other);
         }
     }
 
-    public bool isBuildable()
+    public bool IsBuildable()
     {
         return colliderList.Count == 0;
     }
