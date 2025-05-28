@@ -1,5 +1,6 @@
-
 using UnityEngine;
+
+// 빌드관련 UI
 
 [System.Serializable]
 public class Building
@@ -12,21 +13,13 @@ public class Building
 public class BuildManual : MonoBehaviour
 {
     private bool isActivated = false; //
-    private bool isPreviewActivated = false; // 미리보기 상태
+    
     [SerializeField] private GameObject go_BaseUI; // 건축 UI
     [SerializeField] private Building[] builds; // 설치물 저장
 
-    private GameObject go_Preview; // 미리보기 프리팹을 담을 변수
-    private GameObject go_Prefab; // 실제 생성 프리팹을 담을 변수
-    [SerializeField] private Transform tf_PlayerCam; // Player Camera 위치로 생성
-
-    // Ray로 설치 지점을 지정.
-    private RaycastHit hitInfo;
-    [SerializeField] private LayerMask layerMask; // 설치 가능or불가능 필터링할 레이어
-    [SerializeField] private float rayRange;
-
     // [SerializeField] private BuildData[] buildList; // 건축물(SO) 리스트
-
+    // go_Preview, go_Prefab, tf_PlayerCam, isPreviewActivated
+    
     public void SlotClick(int _slotNumber)
     {
         go_Preview = Instantiate(
@@ -53,55 +46,6 @@ public class BuildManual : MonoBehaviour
         go_BaseUI.SetActive(false); // 제작탭 종료
     }
 
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab) && !isPreviewActivated)
-        {
-            Window();
-            Debug.Log("Tab키 작동");
-        }
-
-        if (isPreviewActivated)
-        {
-            PreviewPosUpdate();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isPreviewActivated)
-        {
-            Debug.Log("마우스 클릭: 건설 시작");
-            Build();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cancel();
-        }
-    }
-
-    private void Build()
-    {
-        Quaternion lockRot = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
-
-        //미리보기 활성화 되고 미리보기 오브젝트가 설치 가능한 상태일 때
-        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
-        {
-            Debug.Log("건축 완료");
-            
-            Instantiate(go_Prefab, hitInfo.point, lockRot);
-            Destroy(go_Preview);
-
-            isActivated = false;
-            isPreviewActivated = false;
-            go_Preview = null;
-            go_Prefab = null;
-        }
-        else
-        {
-            Debug.Log("건축 불가: 장애물 확인");
-        }
-    }
-
     private void Window()
     {
         if (!isActivated)
@@ -112,35 +56,6 @@ public class BuildManual : MonoBehaviour
         {
             CloseWindow();
         }
-    }
-
-    private void PreviewPosUpdate() // 
-    {
-        if (Physics.Raycast(tf_PlayerCam.position, tf_PlayerCam.forward, out hitInfo, rayRange, layerMask))
-        {
-
-            if (hitInfo.transform != null)
-            {
-                Vector3 _location = hitInfo.point;
-                go_Preview.transform.position = _location;
-                go_Preview.transform.rotation = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 미리보기 회전 잠금
-            }
-        }
-    }
-
-    private void Cancel() // 미리보기 상태 취소
-    {
-        if (isPreviewActivated)
-        {
-            Destroy(go_Preview);
-        }
-
-        isActivated = false;
-        isPreviewActivated = false;
-        go_Preview = null;
-        go_Prefab = null;
-
-        go_BaseUI.SetActive(false);
     }
 
     private void OpenWindow() // 제작탭 열기

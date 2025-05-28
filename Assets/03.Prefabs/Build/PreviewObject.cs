@@ -21,45 +21,43 @@ public class PreviewObject : MonoBehaviour
 
     private void ChangeColor()
     {
-        if (colliderList.Count > 0) {
-            Debug.Log("설치 불가: 레드");
+        if (colliderList.Count > 0)
+        {
             SetColor(red);
         }
-        else {
+        else
+        {
             SetColor(green);
         }
     }
 
-    private void SetColor(Material mat) // 자식 렌더러에서 material 컬러를 불러오고 변경하는 함수. >> 그런데 현재 사용하는 모델링에는 자식 컴포넌트가 없음.
+    private void SetColor(Material mat) // 장애물에 따라 material 컬러를 변경하는 함수.
     {
-        foreach (Transform tf_Obj in this.transform)
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
         {
-            Debug.Log("설치 불가: 머테리얼 감지");
-            var newMaterials = new Material[tf_Obj.GetComponent<Renderer>().materials.Length];
-
+            Material[] newMaterials = new Material[renderer.materials.Length]; // 미리보기 프리팹은 단일 오브젝트이긴 하지만 추후 자식 
             for (int i = 0; i < newMaterials.Length; i++)
             {
-                Debug.Log("머테리얼 변경 중");
                 newMaterials[i] = mat;
             }
-            Debug.Log("변경 완료.");
-            tf_Obj.GetComponent<Renderer>().materials = newMaterials;
+            renderer.materials = newMaterials;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    // 미리보기 프리팹을 통해 설치 가능여부 판정.
+    // 충돌 리스트에 장애물을 저장하고 리스트가 비어있으면 건축이 가능하게 만드는 로직.
+
+    private void OnTriggerEnter(Collider other) // 장애물에 닿으면 작동
     {
-        Debug.Log("충돌 확인: 건축 불가");
-        // Ground(설치 가능)
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
         {
             colliderList.Add(other);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other) // 장애물에서 떨어지면 작동.
     {
-        Debug.Log("충돌 없음: 건축 가능");
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
         {
             colliderList.Remove(other);
