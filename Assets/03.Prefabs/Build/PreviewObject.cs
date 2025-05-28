@@ -6,9 +6,10 @@ public class PreviewObject : MonoBehaviour
 {
     //충돌한 오브젝트의 정보가 담기는 리스트.
     private List<Collider> colliderList = new List<Collider>();
-    [SerializeField] private int layerGround; //땅 레이어
-    private const int IGNORE_RAYCAST_LAYER = 2;
+    [SerializeField] private int layerGround; //땅 레이어(설치 가능)
+    private const int IGNORE_RAYCAST_LAYER = 2; // 무시할 레이어
 
+    //충돌 시 설치 불가를 시각적으로 나타낼 변수.
     [SerializeField] private Material green;
     [SerializeField] private Material red;
 
@@ -27,8 +28,12 @@ public class PreviewObject : MonoBehaviour
 
     private void ChangeColor()
     {
-        if (colliderList.Count > 0) ;
-        else ;
+        if (colliderList.Count > 0) {
+            SetColor(red);
+        }
+        else {
+            SetColor(green);
+        }
     }
 
     private void SetColor(Material mat) // 자식 렌더러에서 material 컬러를 불러오고 변경하는 함수. >> 그런데 현재 사용하는 모델링에는 자식 컴포넌트가 없음.
@@ -48,6 +53,7 @@ public class PreviewObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // Ground(설치 가능)
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
         {
             colliderList.Add(other);
