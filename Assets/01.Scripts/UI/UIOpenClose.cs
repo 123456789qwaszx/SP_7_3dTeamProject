@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
@@ -7,13 +7,14 @@ public class UIOpenClose : MonoBehaviour
 {
     public GameObject inven;
     public GameObject option;
+    public GameObject gameOver;
 
     public void OCInven()
     {
         {
             if (inven != null)
             {
-                inven.SetActive(!inven.activeSelf); // ÇöÀç »óÅÂÀÇ ¹İ´ë·Î Åä±Û
+                inven.SetActive(!inven.activeSelf); // í˜„ì¬ ìƒíƒœì˜ ë°˜ëŒ€ë¡œ í† ê¸€
             }
         }
     }
@@ -23,8 +24,19 @@ public class UIOpenClose : MonoBehaviour
             Debug.Log(option);
             if (option != null)
             {
-                option.SetActive(!option.activeSelf); // ÇöÀç »óÅÂÀÇ ¹İ´ë·Î Åä±Û
+                option.SetActive(!option.activeSelf); // í˜„ì¬ ìƒíƒœì˜ ë°˜ëŒ€ë¡œ í† ê¸€
             }
+        }
+    }
+    public void OCGameOver()
+    {
+        if (gameOver != null)
+        {
+            gameOver.SetActive(gameOver);
+        }
+        else
+        {
+            Debug.LogWarning("GameOver UIë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
     // Start is called before the first frame update
@@ -42,7 +54,7 @@ public class UIOpenClose : MonoBehaviour
                 option = foundInven;
             }
             else
-                Debug.LogWarning("Option Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogWarning("Option ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
 
     }
