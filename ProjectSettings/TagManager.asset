@@ -6,6 +6,8 @@ TagManager:
   tags:
   - HardObject
   - Item
+  - Resource
+  - Enemy
   layers:
   - Default
   - TransparentFX
