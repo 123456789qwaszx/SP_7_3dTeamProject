@@ -49,7 +49,7 @@ public class Equipment : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, attackDistance))
         {
-            if (doesGatherResources && hit.collider.TryGetComponent (out ResourceData resource))
+            if (doesGatherResources && hit.collider.TryGetComponent (out EquipmentData resource))
             {
             }
         }

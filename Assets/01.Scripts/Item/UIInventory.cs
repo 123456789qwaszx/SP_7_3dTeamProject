@@ -82,16 +82,20 @@ public class UIInventory : MonoBehaviour
     {
         EquipmentData data = Managers.Player.Player.itemData;
 
-        ItemSlot emptySlot = GetEmptySlot(data);
-
-        // 있다면
-        if (emptySlot != null)
+        if (data.canStack)
         {
-            emptySlot.item = data;
-            emptySlot.quantity = 1;
-            UpdateUI();
-            Managers.Player.Player.itemData = null;
-            return;
+            ItemSlot slot = GetItemStack(data);
+            ItemSlot emptySlot = GetEmptySlot(data);
+
+            // 있다면
+            if (emptySlot != null)
+            {
+                emptySlot.item = data;
+                emptySlot.quantity = 1;
+                UpdateUI();
+                Managers.Player.Player.itemData = null;
+                return;
+            }
         }
 
         ThrowItem(data);
@@ -170,7 +174,7 @@ public class UIInventory : MonoBehaviour
             selectedStatValue.text += selectedItem.weaponDamages[i].value.ToString() + "\n";
         }
 
-        //useButton.SetActive(selectedItem.type == ItemType.Consumable);
+        useButton.SetActive(selectedItem.type == EquipmenType.Food);
         equipButton.SetActive(selectedItem.type == EquipmenType.Weapon && !slots[index].equipped);
         unequipButton.SetActive(selectedItem.type == EquipmenType.Weapon && slots[index].equipped);
         dropButton.SetActive(true);

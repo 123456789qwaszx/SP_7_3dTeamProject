@@ -4,10 +4,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum ConsumableType
+{
+    Health,
+    Hydration,
+    Hunger
+}
+
+[Serializable]
+public class ItemDataConsumable
+{
+    public ConsumableType type;
+    public float value;
+}
+
+public enum ResourceType
+{
+    Tree,
+    Rock,
+    Iron,
+    Mushroom
+}
+
+[Serializable]
+public class ItemDataResourceHp
+{
+    public ResourceType type;
+    public int value;
+}
+
+
 public enum EquipmenType
 {
     Weapon,
-    Tool
+    Resource,
+    Food
 }
 
 public enum DamageType
@@ -39,6 +70,17 @@ public class EquipmentData : ScriptableObject
 
     [Header("EquipmentStatus")]
     public WeaponDamage[] weaponDamages;
+
+
+    [Header("stacking")]
+    public bool canStack;
+    public int maxStackAmount;
+
+    [Header("Consumable")]
+    public ItemDataConsumable[] consumables;
+
+    [Header("Resource")]
+    public ItemDataResourceHp[] resourceHp;
 
 }
 

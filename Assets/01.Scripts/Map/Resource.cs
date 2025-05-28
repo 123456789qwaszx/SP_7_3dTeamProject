@@ -10,7 +10,7 @@ public interface IDamagable
 public class Resource : MonoBehaviour, IDamagable
 {
     public PlayerInteraction interaction;
-    public ResourceData _data;
+    public EquipmentData _data;
     public ResourceCondition resourceCondition;
 
     private Transform _resourceRoot;

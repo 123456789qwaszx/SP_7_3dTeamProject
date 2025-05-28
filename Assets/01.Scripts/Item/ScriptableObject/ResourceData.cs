@@ -4,51 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum ConsumableType
-{
-    Health,
-    Hydration,
-    Hunger
-}
+// public enum ConsumableType
+// {
+//     Health,
+//     Hydration,
+//     Hunger
+// }
 
-[Serializable]
-public class ItemDataConsumable
-{
-    public ConsumableType type;
-    public float value;
-}
+// [Serializable]
+// public class ItemDataConsumable
+// {
+//     public ConsumableType type;
+//     public float value;
+// }
 
-public enum ResourceType
-{
-    Tree,
-    Rock,
-    Iron,
-    Mushroom
-}
+// [CreateAssetMenu(fileName = "Resource", menuName = "New Resource")]
+// public class ResourceData : ScriptableObject
+// {
+//     [Header("Info")]
+//     public string ResourceName;
+//     public string description;
+//     public Sprite icon;
+//     public GameObject dropPrefab;
 
-[Serializable]
-public class ItemDataResourceHp
-{
-    public ResourceType type;
-    public int value;
-}
+//     [Header("stacking")]
+//     public bool canStack;
+//     public int maxStackAmount;
 
-[CreateAssetMenu(fileName = "Resource", menuName = "New Resource")]
-public class ResourceData : ScriptableObject
-{
-    [Header("Info")]
-    public string ResourceName;
-    public string description;
-    public Sprite icon;
-    public GameObject dropPrefab;
+//     [Header("Consumable")]
+//     public ItemDataConsumable[] consumables;
 
-    [Header("stacking")]
-    public bool canStack;
-    public int maxStackAmount;
-
-    [Header("Consumable")]
-    public ItemDataConsumable[] consumables;
-
-    [Header("Resorce")]
-    public ItemDataResourceHp[] resourceHp;
-}
+//     [Header("Resorce")]
+//     public ItemDataResourceHp[] resourceHp;
+// }
