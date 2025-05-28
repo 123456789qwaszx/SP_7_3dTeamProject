@@ -20,8 +20,7 @@ MonoBehaviour:
   attackDistance: 2.5
   walkSpeed: 3
   runSpeed: 6
-  dropItems:
-  - itemPrefab: {fileID: 0}
-    dropRate: 0
-    minQuantity: 1
-    maxQuantity: 1
+  abilities:
+  - abilityName: Rage
+    duration: 10
+  dropItems: []

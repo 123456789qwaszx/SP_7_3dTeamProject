@@ -20,8 +20,5 @@ MonoBehaviour:
   attackDistance: 2.5
   walkSpeed: 2
   runSpeed: 4
-  dropItems:
-  - itemPrefab: {fileID: 0}
-    dropRate: 0.5
-    minQuantity: 1
-    maxQuantity: 1
+  abilities: []
+  dropItems: []

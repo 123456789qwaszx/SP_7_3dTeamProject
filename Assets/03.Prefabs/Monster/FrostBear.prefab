@@ -1851,8 +1851,8 @@ GameObject:
   - component: {fileID: 2715433977506762674}
   - component: {fileID: 9190681215731351458}
   - component: {fileID: 5706338535210763873}
-  - component: {fileID: 3325962707964715966}
   - component: {fileID: 4014439883878140226}
+  - component: {fileID: 3703150639674816376}
   m_Layer: 0
   m_Name: FrostBear
   m_TagString: Untagged
@@ -1886,7 +1886,7 @@ Animator:
   m_GameObject: {fileID: 7758462764035481989}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b7822eb5951163b48830b6d9bcbf48b4, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6b74c0471f91af34f8e98a4d46810410, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4413c6e25a365ec40bb2192731a6b1cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1918,27 +1918,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6155784, y: 1.8869327, z: 2.9821122}
   m_Center: {x: 0.026301026, y: 0.8383978, z: 0.14624107}
---- !u!114 &3325962707964715966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7758462764035481989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929d43b44be3d544f9f1fa02ab140c0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: d13430ea7aaa18a4eb0c293e0cfc43f8, type: 2}
-  currentHp: 0
-  currentDamage: 0
-  minWanderDistance: 0
-  maxWanderDistance: 0
-  minWanderWaitTime: 0
-  maxWanderWaitTime: 0
-  fieldOfView: 120
-  currentState: 0
 --- !u!195 &4014439883878140226
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1961,6 +1940,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3703150639674816376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758462764035481989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78066456b0fdaa3468e9c05fcdfb49ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterData: {fileID: 11400000, guid: d13430ea7aaa18a4eb0c293e0cfc43f8, type: 2}
+  currentHp: 0
+  currentDamage: 0
+  minWanderDistance: 5
+  maxWanderDistance: 10
+  minWanderWaitTime: 1
+  maxWanderWaitTime: 5
+  fieldOfView: 120
+  currentState: 0
 --- !u!1 &7888448810738113656
 GameObject:
   m_ObjectHideFlags: 0
