@@ -8,6 +8,7 @@ public class ResourceManager
 {
     // 원본 'GameObject prefab'을 참조하여 씬에 복사를 해줌
     // 풀을 뒤져서 있으면 그걸 활성화 시킴
+
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject original = Load<GameObject>($"Prefabs/{path}");
@@ -22,7 +23,7 @@ public class ResourceManager
 
         GameObject go = Object.Instantiate(original, parent);
         go.name = original.name;
-        return go; 
+        return go;
     }
 
     // 풀에 들어갈 공간이 있으면 비활성화 시킴
@@ -41,10 +42,8 @@ public class ResourceManager
 
         Object.Destroy(go);
     }
+    
 
-
-    // 메모리에 원본의 정보를 로드. 컴포넌트의 변수에 스프라이트이미지 등을 연결할 때 사용
-    // 씬에서는 객체가 표현되지 않고, 메모리로만 들고 있음.
     public T Load<T>(string path) where T : Object
     {
         if (typeof(T) == typeof(GameObject))
