@@ -1,22 +1,25 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerStats : MonoBehaviour
 {
-    
+    public UIOpenClose uiOpenClose;
+    public float noHungerHealthDecay = 5f;
+    public UIStat uiStat;
     [SerializeField]
     private Condition _health;
     public Condition Health // 체력
     {
-        get{ return _health; }
-        set{ _health = value; }
+        get { return _health; }
+        set { _health = value; }
     }
     [SerializeField]
     private Condition _hunger;
     public Condition Hunger             // 배고픔
     {
-        get{return _hunger; }
+        get { return _hunger; }
         set { _hunger = value; }
     }
     [SerializeField]
@@ -24,8 +27,8 @@ public class PlayerStats : MonoBehaviour
 
     public Condition Hydration          // 수분
     {
-        get{return _hydration; }
-        set{_hydration = value;}
+        get { return _hydration; }
+        set { _hydration = value; }
     }
     [SerializeField]
     private float _attack;
@@ -64,5 +67,49 @@ public class PlayerStats : MonoBehaviour
     {
         //Managers.Player.Player.PlayerStats = this;
     }
+    void Update()
+    {
 
+        //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
+        Hunger.Add(Hunger.passiveValue * Time.deltaTime);
+        Hydration.Subtract(Hydration.passiveValue * Time.deltaTime);
+
+        if (Hydration.curValue <= 0f)
+        {
+            Health.Subtract(noHungerHealthDecay * Time.deltaTime);
+        }
+        if (Hunger.curValue <= 0f)
+        {
+            Health.Subtract(noHungerHealthDecay * Time.deltaTime);
+        }
+        if (Health.curValue <= 0f)
+        {
+            Die();
+        }
+
+    }
+    public void Heal(float amount)
+    {
+        Health.Add(amount);
+    }
+    public void Drink(float amount)
+    {
+        Hydration.Add(amount);
+    }
+    public void Eat(float amount)
+    {
+        Health.Add(amount);
+    }
+    public void Die()
+    {
+        Debug.Log("died.");
+        if (uiOpenClose != null)
+        {
+            uiOpenClose.OCGameOver();
+        }
+        else
+        {
+            Debug.LogWarning("UIOpenClose가 연결되지 않았습니다.");
+        }
+    }
 }
