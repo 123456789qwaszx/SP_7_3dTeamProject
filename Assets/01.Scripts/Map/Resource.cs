@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : MonoBehaviour
+public interface IDamagable
+{
+    void TakePhysicalDamage(int damage);
+}
+
+public class Resource : MonoBehaviour, IDamagable
 {
     public PlayerInteraction interaction;
     public ResourceData _data;
+    public ResourceCondition resourceCondition;
 
     private Transform _resourceRoot;
     public Transform ResourceRoot
@@ -24,12 +30,32 @@ public class Resource : MonoBehaviour
     private float workSpeed = 2;
     public int capacity = 3;
 
+    public int hitCount = 1;
+
 
     void Start()
     {
+        for (int i = 0; i < _data.resourceHp.Length; i++)
+        {
+            switch (_data.resourceHp[i].type)
+            {
+                case ResourceType.Tree:
+                    this.hitCount = _data.resourceHp[i].value;
+                    break;
+                case ResourceType.Rock:
+                    this.hitCount = _data.resourceHp[i].value;
+                    break;
+                case ResourceType.Iron:
+                    this.hitCount = _data.resourceHp[i].value;
+                    break;
+                case ResourceType.Mushroom:
+                    this.hitCount = _data.resourceHp[i].value;
+                    break;
+            }
+        }
+
         interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
-        
     }
 
     void OnCollisionEnter(Collision collision)
@@ -46,7 +72,7 @@ public class Resource : MonoBehaviour
         // 나중에 Ax를 들었을 때만 동작.
         // 혹은 특정 키값입력 or 능력 등등
         SpawnResource(_data.dropPrefab, ResourceRoot);
-        _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0,2);
+        _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0, 2);
         capacity -= 1;
         if (capacity <= 0)
         {
@@ -62,6 +88,11 @@ public class Resource : MonoBehaviour
         go.name = prefab.name;
         go.transform.parent = resourceRoot;
         return go;
+    }
+
+    public void TakePhysicalDamage(int damage)
+    {
+        hitCount -= damage;
     }
 
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
-    public ResourceData item;
+    public EquipmentData item;
 
     public Button button;
     public Image icon;

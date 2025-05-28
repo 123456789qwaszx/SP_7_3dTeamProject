@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3407840398327768280}
   - component: {fileID: 417098373325200516}
   - component: {fileID: 5578757481951313038}
+  - component: {fileID: 6251163699361478053}
   m_Layer: 5
   m_Name: ItemSlot_KED
   m_TagString: Untagged
@@ -168,6 +169,26 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &6251163699361478053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042495818065808797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3644e88c26e374eac08dcc6b3ac6f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  button: {fileID: 0}
+  icon: {fileID: 0}
+  quantityText: {fileID: 0}
+  inventory: {fileID: 0}
+  index: 0
+  equipped: 0
+  quantity: 0
 --- !u!1 &3429289561783954455
 GameObject:
   m_ObjectHideFlags: 0

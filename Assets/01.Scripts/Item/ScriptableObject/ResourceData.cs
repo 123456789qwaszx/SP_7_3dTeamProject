@@ -14,7 +14,7 @@ public enum ConsumableType
 [Serializable]
 public class ItemDataConsumable
 {
-    public ConsumableType consumabletype;
+    public ConsumableType type;
     public float value;
 }
 
@@ -29,8 +29,8 @@ public enum ResourceType
 [Serializable]
 public class ItemDataResourceHp
 {
-    public ResourceType Resourcetype;
-    public float value;
+    public ResourceType type;
+    public int value;
 }
 
 [CreateAssetMenu(fileName = "Resource", menuName = "New Resource")]
@@ -44,7 +44,7 @@ public class ResourceData : ScriptableObject
 
     [Header("stacking")]
     public bool canStack;
-    public int maxStackAmout;
+    public int maxStackAmount;
 
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;

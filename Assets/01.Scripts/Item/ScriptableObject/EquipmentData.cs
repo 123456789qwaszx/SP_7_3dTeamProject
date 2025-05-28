@@ -10,12 +10,17 @@ public enum EquipmenType
     Tool
 }
 
+public enum DamageType
+{
+    ForMonster,
+    ForResource
+}
+
 [Serializable]
 public class WeaponDamage
 {
-    public EquipmenType equipmenType;
-    public float DamageToMonster;
-    public float DamageToResource;
+    public DamageType type;
+    public float value;
 }
 
 
@@ -25,6 +30,7 @@ public class EquipmentData : ScriptableObject
     [Header("Info")]
     public string displayName;
     public string description;
+    public Sprite icon;
     public EquipmenType type;
     public GameObject dropPrefab;
 
@@ -32,6 +38,7 @@ public class EquipmentData : ScriptableObject
     public GameObject equipPrefab;
 
     [Header("EquipmentStatus")]
-    public WeaponDamage[] equipmentStatus;
+    public WeaponDamage[] weaponDamages;
 
 }
+

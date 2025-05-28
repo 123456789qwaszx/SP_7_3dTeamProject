@@ -15,23 +15,23 @@ public class UICondition : MonoBehaviour
     {
         if (CharacterManager.Instance == null)
         {
-            Debug.LogWarning("CharacterManager.Instance°¡ ¾ÆÁ÷ nullÀÔ´Ï´Ù.");
+            Debug.LogWarning("CharacterManager.Instanceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
         if (CharacterManager.Instance.Player == null)
         {
-            Debug.LogWarning("CharacterManager.Instance.Player°¡ ¾ÆÁ÷ nullÀÔ´Ï´Ù.");
+            Debug.LogWarning("CharacterManager.Instance.Playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
         if (CharacterManager.Instance.Player.PlayerStats == null)
         {
-            Debug.LogWarning("PlayerStats°¡ ¾ÆÁ÷ nullÀÔ´Ï´Ù.");
+            Debug.LogWarning("PlayerStatsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ nullï¿½Ô´Ï´ï¿½.");
             return;
         }
 
-        CharacterManager.Instance.Player.PlayerStats.uiCondition = this;
-        Debug.Log(" UIConditionÀÌ PlayerStats¿¡ ¼º°øÀûÀ¸·Î ¿¬°áµÊ!");
+        //CharacterManager.Instance.Player.PlayerStats.uiCondition = this;
+        Debug.Log(" UIConditionï¿½ï¿½ PlayerStatsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½!");
     }
 }
