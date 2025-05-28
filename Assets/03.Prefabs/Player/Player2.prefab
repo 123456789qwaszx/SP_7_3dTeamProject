@@ -701,6 +701,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 23c12d36-0539-48f3-acb2-3b0891021546
     m_ActionName: Player/PlayerLook[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c89a1bb-6d0b-4d36-9f93-93e97a205588
+    m_ActionName: Player/CraftMenu[/Keyboard/tab]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

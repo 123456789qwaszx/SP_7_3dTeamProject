@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1612581862445224792}
   - component: {fileID: 8135956134164138721}
   - component: {fileID: 7758007412615341917}
+  - component: {fileID: 3339635732491404826}
+  - component: {fileID: -2062857487324085759}
   m_Layer: 0
   m_Name: fence-doorway_Preview
   m_TagString: Untagged
@@ -84,6 +86,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3339635732491404826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320445888353815105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ea5978b6b73934daaa536cf2c794f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerGround: 10
+  green: {fileID: 2100000, guid: 307d88e98d916cd4baa42cf39c3c7ccc, type: 2}
+  red: {fileID: 2100000, guid: 42eb6850f313c4644bccba50efc618c9, type: 2}
+--- !u!65 &-2062857487324085759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3320445888353815105}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 0.51746684, z: 0.042780027}
+  m_Center: {x: 0, y: 0.25873342, z: -0.22860998}
 --- !u!1 &7805446083046230066
 GameObject:
   m_ObjectHideFlags: 0

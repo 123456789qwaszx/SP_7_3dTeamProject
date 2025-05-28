@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tree-log_Stand
   m_EditorClassIdentifier: 
   buildingName: tree-log_Stand
-  prefab: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  prefab: {fileID: 593675967769376830, guid: d77d26f2ae744024eb092780f1c5790d, type: 3}
+  previewPrefab: {fileID: 593675967769376830, guid: b45aee26b382d924c9b2877c46ce3e50, type: 3}
   icon: {fileID: 0}
   cost: 0

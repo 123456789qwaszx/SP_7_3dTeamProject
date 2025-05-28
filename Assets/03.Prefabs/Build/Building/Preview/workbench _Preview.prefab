@@ -177,6 +177,8 @@ GameObject:
   - component: {fileID: 8572530391128813779}
   - component: {fileID: 3324899811380221997}
   - component: {fileID: 6980478033754646697}
+  - component: {fileID: -4938205954357914819}
+  - component: {fileID: -2643607876194734420}
   m_Layer: 0
   m_Name: workbench _Preview
   m_TagString: Untagged
@@ -251,3 +253,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-4938205954357914819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510512928363430568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ea5978b6b73934daaa536cf2c794f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerGround: 10
+  green: {fileID: 2100000, guid: 307d88e98d916cd4baa42cf39c3c7ccc, type: 2}
+  red: {fileID: 2100000, guid: 42eb6850f313c4644bccba50efc618c9, type: 2}
+--- !u!65 &-2643607876194734420
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2510512928363430568}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.25803152, y: 0.23655, z: 0.25951645}
+  m_Center: {x: -0.002007097, y: 0.118275, z: 0.003008926}

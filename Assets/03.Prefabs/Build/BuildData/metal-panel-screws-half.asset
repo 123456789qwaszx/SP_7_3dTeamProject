@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: metal-panel-screws-half
   m_EditorClassIdentifier: 
   buildingName: metal-panel-screws-half
-  prefab: {fileID: 0}
-  previewPrefab: {fileID: 0}
+  prefab: {fileID: 1566367195531358441, guid: f161f48f980c8254a89406e8c7fd38c4, type: 3}
+  previewPrefab: {fileID: 1566367195531358441, guid: deab63571333f1849bfbe013382519f8, type: 3}
   icon: {fileID: 0}
   cost: 0

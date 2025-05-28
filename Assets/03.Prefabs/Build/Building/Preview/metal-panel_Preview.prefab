@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8340748449820914904}
   - component: {fileID: 8463348548458154979}
   - component: {fileID: -6805836791924025421}
+  - component: {fileID: -7763927297068239882}
   m_Layer: 0
   m_Name: metal-panel_Preview
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3001666245541303330}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: -0.391}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8340748449820914904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,3 +100,24 @@ MonoBehaviour:
   layerGround: 10
   green: {fileID: 2100000, guid: 307d88e98d916cd4baa42cf39c3c7ccc, type: 2}
   red: {fileID: 2100000, guid: 42eb6850f313c4644bccba50efc618c9, type: 2}
+--- !u!65 &-7763927297068239882
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001666245541303330}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.46658355, y: 0.5, z: 0.037671067}
+  m_Center: {x: -0.0022630454, y: 0.25, z: -0.0061644674}

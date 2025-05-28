@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6973106910517835546}
   - component: {fileID: 6893258381376422842}
   - component: {fileID: 395580708030153052}
+  - component: {fileID: 7041125889639239377}
+  - component: {fileID: -3677471435614511822}
+  - component: {fileID: -4701924668889306719}
   m_Layer: 0
   m_Name: tree-log_Stand_Preview
   m_TagString: Untagged
@@ -27,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 593675967769376830}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.262, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -83,3 +86,53 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7041125889639239377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593675967769376830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ea5978b6b73934daaa536cf2c794f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerGround: 10
+  green: {fileID: 2100000, guid: 307d88e98d916cd4baa42cf39c3c7ccc, type: 2}
+  red: {fileID: 2100000, guid: 42eb6850f313c4644bccba50efc618c9, type: 2}
+--- !u!65 &-3677471435614511822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593675967769376830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.19455306, y: 0.1502444, z: 1.0000002}
+  m_Center: {x: 0.0036657453, y: -0.0052340273, z: -4.1571715e-18}
+--- !u!114 &-4701924668889306719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593675967769376830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaad4064672cd644a8728d968da52f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockedXAngle: -90
+  lockedHeight: 1.25
