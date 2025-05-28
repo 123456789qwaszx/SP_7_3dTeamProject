@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: EquipmentData_40_Axe
   m_EditorClassIdentifier: 
   displayName: "\uB0A1\uC740 \uB3C4\uB07C"
-  description: "\uC9D0\uC2B9 \uC7A1\uB294 \uB3C4\uB07C"
-  type: 1
+  description: "\uAE08\uBC29\uC774\uB77C\uB3C4 \uBD80\uC234\uC9C8 \uB4EF\uD55C \uB3C4\uB07C"
+  icon: {fileID: 0}
+  type: 0
   dropPrefab: {fileID: 6769927984663270225, guid: 169c30adfd237fa4193b298740b2ad54, type: 3}
-  equipPrefab: {fileID: 0}
-  equipmentStatus: []
+  equipPrefab: {fileID: 6769927984663270225, guid: 169c30adfd237fa4193b298740b2ad54, type: 3}
+  weaponDamages:
+  - type: 1
+    value: 1

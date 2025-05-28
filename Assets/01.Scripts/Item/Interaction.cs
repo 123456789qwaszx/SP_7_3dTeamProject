@@ -7,9 +7,6 @@ using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
-    public float checkRate = 0.05f;
-    private float lastCheckTime;
-
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
 
@@ -19,6 +16,7 @@ public class Interaction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Item"))
         {
+            Debug.Log("잡았다아이템");
             curInteractGameObject = collision.collider.gameObject;
             curInteractable = collision.collider.GetComponent<IInteractable>();
 

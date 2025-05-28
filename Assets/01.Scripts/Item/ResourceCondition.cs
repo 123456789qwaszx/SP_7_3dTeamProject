@@ -28,13 +28,11 @@ public class ResourceCondition : MonoBehaviour
 
     public void Add(float value)
     {
-        // curValue += value;
         curValue = Mathf.Min(curValue + value, maxValue);
     }
 
     public void Subtract(float value)
     {
-        //curValue -= value;
         curValue = Mathf.Max(curValue - value, 0);
     }
 }
