@@ -37,7 +37,7 @@ public class BuildManual : MonoBehaviour
     {
         if (BuildManager.Instance != null)
         {
-            BuildManager.Instance.OnCancelBuild += CloseWindow;
+            BuildManager.Instance.OnHideBuildMenu += CloseWindow;
         }
     }
 
@@ -45,7 +45,7 @@ public class BuildManual : MonoBehaviour
     {
         if (BuildManager.Instance != null)
         {
-            BuildManager.Instance.OnCancelBuild -= CloseWindow;
+            BuildManager.Instance.OnHideBuildMenu -= CloseWindow;
         }
     }
 

@@ -7,7 +7,7 @@ public class BuildManager : MonoBehaviour
     public static BuildManager Instance { get; private set; }
 
     //미리보기 프리팹 상태 시 취소 이벤트.
-    public event Action OnCancelBuild;
+    public event Action OnHideBuildMenu;
 
     public bool isPreviewActivated = false; // 미리보기 상태
     private GameObject go_Preview; // 미리보기 프리팹을 담을 변수
@@ -60,7 +60,8 @@ public class BuildManager : MonoBehaviour
 
         go_Prefab = selectedBuilding.go_Prefabs; // 테스트용
         isPreviewActivated = true;
-        
+
+
         //SO 전용
         // if (_slotNumber < buildList.Length)
         // {
@@ -75,6 +76,7 @@ public class BuildManager : MonoBehaviour
 
         // isPreviewActivated = true; // 미리보기 활성화 상태
         // go_BaseUI.SetActive(false); // 제작탭 종료
+        HideBuild();
     }
     private void Build()
     {
@@ -124,6 +126,11 @@ public class BuildManager : MonoBehaviour
         go_Preview = null;
         go_Prefab = null;
 
-        OnCancelBuild?.Invoke();
+        
+    }
+
+    private void HideBuild()
+    {
+        OnHideBuildMenu?.Invoke();
     }
 }
