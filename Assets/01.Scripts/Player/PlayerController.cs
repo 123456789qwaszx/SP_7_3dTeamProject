@@ -13,7 +13,10 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     
     
-    [SerializeField] private  PlayerStats playerStats;
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private Collider attackRange;
+
+    private List<IDamageable> targetsInRange = new();
     
     [Header("땅(그라운드) 체크")]
     [SerializeField] private bool IsGround;
@@ -81,35 +84,34 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)  // 플레이어 이동 기능 (인풋시스템)
     {
         if (context.performed)
         {
-            _playerInput = context.ReadValue<Vector2>();
-            Debug.Log($"Cheak{_playerInput}");
+            _playerInput = context.ReadValue<Vector2>();     // 입력 받은 값을 _playerInput 넣어줌
         }
         else
         {
-            _playerInput = Vector2.zero;
+            _playerInput = Vector2.zero;                     // 입력 받은 값이 없으면 Vector2.zeor를 _playerInput 넣어줌
         }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         Debug.Log("Jump입력 됨");
-        if (context.performed && IsGround)
+        if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
         {
             Debug.Log("true로 못 들어오는 중");
             
-            animator.SetBool("IsJump", true);
+            animator.SetBool("IsJump", true);          // 점프 애니메이션을 true로 바꿔줌
             
         }
         Debug.Log("현재 땅이 아닙니다.");
     }
 
-    public void AddJump()
+    public void ApplyJump()                                // 애니메이션에서 클립 위치에 이벤트 줄 메서드
     {
-        _rigidbody.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse);
+        _rigidbody.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse); // 점프 기능
        
     }
     
@@ -135,12 +137,24 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttacking(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed)                              // 마우스 클릭이 실행 됐을 때
         {
             Debug.Log("마우스 좌클릭");
-            animator.SetTrigger("IsAttack");
+            animator.SetTrigger("IsAttack");           // 클릭이 실행 되면 "어택 애니메이션" 실행
         }
         Debug.Log("마우스 좌클릭이 안됨");
+    }
+
+    public void ApplyDamage()
+    {
+        foreach (var target in targetsInRange)
+        {
+            if (target != null)
+            {
+                target.TakeDamage(playerStats.Attack);
+                Debug.Log("공격시도");
+            }
+        }
     }
 
     private void HandleMove()
@@ -165,5 +179,34 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy") || other.CompareTag("Resource"))      // 들어온 오브젝트의 태그 "Enemy" 또는 "Resource" 체크
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                Debug.Log("적이 들어왔다");
+            }
+            else if (other.CompareTag("Resource"))
+            {
+                Debug.Log("자원이다");
+            }
+            
+            if (other.TryGetComponent(out IDamageable damageable))          // 들어온 오브젝트(other)에 IDamageable이 있는지 확인, 있으면 damageble변수 에 넣어줌.
+            {
+                Debug.Log($"IDamageable 인터페이스 있음! => 대상: {other.gameObject.name}");
+                if (!targetsInRange.Contains(damageable))
+                    targetsInRange.Add(damageable);
+                Debug.Log("리스트에 추가 완료");
+            }
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out IDamageable damageable))
+        {
+            targetsInRange.Remove(damageable);
+        }
+    }
 }
