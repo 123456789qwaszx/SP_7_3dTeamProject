@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 355579719655775441}
   - component: {fileID: -6970586200354185132}
   - component: {fileID: -5342675110196490482}
+  - component: {fileID: 4073012714042152122}
   m_Layer: 9
   m_Name: Object_01_Rock
   m_TagString: HardObject
@@ -252,7 +253,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 4455091661538624291}
   _data: {fileID: 11400000, guid: abe9bf65a991fca47a7cf1d3a65bcda5, type: 2}
+  resourceCondition: {fileID: 0}
   capacity: 3
+  hitCount: 1
 --- !u!114 &-6970586200354185132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +290,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.871557, y: 4.9528017, z: 5.4772425}
   m_Center: {x: -0.12330532, y: 1.9764009, z: 0.1262021}
+--- !u!54 &4073012714042152122
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105714625683771381}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

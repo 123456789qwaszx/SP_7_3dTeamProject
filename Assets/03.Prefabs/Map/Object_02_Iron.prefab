@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 8080187458834632248}
   - component: {fileID: -6076248202592419886}
   - component: {fileID: 6754709058341933419}
+  - component: {fileID: 1488579886211169022}
   m_Layer: 9
   m_Name: Object_02_Iron
   m_TagString: HardObject
@@ -169,7 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 5312925209776902975}
   _data: {fileID: 11400000, guid: f37fc2b85727aa24aae54ce12bc33ad8, type: 2}
+  resourceCondition: {fileID: 0}
   capacity: 3
+  hitCount: 1
 --- !u!114 &-6076248202592419886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +207,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.145421, y: 3.8752804, z: 6.460664}
   m_Center: {x: -0.41095018, y: 1.437639, z: 0.4204316}
+--- !u!54 &1488579886211169022
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795750768401531074}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &4719345000045497
 PrefabInstance:
   m_ObjectHideFlags: 0

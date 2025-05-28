@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 6158459279195741594}
   - component: {fileID: 4726585978980811078}
   - component: {fileID: 1582972024367214072}
+  - component: {fileID: -6533963452773735576}
   m_Layer: 9
   m_Name: Object_00_Tree
   m_TagString: HardObject
@@ -265,7 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 1542484622764985291}
   _data: {fileID: 11400000, guid: db6e6c49deccfc54582ab90789d1b21c, type: 2}
+  resourceCondition: {fileID: 0}
   capacity: 2
+  hitCount: 1
 --- !u!65 &1582972024367214072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -287,3 +290,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.157854, y: 10.6182575, z: 1.5074611}
   m_Center: {x: -0.02165699, y: 4.809128, z: 0.020351171}
+--- !u!54 &-6533963452773735576
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795270722307652853}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

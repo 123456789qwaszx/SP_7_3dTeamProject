@@ -6,30 +6,74 @@ using UnityEngine;
 public class UIInventory : MonoBehaviour
 {
     public ItemSlot[] slots;
-
+    public GameObject inventoryWindow;
     public Transform slotPanel;
-
-
-    EquipmentData selectedItem;
-    int selectedItemIndex = 0;
+    public Transform dropPosition;
 
     public Resource resource;
 
+    [Header("Select Item")]
+    public TextMeshProUGUI selectedItemName;
+    public TextMeshProUGUI selectedItemDescription;
+    public TextMeshProUGUI selectedStatName;
+    public TextMeshProUGUI selectedStatValue;
+    public GameObject useButton;
+    public GameObject equipButton;
+    public GameObject unequipButton;
+    public GameObject dropButton;
+
+    EquipmentData selectedItem;
+    int selectedItemIndex = 0;
 
     void Start()
     {
         Managers.Player.Player.addItem += AddItem;
 
 
+        inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
+
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
             slots[i].index = i;
             slots[i].inventory = this;
         }
+
+        
+        ClearSelectedItemWindow();
     }
 
+
+    void ClearSelectedItemWindow()
+    {
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text = string.Empty;
+        selectedStatName.text = string.Empty;
+        selectedStatValue.text = string.Empty;
+
+        useButton.SetActive(false);
+        equipButton.SetActive(false);
+        unequipButton.SetActive(false);
+        dropButton.SetActive(false);
+    }
+
+
+    public void Toggle()
+    {
+        if (IsOpen())
+        {
+            inventoryWindow.SetActive(false);
+        }
+        else
+        {
+            inventoryWindow.SetActive(true);
+        }
+    }
+    public bool IsOpen()
+    {
+        return inventoryWindow.activeInHierarchy;
+    }
 
     void AddItem()
     {
@@ -47,6 +91,7 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
+        ThrowItem(data);
         Managers.Player.Player.itemData = null;
     }
 
@@ -93,6 +138,11 @@ public class UIInventory : MonoBehaviour
         return null;
     }
 
+    void ThrowItem(EquipmentData data)
+    {
+        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
+    }
+
 
     public void SelectItem(int index)
     {
@@ -101,8 +151,26 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
+        
         selectedItem = slots[index].item;
         selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.displayName;
+        selectedItemDescription.text = selectedItem.description;
+
+        selectedStatName.text = string.Empty;
+        selectedStatValue.text = string.Empty;
+
+        for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
+        {
+            selectedStatName.text += selectedItem.weaponDamages[i].type.ToString() + "\n";
+            selectedStatValue.text += selectedItem.weaponDamages[i].value.ToString() + "\n";
+        }
+
+        //useButton.SetActive(selectedItem.type == ItemType.Consumable);
+        equipButton.SetActive(selectedItem.type == EquipmenType.Weapon && !slots[index].equipped);
+        unequipButton.SetActive(selectedItem.type == EquipmenType.Weapon && slots[index].equipped);
+        dropButton.SetActive(true);
     }
 
     public void OnUseButton()
