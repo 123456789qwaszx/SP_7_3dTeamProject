@@ -36,7 +36,7 @@ public class PreviewObject : MonoBehaviour
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null)
         {
-            Material[] newMaterials = new Material[renderer.materials.Length]; // 미리보기 프리팹은 단일 오브젝트이긴 하지만 추후 자식 
+            Material[] newMaterials = new Material[renderer.materials.Length]; // 미리보기 프리팹은 단일 오브젝트 
             for (int i = 0; i < newMaterials.Length; i++)
             {
                 newMaterials[i] = mat;

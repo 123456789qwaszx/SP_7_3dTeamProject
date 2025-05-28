@@ -6,7 +6,7 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance { get; private set; }
 
-    public bool isPreviewActivated = false; // 미리보기 상태
+    public bool isPreviewActivated = false; // 미리보기 상태: BuildManual에서 사용하기 위해 전체 접근으로.
     private GameObject go_Preview; // 미리보기 프리팹을 담을 변수
     private GameObject go_Prefab; // 실제 생성 프리팹을 담을 변수
 
@@ -57,22 +57,6 @@ public class BuildManager : MonoBehaviour
 
         go_Prefab = buildList.prefab;
         isPreviewActivated = true;
-
-
-        //SO 전용
-        // if (_slotNumber < buildList.Length)
-        // {
-        //     BuildData selectedBuilding = buildList[_slotNumber];
-
-        //     go_Preview = Instantiate(
-        //         selectedBuilding.previewPrefab,
-        //         tf_Player.position + tf_Player.forward,
-        //         Quaternion.identity
-        //     );
-        // }
-
-        // isPreviewActivated = true; // 미리보기 활성화 상태
-        // go_BaseUI.SetActive(false); // 제작탭 종료
     }
     private void Build()
     {
@@ -97,7 +81,7 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    private void PreviewPosUpdate() // 
+    private void PreviewPosUpdate()
     {
         if (Physics.Raycast(tf_PlayerCam.position, tf_PlayerCam.forward, out hitInfo, rayRange, layerMask))
         {
