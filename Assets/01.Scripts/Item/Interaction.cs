@@ -16,7 +16,6 @@ public class Interaction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Item"))
         {
-            Debug.Log("잡았다아이템");
             curInteractGameObject = collision.collider.gameObject;
             curInteractable = collision.collider.GetComponent<IInteractable>();
 

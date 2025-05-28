@@ -49,10 +49,37 @@ public class Equipment : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, attackDistance))
         {
-            if (doesGatherResources && hit.collider.TryGetComponent (out EquipmentData resource))
+            if (doesGatherResources && hit.collider.TryGetComponent(out EquipmentData resource))
             {
+
             }
         }
     }
+
+
+    EquipmentData selectedItem;
+    Resource resource;
+    public void Gathering()
+    {
+
+
+        if (selectedItem.type == EquipmentType.Weapon)
+        {
+            for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
+            {
+                switch (selectedItem.weaponDamages[i].type)
+                {
+                    case DamageType.ForMonster:
+                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                        break;
+                    case DamageType.ForResource:
+                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                        break;
+                }
+            }
+        }
+    }
+    
 }
+
 
