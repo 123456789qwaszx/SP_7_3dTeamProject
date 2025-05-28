@@ -2992,18 +2992,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_BaseUI: {fileID: 2500906918705368560}
-  builds:
-  - buildName: Panel
-    go_Prefabs: {fileID: 7539615883743782861, guid: fc1d2821a4a394c4d960ab461a198a40, type: 3}
-    go_PreviewPrefabs: {fileID: 3001666245541303330, guid: 28e9c54b397cea3459cf44b08418b5c7, type: 3}
-  - buildName: House
-    go_Prefabs: {fileID: 8771535536120350647, guid: 3888e55da9fb9244a9a2544182b5125f, type: 3}
-    go_PreviewPrefabs: {fileID: 8771535536120350647, guid: b6f7ad8d138b25a4287d0d2cd43810ed, type: 3}
-  tf_Player: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  rayRange: 15
+  buildList:
+  - {fileID: 11400000, guid: 307342182c772154ebfad0d981b6fbfd, type: 2}
+  - {fileID: 11400000, guid: 18b0c64d2bfcd47428aa2e435c66007a, type: 2}
+  - {fileID: 11400000, guid: 10f540122ca28e345917212eba356ff6, type: 2}
+  - {fileID: 11400000, guid: 88d4895385f60944b89850f4b7eaa63b, type: 2}
+  - {fileID: 11400000, guid: 04b6d0f032e75f44da5e241ff86e5987, type: 2}
+  - {fileID: 11400000, guid: ce70a91c8b6630442ab715d1503eb21a, type: 2}
+  - {fileID: 11400000, guid: 61de6ed744b98354cb24a3ebb26cd813, type: 2}
+  - {fileID: 11400000, guid: 3a9c279adf1dc234396b3d66b2d369bd, type: 2}
 --- !u!1 &8028367400151327291
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,10 +13,10 @@ public class Building
 public class BuildManual : MonoBehaviour
 {
     [SerializeField] private GameObject go_BaseUI; // 건축 UI
-    [SerializeField] private Building[] builds; // 설치물 저장
+    // [SerializeField] private Building[] builds; // 설치물 저장
     private bool isActivated = false; // UI 활성 상태
 
-    // [SerializeField] private BuildData[] buildList; // 건축물(SO) 리스트
+    [SerializeField] private BuildData[] buildList; // 건축물(SO) 리스트
     // go_Preview, go_Prefab, tf_PlayerCam, isPreviewActivated
 
     void Update()
@@ -30,23 +30,9 @@ public class BuildManual : MonoBehaviour
 
     public void SlotClick(int _slotNumber)
     {
-        BuildManager.Instance.SelectedBuilding(builds[_slotNumber]);
-    }
-
-    private void OnEnable()
-    {
-        if (BuildManager.Instance != null)
-        {
-            BuildManager.Instance.OnHideBuildMenu += CloseWindow;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (BuildManager.Instance != null)
-        {
-            BuildManager.Instance.OnHideBuildMenu -= CloseWindow;
-        }
+        // BuildManager.Instance.SelectedBuilding(builds[_slotNumber]);
+        BuildManager.Instance.SelectedBuilding(buildList[_slotNumber]);
+        CloseWindow();
     }
 
     private void Window()

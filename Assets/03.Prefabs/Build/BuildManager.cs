@@ -6,12 +6,10 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance { get; private set; }
 
-    //미리보기 프리팹 상태 시 취소 이벤트.
-    public event Action OnHideBuildMenu;
-
     public bool isPreviewActivated = false; // 미리보기 상태
     private GameObject go_Preview; // 미리보기 프리팹을 담을 변수
     private GameObject go_Prefab; // 실제 생성 프리팹을 담을 변수
+
     [SerializeField] private Transform tf_PlayerCam; // Player Camera 위치로 생성
 
     // Ray로 설치 지점을 지정.
@@ -40,7 +38,6 @@ public class BuildManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && isPreviewActivated)
         {
-            Debug.Log("마우스 클릭: 건설 시작");
             Build();
         }
 
@@ -50,15 +47,15 @@ public class BuildManager : MonoBehaviour
         }
     }
 
-    public void SelectedBuilding(Building selectedBuilding)
+    public void SelectedBuilding(BuildData buildList)
     {
         go_Preview = Instantiate(
-            selectedBuilding.go_PreviewPrefabs,
+            buildList.previewPrefab,
             tf_PlayerCam.position + tf_PlayerCam.forward,
             Quaternion.identity
         );
 
-        go_Prefab = selectedBuilding.go_Prefabs; // 테스트용
+        go_Prefab = buildList.prefab;
         isPreviewActivated = true;
 
 
@@ -76,7 +73,6 @@ public class BuildManager : MonoBehaviour
 
         // isPreviewActivated = true; // 미리보기 활성화 상태
         // go_BaseUI.SetActive(false); // 제작탭 종료
-        HideBuild();
     }
     private void Build()
     {
@@ -125,10 +121,5 @@ public class BuildManager : MonoBehaviour
         isPreviewActivated = false;
         go_Preview = null;
         go_Prefab = null;
-    }
-
-    private void HideBuild()
-    {
-        OnHideBuildMenu?.Invoke();
     }
 }
