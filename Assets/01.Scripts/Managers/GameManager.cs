@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -8,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerInput playerInput; //카메라 기능을 일시 비활성할 변수
+    [SerializeField] private UIOpenClose uiOpenClose;
     bool isPause = false; // 인게임 정지 상태를 확인하는 변수
     bool isGameOver = false; // 게임오버 상태를 확인하는 변수
 
@@ -18,6 +17,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Retry()
     {
+        Time.timeScale = 1;
 #if UNITY_EDITOR
         Debug.Log("게임 재시작 (에디터)");
 #endif
@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        uiOpenClose = FindObjectOfType<UIOpenClose>();
         playerInput = FindObjectOfType<PlayerInput>(); // 인게임 생성으로 자동으로 PlayerInput을 찾아 등록.
         //다만, 게임 재시작 시 플레이어 오브젝트를 다시 못찾는 버그
         Cursor.lockState = CursorLockMode.Confined;
@@ -113,12 +114,11 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
+        Debug.Log("사망 메뉴 작동 확인(GameManager)");
+
         if (isGameOver) return; // 재시작 시 리턴하면서 
 
         isGameOver = true;
-        // Time.timeScale = 0; //인게임 정지
-        // 재시작 시 
-
         TogglePause(); // 게임 오버시 인게임 정지
     }
 }

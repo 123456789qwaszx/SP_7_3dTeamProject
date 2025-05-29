@@ -34,22 +34,22 @@ public class UIOpenClose : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
+            Debug.Log("인벤토리 작동: I");
             OCInven();
         }
     }
 
     public void OCInven()
     {
-        if (!isActive)
+        isActive = !isActive;
+        inven.SetActive(!inven.activeSelf);
+
+        if (isActive)
         {
-            isActive = true;
-            inven.SetActive(!inven.activeSelf);
             GameManager.Instance.DisableGameCamLook();
         }
         else
         {
-            isActive = false;
-            inven.SetActive(!inven.activeSelf);
             GameManager.Instance.EnableGameCamLook();
         }
     }
@@ -70,8 +70,8 @@ public class UIOpenClose : MonoBehaviour
     {
         if (gameOver != null)
         {
-            gameOver.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
-            GameManager.Instance.TogglePause();
+            Debug.Log("UI gameover 메서드 작동");
+            gameOver.SetActive(!gameOver.activeSelf); // 현재 상태의 반대로 토글
         }
         else
         {
