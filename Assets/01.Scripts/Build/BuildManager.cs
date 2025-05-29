@@ -70,7 +70,6 @@ public class BuildManager : MonoBehaviour
             Instantiate(go_Prefab, hitInfo.point, lockRot);
             Destroy(go_Preview);
 
-            // isActivated = false;
             isPreviewActivated = false;
             go_Preview = null;
             go_Prefab = null;
