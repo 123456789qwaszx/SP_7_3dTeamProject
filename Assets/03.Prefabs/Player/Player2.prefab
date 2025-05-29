@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &254015340608988501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4835261383449108772}
+  m_Layer: 0
+  m_Name: itemEquipParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4835261383449108772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254015340608988501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.44, y: 3.27, z: 2.08}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9147319663612536914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637620751395756031
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,8 +539,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1921771625734807920, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921771625734807920, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1921771625734807920, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.98021
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 1922800474581884951, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -674,6 +713,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7436592639239696898}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4835261383449108772}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
       insertIndex: -1
@@ -838,7 +880,7 @@ MonoBehaviour:
   playerStats: {fileID: 2404234221295657825}
   attackRange: {fileID: 1947050636912972749}
   uiOpenClose: {fileID: 0}
-  modelTransform: {fileID: 9147319663612536914}
+  modelTransform: {fileID: 0}
   IsGround: 0
   groundCheckTr: {fileID: 8774700000564567073}
   groundDistance: 0.1
@@ -955,7 +997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curInteractGameObject: {fileID: 0}
   curEquip: {fileID: 0}
-  equipParent: {fileID: 0}
+  equipParent: {fileID: 4835261383449108772}
 --- !u!4 &9147319663612536914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
