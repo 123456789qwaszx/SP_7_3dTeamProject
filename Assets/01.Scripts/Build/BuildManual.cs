@@ -40,6 +40,7 @@ public class BuildManual : MonoBehaviour
         if (!isActivated)
         {
             OpenWindow();
+            
         }
         else
         {
@@ -49,12 +50,14 @@ public class BuildManual : MonoBehaviour
 
     private void OpenWindow() // 제작탭 열기
     {
+        UIManager.Instance.DisableGameCamLook();
         isActivated = true;
         go_BaseUI.SetActive(true);
     }
 
     private void CloseWindow() // 제작탭 닫기
     {
+        UIManager.Instance.EnableGameCamLook();
         isActivated = false;
         go_BaseUI.SetActive(false);
     }
