@@ -63,7 +63,10 @@ public class EquipmentData : ScriptableObject
     public string description;
     public Sprite icon;
     public EquipmentType type;
+    public ResourceType resourcetype;
     public GameObject dropPrefab;
+
+    public int quantity;
 
     [Header("Equip")]
     public GameObject equipPrefab;
@@ -80,7 +83,7 @@ public class EquipmentData : ScriptableObject
     public ItemDataConsumable[] consumables;
 
     [Header("Resource")]
-    public ItemDataResourceHp[] resourceHp;
+    public ItemDataResourceHp[] resources;
 
 }
 

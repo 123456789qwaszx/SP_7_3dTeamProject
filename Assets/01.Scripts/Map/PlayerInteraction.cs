@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     public Action<Player> OnPlayerInteraction;
-    public float InteractInterval = 0f;
+    public float InteractInterval = 0.5f;
     private Player _player;
 
     private void Start()

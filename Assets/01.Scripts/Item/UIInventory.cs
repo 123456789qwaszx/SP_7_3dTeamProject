@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +26,7 @@ public class UIInventory : MonoBehaviour
     EquipmentData selectedItem;
     int selectedItemIndex = 0;
 
-    
+
     int curEquipIndex;
 
     void Start()
@@ -40,8 +42,37 @@ public class UIInventory : MonoBehaviour
             slots[i].inventory = this;
         }
 
-        
+
         ClearSelectedItemWindow();
+    }
+
+
+    void UseStackedItem(EquipmentData data, int quantity)
+    {
+        // 우선 인벤토리에 아이템이 있는지 확인
+        // 있다면 sloti를 싺다 뒤지는데
+        // slot[i]의 icon이 data.icon과 일치하다면
+        // quantity가 slot[i].item.quantity보다 같거나 작을 때
+        // slot[i].item.quantity -= quantity가
+        // 그리고 0이 됐다면, 인벤토리에서 삭제
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
+            {
+                slots[i].item.quantity -= quantity;
+
+                if (slots[i].item.quantity == 0)
+                {
+                    selectedItem = null;
+                    slots[selectedItemIndex].item = null;
+                    selectedItemIndex = -1;
+                    ClearSelectedItemWindow();
+                }
+            }
+            
+            UpdateUI();
+        }
     }
 
 
@@ -63,21 +94,31 @@ public class UIInventory : MonoBehaviour
     {
         EquipmentData data = Managers.Player.Player.itemData;
 
-        // if (data.canStack)
-        // {
-        //     ItemSlot slot = GetItemStack(data);
-             ItemSlot emptySlot = GetEmptySlot(data);
-
-            // 있다면
-            if (emptySlot != null)
+        if (data.canStack)
+        {
+            ItemSlot slot = GetItemStack(data);
+            if (slot != null)
             {
-                emptySlot.item = data;
-                emptySlot.quantity = 1;
+                data.quantity++;
+                slot.quantity++;
                 UpdateUI();
                 Managers.Player.Player.itemData = null;
                 return;
             }
-       // }
+        }
+        ItemSlot emptySlot = GetEmptySlot(data);
+
+        // 있다면
+        if (emptySlot != null)
+        {
+            emptySlot.item = data;
+            data.quantity++;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            Managers.Player.Player.itemData = null;
+            return;
+        }
+
 
         ThrowItem(data);
         Managers.Player.Player.itemData = null;
@@ -139,7 +180,7 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
-        
+
         selectedItem = slots[index].item;
         selectedItemIndex = index;
 
@@ -183,12 +224,13 @@ public class UIInventory : MonoBehaviour
     public void OnDropButton()
     {
         ThrowItem(selectedItem);
-        RemoveSelectedItem();
+        RemoveSelectedItem();      
     }
 
     void RemoveSelectedItem()
     {
         slots[selectedItemIndex].quantity--;
+        slots[selectedItemIndex].item.quantity--;
 
         if (slots[selectedItemIndex].quantity <= 0)
         {

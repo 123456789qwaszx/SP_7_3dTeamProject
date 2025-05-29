@@ -8,30 +8,29 @@ public class Resource : MonoBehaviour, IDamageable
     public EquipmentData _data;
     public ResourceCondition resourceCondition;
 
-
     private float workSpeed = 0.5f;
-    public int capacity = 3;
 
+    public int capacity = 3;
     public float hitCount = 1;
 
 
     void Start()
     {
-        for (int i = 0; i < _data.resourceHp.Length; i++)
+        for (int i = 0; i < _data.resources.Length; i++)
         {
-            switch (_data.resourceHp[i].type)
+            switch (_data.resources[i].type)
             {
                 case ResourceType.Tree:
-                    this.hitCount = _data.resourceHp[i].value;
+                    this.hitCount = _data.resources[i].value;
                     break;
                 case ResourceType.Rock:
-                    this.hitCount = _data.resourceHp[i].value;
+                    this.hitCount = _data.resources[i].value;
                     break;
                 case ResourceType.Iron:
-                    this.hitCount = _data.resourceHp[i].value;
+                    this.hitCount = _data.resources[i].value;
                     break;
                 case ResourceType.Mushroom:
-                    this.hitCount = _data.resourceHp[i].value;
+                    this.hitCount = _data.resources[i].value;
                     break;
             }
         }
