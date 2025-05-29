@@ -102,11 +102,11 @@ public class PlayerStats : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("died.");
+        // Debug.Log("died.");
         if (uiOpenClose != null)
         {
-            // uiOpenClose.OCGameOver();
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(); // 게임오버: 인게임 정지.
+            uiOpenClose.OCGameOver(); // 게임오버 UI 활성화
         }
         else
         {

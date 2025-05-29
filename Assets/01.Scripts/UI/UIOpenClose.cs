@@ -43,7 +43,7 @@ public class UIOpenClose : MonoBehaviour
         if (!isActive)
         {
             isActive = true;
-            inven.SetActive(true);
+            inven.SetActive(!inven.activeSelf);
             GameManager.Instance.DisableGameCamLook();
         }
         else
@@ -54,7 +54,7 @@ public class UIOpenClose : MonoBehaviour
         }
     }
 
-    // 옵션 버튼 누르면 작동
+    // 옵션 버튼 누르면 작동:
     public void OCOption()
     {
         Debug.Log(option);
@@ -77,6 +77,4 @@ public class UIOpenClose : MonoBehaviour
             Debug.LogWarning("GameOver UI를 찾을 수 없습니다.");
         }
     }
-
-    
 }
