@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 #endif
         // 현재 씬을 다시 로드하여 게임 재시작
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
 
     public void Title()
@@ -45,19 +46,24 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
-    // private void OnEnable()
-    // {
-    //     SceneManager.sceneLoaded += OnSeneLoaded;   
-    // }
+    //씬 로드하면서 PlayerInput 추가 재할당.
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-    // private void OnDisable()
-    // {
-    //     SceneManager.sceneLoaded -= OnSeneLoaded;
-    // }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+    }
 
 
-
-    private void Awake()
+    private void Start()
     {
         playerInput = FindObjectOfType<PlayerInput>(); // 인게임 생성으로 자동으로 PlayerInput을 찾아 등록.
         //다만, 게임 재시작 시 플레이어 오브젝트를 다시 못찾는 버그
@@ -107,10 +113,11 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        if (isGameOver) return;
+        if (isGameOver) return; // 재시작 시 리턴하면서 
 
         isGameOver = true;
         Time.timeScale = 0; //인게임 정지
+        // 재시작 시 
 
         TogglePause(); // 게임 오버시 인게임 정지
     }
