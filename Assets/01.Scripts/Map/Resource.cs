@@ -58,15 +58,6 @@ public class Resource : MonoBehaviour, IDamagable
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("HardObject"))
-        {
-            Managers.Resource.Destroy(gameObject);
-        }
-    }
-
-
     void OnPlayerResourceInteraction(Player pc)
     {
         // 나중에 Ax를 들었을 때만 동작.
