@@ -1381,6 +1381,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -4.286
       objectReference: {fileID: 0}
+    - target: {fileID: 1107391361619342689, guid: 105be810ac9b7ef438ceb94464dc1b56, type: 3}
+      propertyPath: NPCName
+      value: 
+      objectReference: {fileID: 145378081}
+    - target: {fileID: 1107391361619342689, guid: 105be810ac9b7ef438ceb94464dc1b56, type: 3}
+      propertyPath: NPCText
+      value: 
+      objectReference: {fileID: 655546385}
+    - target: {fileID: 1107391361619342689, guid: 105be810ac9b7ef438ceb94464dc1b56, type: 3}
+      propertyPath: MarkNPCName
+      value: 
+      objectReference: {fileID: 946042716}
+    - target: {fileID: 1107391361619342689, guid: 105be810ac9b7ef438ceb94464dc1b56, type: 3}
+      propertyPath: NPCTextBoard
+      value: 
+      objectReference: {fileID: 735057151}
     - target: {fileID: 3758264422300984902, guid: 105be810ac9b7ef438ceb94464dc1b56, type: 3}
       propertyPath: m_Name
       value: NPCManager
