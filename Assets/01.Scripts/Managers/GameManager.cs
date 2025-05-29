@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 //싱글톤 상속하면서 GameManger 오브젝트를 생성함(UI를 작동해야 생성됨.)
 public class GameManager : Singleton<GameManager>
@@ -10,7 +11,52 @@ public class GameManager : Singleton<GameManager>
     bool isPause = false; // 인게임 정지 상태를 확인하는 변수
     bool isGameOver = false; // 게임오버 상태를 확인하는 변수
 
-    //
+    public void GameStart()
+    {
+        SceneManager.LoadScene("YJHTestScene");
+    }
+
+    public void Retry()
+    {
+#if UNITY_EDITOR
+        Debug.Log("게임 재시작 (에디터)");
+#endif
+        // 현재 씬을 다시 로드하여 게임 재시작
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void Title()
+    {
+        SceneManager.LoadScene("YJHTestTitle");
+    }
+
+    public void GameExit()
+    {
+#if UNITY_EDITOR
+        // 에디터 환경에서는 플레이 모드 종료
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif DEVELOPMENT_BUILD
+        // 개발 빌드에서는 로그 출력 후 종료
+        Debug.Log("게임 종료 (개발 빌드)");
+        Application.Quit();
+#else
+        // 릴리즈 빌드에서는 바로 종료
+        Application.Quit();
+#endif
+    }
+
+    // private void OnEnable()
+    // {
+    //     SceneManager.sceneLoaded += OnSeneLoaded;   
+    // }
+
+    // private void OnDisable()
+    // {
+    //     SceneManager.sceneLoaded -= OnSeneLoaded;
+    // }
+
+
+
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>(); // 인게임 생성으로 자동으로 PlayerInput을 찾아 등록.
