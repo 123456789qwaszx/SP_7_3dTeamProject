@@ -4,12 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPC : MonoBehaviour
+public class NPC : MonoBehaviour 
 {
     public GameObject MarkNPCName;
     public GameObject NPCSearch;
     public GameObject NPCManager;
     public GameObject NPCTextBoard;
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -35,7 +36,8 @@ public class NPC : MonoBehaviour
             // 버튼 클릭 이벤트 연결
 
              instance.GetComponent<Button>().onClick.AddListener(NPCManager.GetComponent<SearchNPCNameBtn>().ButtonClick);
-                
+
+
         }
     }
 
@@ -43,19 +45,27 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerExit(Collider other)//멀어질 경우 해당 생성 오브젝트 삭제
     {
-        
+
         string npcName = this.gameObject.name;
 
-       
+
 
         if (other.CompareTag("Player"))
-        {         
-            Destroy(MarkNPCName.transform.Find(npcName).gameObject);
+        {
+            Transform child = MarkNPCName.transform.Find(npcName);
+            if (child != null)
+            {
+                Destroy(child.gameObject);
+            }
+
+            if (NPCTextBoard.activeSelf)
+            {
+                NPCTextBoard.SetActive(false);
+            }
+
+
         }
 
-        NPCTextBoard.SetActive(false);
     }
-
-
 
 }

@@ -16,7 +16,9 @@ MonoBehaviour:
   description: "\uD5C8\uAE30\uC640 \uCCB4\uB825\uC744 \uCC44\uC6CC\uC900\uB2E4"
   icon: {fileID: 21300000, guid: 1089cb9d8bd25c44eb5301ace6468a89, type: 3}
   type: 2
+  resourcetype: 0
   dropPrefab: {fileID: 7849485700967436439, guid: 8f6299d76c4aa95468ea529ffad9458a, type: 3}
+  quantity: 0
   equipPrefab: {fileID: 0}
   weaponDamages: []
   canStack: 1
@@ -26,4 +28,4 @@ MonoBehaviour:
     value: 50
   - type: 2
     value: 50
-  resourceHp: []
+  resources: []

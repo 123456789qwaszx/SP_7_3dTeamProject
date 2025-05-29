@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
   
     private Rigidbody _rigidbody;
@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Collider attackRange;
+    [SerializeField] private UIOpenClose uiOpenClose;
+    [SerializeField] private Transform modelTransform;
 
     private List<IDamageable> targetsInRange = new();
     
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckTr;
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
-    
+
     [Header("카메라")]
     [SerializeField] private Transform cameraContainer;
     [SerializeField] private Transform camTr;
@@ -50,12 +52,30 @@ public class PlayerController : MonoBehaviour
     {
         CheckGround();
         HandleLook();
+        
+        //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
+        playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
+        playerStats.Hydration.Subtract(playerStats.Hydration.passiveValue * Time.deltaTime);
+
+        if (playerStats.Hydration.curValue <= 0f)
+        {
+            playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
+        }
+        if (playerStats.Hunger.curValue <= 0f)
+        {
+            playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
+        }
+        if (playerStats.Health.curValue <= 0f)
+        {
+            Die();
+        }
        
     }
 
     void FixedUpdate()
     {
         HandleMove();
+        RotateModel();
     }
 
     public void CheckGround()
@@ -75,12 +95,11 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawSphere(groundCheckTr.position, groundDistance);
         }
     }
-
     public void Move()
     {
+        
         Vector3 move = new Vector3(_playerInput.x, 0, _playerInput.y);
         _rigidbody.MovePosition(this.transform.position + move *playerStats.Speed  * Time.deltaTime);
-        
 
     }
 
@@ -209,4 +228,55 @@ public class PlayerController : MonoBehaviour
             targetsInRange.Remove(damageable);
         }
     }
+    
+    public void Heal(float amount)
+    {
+        playerStats.Health.Add(amount);
+    }
+    public void Drink(float amount)
+    {
+        playerStats.Hydration.Add(amount);
+    }
+    public void Eat(float amount)
+    {
+        playerStats.Health.Add(amount);
+    }
+    public void Die()
+    {
+        Debug.Log("died.");
+        if (uiOpenClose != null)
+        {
+            uiOpenClose.OCGameOver();
+        }
+        else
+        {
+            Debug.LogWarning("UIOpenClose가 연결되지 않았습니다.");
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        playerStats.Health.Subtract(damage);
+        
+        if (playerStats.Health.curValue <= 0f)
+        {
+            Die();
+        }
+    }
+    private void RotateModel()
+    {
+        Vector3 moveDir = _rigidbody.velocity;
+        moveDir.y = 0;
+
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(moveDir);
+            modelTransform.rotation = Quaternion.Slerp(
+                modelTransform.rotation,
+                targetRot,
+                Time.deltaTime * 10f
+            );
+        }
+    }
+    
 }
