@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 757936459772691722}
   - component: {fileID: 1458431252149522029}
   - component: {fileID: 3294143452451098113}
+  - component: {fileID: 3578659500501089834}
   m_Layer: 0
   m_Name: Farm
   m_TagString: Untagged
@@ -268,6 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedXAngle: -90
+  lockedHeight: 0
 --- !u!54 &1458431252149522029
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,6 +318,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.018342365, y: 0.014458563, z: 0.013106394}
   m_Center: {x: 0.00019785296, y: 0.0029037278, z: 0.006340721}
+--- !u!114 &3578659500501089834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8771535536120350647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb442bcaf130d8c4f8f999ee28aad5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interaction: {fileID: 6336757116371328242}
+  qwe: {fileID: 0}
 --- !u!1 &9126725671813016572
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2089520298135671564}
   - component: {fileID: 5587370489563070042}
+  - component: {fileID: 6336757116371328242}
   m_Layer: 0
   m_Name: HomeInteraction
   m_TagString: Untagged
@@ -369,3 +386,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.01610923, y: 0.012219218, z: 0.0082645845}
   m_Center: {x: -0.0011094474, y: 0.0019608622, z: 0.0035501828}
+--- !u!114 &6336757116371328242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126725671813016572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684480842f37604e97d92ef5d95f1ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractInterval: 0.5

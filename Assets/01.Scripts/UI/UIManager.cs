@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class UIManager : MonoBehaviour
 {
     // UI 작동 시 카메라 잠금 혹은 게임 일시 정시 기능
-    // 테스트 1: 플레이어 인풋시스템(카메라)를 잠금.
+    // 테스트 1: 플레이어 인풋시스템(카메라)를 잠금. 작동 확인인
     public static UIManager Instance { get; private set; }
     [SerializeField] private PlayerInput playerInput; //카메라 기능을 일시 비활성할 변수
     void Start()
@@ -38,4 +38,6 @@ public class UIManager : MonoBehaviour
         }
         Cursor.lockState = CursorLockMode.Locked; // 마우스 커서 숨김
     }
+
+    
 }
