@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.VFX;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class PlayerStats : MonoBehaviour
     public float noHungerHealthDecay = 5f;
     public UIStat uiStat;
     [SerializeField]
-    private Condition _health;
+    private Condition _health; 
+    public SFXManager sfxManager;
+    private bool _isDead = false;
     public Condition Health // 체력
     {
         get { return _health; }
@@ -82,9 +85,15 @@ public class PlayerStats : MonoBehaviour
         {
             Health.Subtract(noHungerHealthDecay * Time.deltaTime);
         }
-        if (Health.curValue <= 0f)
+        if (!_isDead && Health.curValue <= 0f)
         {
+            _isDead = true; // 여기서 한 번만 통과
             Die();
+
+            if (sfxManager != null && sfxManager.playerDieSFX != null)
+            {
+                sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
+            }
         }
 
     }

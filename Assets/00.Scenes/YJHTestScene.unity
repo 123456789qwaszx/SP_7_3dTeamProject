@@ -149,6 +149,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3530961238689289941}
     - target: {fileID: 2404234221295657825, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: sfxManager
+      value: 
+      objectReference: {fileID: 28332991829956843, guid: db3e7646f15c50744b625f2fff05d1d8, type: 3}
+    - target: {fileID: 2404234221295657825, guid: e844501743b638a43939d964e3f0cc51, type: 3}
       propertyPath: uiOpenClose
       value: 
       objectReference: {fileID: 8128941824098225758}
@@ -1449,7 +1453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: []
-  inventoryWindow: {fileID: 7510885021447463328}
   slotPanel: {fileID: 4073880752524646344}
   dropPosition: {fileID: 0}
   resource: {fileID: 0}
@@ -4214,7 +4217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1203628295477915284, guid: 88140a54f5516864b9297e248e34bbaf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8400807530702070067, guid: 88140a54f5516864b9297e248e34bbaf, type: 3}
       propertyPath: m_LocalPosition.x
