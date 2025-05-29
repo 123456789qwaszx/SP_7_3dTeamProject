@@ -6,7 +6,6 @@ using UnityEngine;
 public class UIInventory : MonoBehaviour
 {
     public ItemSlot[] slots;
-    public GameObject inventoryWindow;
     public Transform slotPanel;
     public Transform dropPosition;
 
@@ -32,8 +31,6 @@ public class UIInventory : MonoBehaviour
     {
         Managers.Player.Player.addItem += AddItem;
 
-
-        inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
 
         for (int i = 0; i < slots.Length; i++)
@@ -62,22 +59,6 @@ public class UIInventory : MonoBehaviour
     }
 
 
-    // public void Toggle()
-    // {
-    //     if (IsOpen())
-    //     {
-    //         inventoryWindow.SetActive(false);
-    //     }
-    //     else
-    //     {
-    //         inventoryWindow.SetActive(true);
-    //     }
-    // }
-    // public bool IsOpen()
-    // {
-    //     return inventoryWindow.activeInHierarchy;
-    // }
-
     void AddItem()
     {
         EquipmentData data = Managers.Player.Player.itemData;
@@ -98,8 +79,8 @@ public class UIInventory : MonoBehaviour
             }
        // }
 
-        //ThrowItem(data);
-        //Managers.Player.Player.itemData = null;
+        ThrowItem(data);
+        Managers.Player.Player.itemData = null;
     }
 
 

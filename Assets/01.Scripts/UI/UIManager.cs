@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
         {
             EnableGameCamLook();
         }
+        
         return isPause;
     }
 }
