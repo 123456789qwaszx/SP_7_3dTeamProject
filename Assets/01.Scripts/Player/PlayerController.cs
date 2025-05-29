@@ -241,6 +241,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Eat(float amount)
     {
         playerStats.Health.Add(amount);
+        playerStats.Hunger.Add(amount);
     }
     // public void Die()
     // {
