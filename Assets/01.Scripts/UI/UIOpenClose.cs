@@ -49,14 +49,14 @@ public class UIOpenClose : MonoBehaviour
             Debug.Log("인벤 단축키 입력 확인");
             isActive = true;
             inven.SetActive(true);
-            UIManager.Instance.DisableGameCamLook();
+            GameManager.Instance.DisableGameCamLook();
         }
         else
         {
             Debug.Log("인벤 단축키 취소 확인");
             isActive = false;
             inven.SetActive(!inven.activeSelf);
-            UIManager.Instance.EnableGameCamLook();
+            GameManager.Instance.EnableGameCamLook();
         }
         
     }
@@ -68,7 +68,7 @@ public class UIOpenClose : MonoBehaviour
         if (option != null)
         {
             option.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
-            UIManager.Instance.TogglePause();
+            GameManager.Instance.TogglePause();
         }
     }
 
