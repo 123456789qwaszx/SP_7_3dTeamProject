@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         if (playerStats.Health.curValue <= 0f)
         {
-            Die();
+            // Die();
+            //게임오버 시 이벤트 호출: 정리 필요.
         }
         
     }
@@ -240,28 +241,29 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Eat(float amount)
     {
         playerStats.Health.Add(amount);
+        playerStats.Hunger.Add(amount);
     }
-    public void Die()
-    {
-        Debug.Log("died.");
-        if (uiOpenClose != null)
-        {
-            uiOpenClose.OCGameOver();
-        }
-        else
-        {
-            Debug.LogWarning("UIOpenClose가 연결되지 않았습니다.");
-        }
-    }
+    // public void Die()
+    // {
+    //     Debug.Log("died.");
+    //     if (uiOpenClose != null)
+    //     {
+    //         uiOpenClose.OCGameOver();
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("UIOpenClose가 연결되지 않았습니다.");
+    //     }
+    // }
 
     public void TakeDamage(float damage)
     {
         playerStats.Health.Subtract(damage);
         
-        if (playerStats.Health.curValue <= 0f)
-        {
-            Die();
-        }
+        // if (playerStats.Health.curValue <= 0f)
+        // {
+        //     Die();
+        // }
     }
     private void RotateModel()
     {

@@ -11,8 +11,6 @@ public class UIInventory : MonoBehaviour
     public Transform slotPanel;
     public Transform dropPosition;
 
-    public Resource resource;
-
     [Header("Select Item")]
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
@@ -23,7 +21,9 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
-    
+    bool equipped = false;
+
+
     private PlayerStats condition;
     private PlayerController controller;
 
@@ -224,8 +224,15 @@ public class UIInventory : MonoBehaviour
 
     public void OnDropButton()
     {
+        if (equipped)
+        {
+            UnEquip(selectedItemIndex);
+            equipped = false;
+
+        }
         ThrowItem(selectedItem);
-        RemoveSelectedItem();      
+        RemoveSelectedItem();
+
     }
 
     void RemoveSelectedItem()
@@ -257,6 +264,7 @@ public class UIInventory : MonoBehaviour
         UpdateUI();
 
         SelectItem(selectedItemIndex);
+        equipped = true;
     }
 
     void UnEquip(int index)
@@ -274,5 +282,6 @@ public class UIInventory : MonoBehaviour
     public void OnUnEquipButton()
     {
         UnEquip(selectedItemIndex);
+        equipped = false;
     }
 }

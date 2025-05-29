@@ -71,10 +71,9 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-            if (sfxManager != null && sfxManager.playerDieSFX != null)
+            if (sfxManager != null && sfxManager.playerDieSFX != null && _isDead)
             {
                 sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
-
             }
     }
 }
