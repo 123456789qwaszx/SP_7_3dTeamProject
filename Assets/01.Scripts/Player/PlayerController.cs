@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         HandleLook();
         
         //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
-        playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
+       playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
         playerStats.Hydration.Subtract(playerStats.Hydration.passiveValue * Time.deltaTime);
-
+        
         if (playerStats.Hydration.curValue <= 0f)
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             Die();
         }
-       
+        
     }
 
     void FixedUpdate()
