@@ -29,7 +29,7 @@ public class MonsterSpawner : MonoBehaviour
     
     void Start()
     {
-        InitailizeSpawnManager();
+        InitializeSpawnManager();
     }
     
 
@@ -38,7 +38,7 @@ public class MonsterSpawner : MonoBehaviour
         CheckAndSpawnMonsters();
     }
     
-    private void InitailizeSpawnManager()
+    private void InitializeSpawnManager()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -98,6 +98,8 @@ public class MonsterSpawner : MonoBehaviour
         monsterObj.transform.rotation = Quaternion.identity;
 
         monster.monsterData = spawnData.monsterData;
+
+        monster.SetMonsterData(spawnData.monsterData);
         
         monster.OnSpawnFromPool();
         
@@ -183,8 +185,13 @@ public class MonsterSpawner : MonoBehaviour
         monsterObj.transform.position = position;
         monsterObj.transform.rotation = Quaternion.identity;
 
+        monster.SetMonsterData(targetSpawnData.monsterData);
+        monster.OnSpawnFromPool();
+        
         activeMonsters[monsterName].Add(monster);
         currentMonsterCounts[monsterName]++;
+
+        monster.onTakeDamage += () => OnMonsterTakeDamage(monster);
     }
 
     public void ClearAllMonsters()

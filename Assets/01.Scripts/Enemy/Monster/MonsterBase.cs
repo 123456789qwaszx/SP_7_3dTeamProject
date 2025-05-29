@@ -48,12 +48,7 @@ public class MonsterBase : MonoBehaviour
 
     protected void OnEnable()
     {
-        //풀에서 활성화 할때마다 호출
-        if (poolable != null && poolable.IsUsing)
-        {
-            ResetMonster();
-            OnMonsterStart();
-        }
+        GetComponents();
     }
 
     protected void OnDisable()
@@ -67,13 +62,10 @@ public class MonsterBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        
-        
         //생성된 경우에 초기화
         if (poolable == null || !poolable.IsUsing)
         {
-            ResetMonster();
-            OnMonsterStart();
+            Initialize();
         }
     }
 
@@ -100,18 +92,39 @@ public class MonsterBase : MonoBehaviour
         }
         OnMonsterUpdate();
     }
-
+    
+    public void SetMonsterData(MonsterData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError($"[SetMonsterData] MonsterData가 null입니다! ({gameObject.name})");
+            return;
+        }
+        
+        monsterData = data;
+    }
     public void OnSpawnFromPool()
     {
         if (!isInitialized)
         {
-            GetComponents();
             isInitialized = true;
         }
         ResetMonster();
+        GetData();
         OnMonsterStart();
     }
-
+    
+    private void Initialize()
+    {
+        if (!isInitialized)
+        {
+            GetComponents();
+        }
+        
+        ResetMonster();
+        GetData();
+        OnMonsterStart();
+    }
     public void OnReturnToPool()
     {
         StopAllCoroutines();
@@ -126,8 +139,9 @@ public class MonsterBase : MonoBehaviour
     private void ResetMonster()
     {
         isDead = false;
-        
-        GetData();
+        lastAttackTime = 0;
+        currentState = AIState.Idle;
+
         if (agent != null)
         {
             agent.enabled = true;
@@ -153,6 +167,7 @@ public class MonsterBase : MonoBehaviour
         lastAttackTime = 0;
     }
     
+    
     // 시작시 필요 컴포넌트 불러오기
     private void GetComponents()
     {
@@ -163,7 +178,7 @@ public class MonsterBase : MonoBehaviour
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
             player = playerObj.transform;
-
+        isInitialized = true;
     }
     
     
@@ -359,8 +374,6 @@ public class MonsterBase : MonoBehaviour
             meshRenderers[i].material.color = Color.white;
         }
     }
-    
-    
     void Die()
     {
         isDead = true;
