@@ -116,7 +116,7 @@ public class GameManager : Singleton<GameManager>
         if (isGameOver) return; // 재시작 시 리턴하면서 
 
         isGameOver = true;
-        Time.timeScale = 0; //인게임 정지
+        // Time.timeScale = 0; //인게임 정지
         // 재시작 시 
 
         TogglePause(); // 게임 오버시 인게임 정지

@@ -71,6 +71,7 @@ public class UIOpenClose : MonoBehaviour
         if (gameOver != null)
         {
             gameOver.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
+            GameManager.Instance.TogglePause();
         }
         else
         {
