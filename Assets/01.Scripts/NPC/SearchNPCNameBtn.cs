@@ -13,8 +13,11 @@ public class SearchNPCNameBtn : MonoBehaviour
     public GameObject NPCText;
     public GameObject NPCName;
 
+
     public void ButtonClick()
     {
+       
+
         // 텍스트 보드 활성화
         NPCTextBoard.SetActive(true);
 
@@ -27,6 +30,10 @@ public class SearchNPCNameBtn : MonoBehaviour
         string clickedName = EventSystem.current.currentSelectedGameObject.name;
         NPCText.GetComponentInChildren<TextMeshProUGUI>().text = "안녕?";
         NPCName.GetComponentInChildren<TextMeshProUGUI>().text = clickedName;
+        Button btn = NPCTextBoard.GetComponentInChildren<Button>(); //NPCTextBoard에 버튼 기능을 가져옴
+        btn.onClick.Invoke(); //누름
+
+
 
     }
 }
