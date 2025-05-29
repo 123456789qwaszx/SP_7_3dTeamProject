@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+        Cursor.lockState = CursorLockMode.Confined;
+
         if (playerInput == null)
         {
             Debug.LogWarning("Player를 찾을 수 없음.(<< GameManager)");

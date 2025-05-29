@@ -105,7 +105,8 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("died.");
         if (uiOpenClose != null)
         {
-            uiOpenClose.OCGameOver();
+            // uiOpenClose.OCGameOver();
+            GameManager.Instance.GameOver();
         }
         else
         {
