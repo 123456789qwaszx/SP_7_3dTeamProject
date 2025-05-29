@@ -6,7 +6,8 @@ public class House : MonoBehaviour
 {
     public PlayerInteraction interaction;
 
-    private float workSpeed = 2;
+    private float workSpeed = 0.5f;
+    public PlayerStats qwe;
 
 
     void Start()
@@ -15,11 +16,8 @@ public class House : MonoBehaviour
         interaction.OnPlayerInteraction = OnPlayerInteraction;
     }
 
-
-    float amount;
-
     void OnPlayerInteraction(Player pc)
     {
-        Managers.Player.Player.PlayerStats.Heal(amount);
+        qwe.Health.curValue += 50;
     }
 }
