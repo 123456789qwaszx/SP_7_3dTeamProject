@@ -21,9 +21,6 @@ public class MonsterSpawner : MonoBehaviour
     
     [Header("풀 설정")] public int initialPoolSize = 10;
     
-    // [Header("리스폰 설정")] public float respawnDelay;
-    // public bool autoRespawn;
-
     private Transform player;
     private Dictionary<string, int> currentMonsterCounts = new Dictionary<string, int>();
     private Dictionary<string, float> lastSpawnTimes = new Dictionary<string, float>();
