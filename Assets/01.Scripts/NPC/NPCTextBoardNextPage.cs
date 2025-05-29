@@ -35,17 +35,17 @@ public class NPCTextBoardNextPage : MonoBehaviour
 
     private void Update()
     {
-        if (NPCTextBoard.activeSelf)// 키 입력으로 대화창 종료 처리
-        {
-            if (Input.anyKeyDown &&
-                !Input.GetMouseButtonDown(0) &&
-                !Input.GetMouseButtonDown(1) &&
-                !Input.GetMouseButtonDown(2))
-            {
+        // if (NPCTextBoard.activeSelf)// 키 입력으로 대화창 종료 처리
+        // {
+        //     if (Input.anyKeyDown &&
+        //         !Input.GetMouseButtonDown(0) &&
+        //         !Input.GetMouseButtonDown(1) &&
+        //         !Input.GetMouseButtonDown(2))
+        //     {
 
-                CloseDialogue();
-            }
-        }
+        //         CloseDialogue();
+        //     }
+        // }
     }
 
     private void NextPage()// 다음 대사 출력 처리

@@ -821,6 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 1194962173620376949}
   PlayerStats: {fileID: 0}
+  interaction: {fileID: 0}
   itemData: {fileID: 0}
 --- !u!114 &1194962173620376949
 MonoBehaviour:
@@ -836,6 +837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 2404234221295657825}
   attackRange: {fileID: 1947050636912972749}
+  uiOpenClose: {fileID: 0}
+  modelTransform: {fileID: 9147319663612536914}
   IsGround: 0
   groundCheckTr: {fileID: 8774700000564567073}
   groundDistance: 0.1
@@ -844,7 +847,7 @@ MonoBehaviour:
     m_Bits: 0
   cameraContainer: {fileID: 706724623263376695}
   camTr: {fileID: 7631623214226830326}
-  mouseSensitivity: 1
+  mouseSensitivity: 0.1
 --- !u!114 &2404234221295657825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,10 +860,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f2f32ed32c38f4f9d34db7859a5624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiOpenClose: {fileID: 0}
   noHungerHealthDecay: 5
   uiStat: {fileID: 0}
   _health: {fileID: 0}
+  sfxManager: {fileID: 0}
   _hunger: {fileID: 0}
   _hydration: {fileID: 0}
   _attack: 0
@@ -951,6 +954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curInteractGameObject: {fileID: 0}
+  curEquip: {fileID: 0}
+  equipParent: {fileID: 0}
 --- !u!4 &9147319663612536914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5890d57cfeb1520408334ff08c850d59, type: 3}
