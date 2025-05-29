@@ -11,30 +11,11 @@ public class Resource : MonoBehaviour, IDamageable
     private float workSpeed = 0.5f;
 
     public int capacity = 3;
-    public float hitCount = 1;
+    public float hitCount;
 
 
     void Start()
     {
-        for (int i = 0; i < _data.resources.Length; i++)
-        {
-            switch (_data.resources[i].type)
-            {
-                case ResourceType.Tree:
-                    this.hitCount = _data.resources[i].value;
-                    break;
-                case ResourceType.Rock:
-                    this.hitCount = _data.resources[i].value;
-                    break;
-                case ResourceType.Iron:
-                    this.hitCount = _data.resources[i].value;
-                    break;
-                case ResourceType.Mushroom:
-                    this.hitCount = _data.resources[i].value;
-                    break;
-            }
-        }
-
         interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
     }

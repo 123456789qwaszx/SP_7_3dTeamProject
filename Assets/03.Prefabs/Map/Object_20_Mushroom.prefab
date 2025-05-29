@@ -53,7 +53,7 @@ MonoBehaviour:
   interaction: {fileID: 1010738793706452536}
   _data: {fileID: 11400000, guid: 684febb720d79c94697096988cb0d3f7, type: 2}
   resourceCondition: {fileID: 9028494737772510551}
-  capacity: 1
+  capacity: 2
   hitCount: 1
 --- !u!114 &4515628552153148294
 MonoBehaviour:

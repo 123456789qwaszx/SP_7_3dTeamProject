@@ -336,8 +336,8 @@ MonoBehaviour:
   interaction: {fileID: 8901643658992607229}
   _data: {fileID: 11400000, guid: b4052e9f1eed4e245aa2e6866aed472e, type: 2}
   resourceCondition: {fileID: 4752213957461301087}
-  capacity: 11
-  hitCount: 1
+  capacity: 5
+  hitCount: 5
 --- !u!114 &3087650617382646510
 MonoBehaviour:
   m_ObjectHideFlags: 0

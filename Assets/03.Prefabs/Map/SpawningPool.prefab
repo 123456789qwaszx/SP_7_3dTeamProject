@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6636129582391942139
+--- !u!1 &373564442265284508
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3012801810557018896}
-  - component: {fileID: 6792644753755892570}
+  - component: {fileID: 919932340927549686}
+  - component: {fileID: 8279036658232530614}
   m_Layer: 0
   m_Name: SpawningPool
   m_TagString: Untagged
@@ -17,51 +17,51 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3012801810557018896
+--- !u!4 &919932340927549686
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636129582391942139}
+  m_GameObject: {fileID: 373564442265284508}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8449759052994541150}
+  - {fileID: 578509575858239092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6792644753755892570
+--- !u!114 &8279036658232530614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6636129582391942139}
+  m_GameObject: {fileID: 373564442265284508}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a2850351e6686d44886d4e58aae31ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceRoot: {fileID: 3012801810557018896}
-  _tree: {fileID: 3860282902365729472, guid: e942b84fca40c8a46842e4f33a366a4a, type: 3}
-  _rock: {fileID: 8344864352413217149, guid: 89dc5f95367e11347a8f83acf218af9c, type: 3}
-  _iron: {fileID: 3237189665329862858, guid: b1db9ef6c20ae21489991118fce2cc46, type: 3}
-  _mushroom: {fileID: 331963517807321746, guid: 87b3b0d346c5b124ebabc5b30237b1a3, type: 3}
+  _resourceRoot: {fileID: 578509575858239092}
+  _tree: {fileID: 1837883798230507807, guid: e942b84fca40c8a46842e4f33a366a4a, type: 3}
+  _rock: {fileID: 7511472394125110075, guid: 89dc5f95367e11347a8f83acf218af9c, type: 3}
+  _iron: {fileID: 4742940664656499871, guid: b1db9ef6c20ae21489991118fce2cc46, type: 3}
+  _mushroom: {fileID: 1624135598506490121, guid: 87b3b0d346c5b124ebabc5b30237b1a3, type: 3}
   _treeCount: 0
   _rockCount: 0
   _ironCount: 0
   _mushroomCount: 0
-  _keepTreeCount: 5
+  _keepTreeCount: 15
   _KeepRockCount: 6
   _keepIronCount: 3
-  _keepMushroomCount: 33
+  _keepMushroomCount: 20
   _spawnRadius: 150
-  _spawnTime: 3
+  _spawnTime: 5
   _reserveCount: 0
---- !u!1 &8424693301774927682
+--- !u!1 &6234451745878516754
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,26 +69,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8449759052994541150}
+  - component: {fileID: 578509575858239092}
   m_Layer: 0
-  m_Name: OBJ_resourceRoot
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8449759052994541150
+--- !u!4 &578509575858239092
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424693301774927682}
+  m_GameObject: {fileID: 6234451745878516754}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.355, z: 1.518}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3012801810557018896}
+  m_Father: {fileID: 919932340927549686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

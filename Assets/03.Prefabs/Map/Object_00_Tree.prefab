@@ -185,8 +185,8 @@ MonoBehaviour:
   interaction: {fileID: 5526025401474907234}
   _data: {fileID: 11400000, guid: a63d3fdb4dad39e45960abf684e64a4a, type: 2}
   resourceCondition: {fileID: 1709244737940657754}
-  capacity: 2
-  hitCount: 1
+  capacity: 5
+  hitCount: 3
 --- !u!65 &2915683256935508268
 BoxCollider:
   m_ObjectHideFlags: 0
