@@ -23,6 +23,9 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
+    
+    private PlayerStats condition;
+
     EquipmentData selectedItem;
     int selectedItemIndex = 0;
 
@@ -31,6 +34,8 @@ public class UIInventory : MonoBehaviour
 
     void Start()
     {
+        condition = Managers.Player.Player.PlayerStats;
+
         Managers.Player.Player.addItem += AddItem;
 
         slots = new ItemSlot[slotPanel.childCount];
@@ -49,13 +54,6 @@ public class UIInventory : MonoBehaviour
 
     void UseStackedItem(EquipmentData data, int quantity)
     {
-        // 우선 인벤토리에 아이템이 있는지 확인
-        // 있다면 sloti를 싺다 뒤지는데
-        // slot[i]의 icon이 data.icon과 일치하다면
-        // quantity가 slot[i].item.quantity보다 같거나 작을 때
-        // slot[i].item.quantity -= quantity가
-        // 그리고 0이 됐다면, 인벤토리에서 삭제
-
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
@@ -70,7 +68,7 @@ public class UIInventory : MonoBehaviour
                     ClearSelectedItemWindow();
                 }
             }
-            
+
             UpdateUI();
         }
     }
@@ -204,20 +202,21 @@ public class UIInventory : MonoBehaviour
 
     public void OnUseButton()
     {
-        if (selectedItem.type == EquipmentType.Weapon)
+        if (selectedItem.type == EquipmentType.Food)
         {
-            for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
+            for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                switch (selectedItem.weaponDamages[i].type)
+                switch (selectedItem.consumables[i].type)
                 {
-                    case DamageType.ForMonster:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Health:
+                        condition.Heal(selectedItem.consumables[i].value);
                         break;
-                    case DamageType.ForResource:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.consumables[i].value);
                         break;
                 }
             }
+            RemoveSelectedItem();
         }
     }
 

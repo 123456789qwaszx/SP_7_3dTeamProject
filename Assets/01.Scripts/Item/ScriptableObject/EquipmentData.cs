@@ -20,6 +20,7 @@ public class ItemDataConsumable
 
 public enum ResourceType
 {
+    None,
     Tree,
     Rock,
     Iron,
