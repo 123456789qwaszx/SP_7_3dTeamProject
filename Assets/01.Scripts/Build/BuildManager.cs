@@ -73,8 +73,6 @@ public class BuildManager : MonoBehaviour
             isPreviewActivated = false;
             go_Preview = null;
             go_Prefab = null;
-
-            UIManager.Instance.EnableGameCamLook();
         }
         else
         {
