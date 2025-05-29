@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3533453675791218152}
   - component: {fileID: 1254860666727716970}
   m_Layer: 5
-  m_Name: Option
+  m_Name: OptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3054993951154160659}
   - component: {fileID: 365632144241564240}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Title_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,8 +255,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2020862559215410366}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+      - m_Target: {fileID: 1727296963717593594}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Title
         m_Mode: 1
         m_Arguments:
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 6520066574100139929}
   - component: {fileID: 6994306028644546271}
   m_Layer: 5
-  m_Name: OK
+  m_Name: OK_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1592,7 +1592,7 @@ GameObject:
   - component: {fileID: 4587940093851979353}
   - component: {fileID: 723751778655410546}
   m_Layer: 5
-  m_Name: Bag
+  m_Name: Bag_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1857,14 +1857,14 @@ GameObject:
   - component: {fileID: 6716159764675726176}
   - component: {fileID: 6320066642683633064}
   - component: {fileID: 2307189334909606034}
-  - component: {fileID: 2020862559215410366}
+  - component: {fileID: 1727296963717593594}
   m_Layer: 5
-  m_Name: GamOver
+  m_Name: GamOverUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6716159764675726176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2020862559215410366
+--- !u!114 &1727296963717593594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1935,9 +1935,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2158850390732374997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca5d4f8ab5ed8e4a953abf4ed4122ed, type: 3}
+  m_Script: {fileID: 11500000, guid: e64161b5ae694f246a5d91f8690ba668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 8439956077558926487, guid: e844501743b638a43939d964e3f0cc51, type: 3}
 --- !u!1 &2193800890090105507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,7 +2220,7 @@ GameObject:
   - component: {fileID: 5361671730310606975}
   - component: {fileID: 4864070237606230101}
   m_Layer: 5
-  m_Name: InventoryCanvas
+  m_Name: InventoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2323,7 +2324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots: []
-  inventoryWindow: {fileID: 2342916513694617663}
   slotPanel: {fileID: 8085901916985353815}
   dropPosition: {fileID: 0}
   resource: {fileID: 0}
@@ -3039,7 +3039,7 @@ GameObject:
   - component: {fileID: 7371696134979400558}
   - component: {fileID: 988728739136011436}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: BGMSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3129,7 +3129,7 @@ GameObject:
   - component: {fileID: 4308802991249182026}
   - component: {fileID: 5205542231173856577}
   m_Layer: 0
-  m_Name: Slider (1)
+  m_Name: SFXSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3204,7 +3204,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4063,7 +4063,7 @@ GameObject:
   - component: {fileID: 6903487403043538989}
   - component: {fileID: 924239400506834650}
   m_Layer: 5
-  m_Name: Bgm
+  m_Name: BGMText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bgm
+  m_text: BGM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4228,7 +4228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 992683601554806947}
   m_Layer: 0
-  m_Name: Bgm
+  m_Name: BGM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4242,7 +4242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4707383266228153300}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4263,7 +4263,7 @@ GameObject:
   - component: {fileID: 3357566682684829722}
   - component: {fileID: 8295114495944666282}
   m_Layer: 0
-  m_Name: Off
+  m_Name: BGMOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4485,7 +4485,7 @@ GameObject:
   - component: {fileID: 1891012579213929776}
   - component: {fileID: 3281842876866834322}
   m_Layer: 5
-  m_Name: Exit Game
+  m_Name: Exit Game_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4593,8 +4593,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2020862559215410366}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+      - m_Target: {fileID: 1727296963717593594}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: GameExit
         m_Mode: 1
         m_Arguments:
@@ -4995,9 +4995,10 @@ GameObject:
   - component: {fileID: 2286616553633091347}
   - component: {fileID: 837712825938078244}
   - component: {fileID: 3974281075786733300}
-  - component: {fileID: 7296666239452750607}
+  - component: {fileID: 8603608203624496340}
+  - component: {fileID: 7407945642765452682}
   m_Layer: 5
-  m_Name: Option
+  m_Name: OptionUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5079,10 +5080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4188c9feea13e6445a4b9f69ae4574db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
-  volumeSlider: {fileID: 988728739136011436}
-  muteToggle: {fileID: 8295114495944666282}
---- !u!114 &7296666239452750607
+  bgmAudioMixer: {fileID: 24100000, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
+  bgmSlider: {fileID: 988728739136011436}
+  bgmMuteToggle: {fileID: 8295114495944666282}
+--- !u!114 &8603608203624496340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5091,9 +5092,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5275781858874074482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca5d4f8ab5ed8e4a953abf4ed4122ed, type: 3}
+  m_Script: {fileID: 11500000, guid: dc320be2cd2ee354ba8ef21954e59566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxAudioMixer: {fileID: 24100000, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
+  sfxSlider: {fileID: 5205542231173856577}
+  sfxMuteToggle: {fileID: 3808330414175129467}
+--- !u!114 &7407945642765452682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275781858874074482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64161b5ae694f246a5d91f8690ba668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 8439956077558926487, guid: e844501743b638a43939d964e3f0cc51, type: 3}
 --- !u!1 &5376525224627540578
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,7 +5370,7 @@ GameObject:
   - component: {fileID: 4959792637471403280}
   - component: {fileID: 6684364431143430833}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: Retry_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5461,7 +5478,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7296666239452750607}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
@@ -5928,7 +5945,7 @@ RectTransform:
   m_Father: {fileID: 6086637839412457731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6056,7 +6073,7 @@ GameObject:
   - component: {fileID: 7366240618988014218}
   - component: {fileID: 3808330414175129467}
   m_Layer: 0
-  m_Name: Off
+  m_Name: SFXOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6130,7 +6147,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &6478153615930835261
 GameObject:
   m_ObjectHideFlags: 0
@@ -6544,7 +6561,7 @@ GameObject:
   - component: {fileID: 5256800395394966936}
   - component: {fileID: 6556229384220638045}
   m_Layer: 5
-  m_Name: Sound
+  m_Name: SFXText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6597,7 +6614,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sound
+  m_text: SFX
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6753,7 +6770,7 @@ GameObject:
   - component: {fileID: 1515948069270036908}
   - component: {fileID: 8780197795541657927}
   m_Layer: 5
-  m_Name: GameOver
+  m_Name: GameOverText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6888,7 +6905,7 @@ GameObject:
   - component: {fileID: 6836333133605452356}
   - component: {fileID: 5527010305766637561}
   m_Layer: 5
-  m_Name: Game Exit
+  m_Name: Game Exit_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6996,7 +7013,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7296666239452750607}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: GameExit
         m_Mode: 1
@@ -7116,7 +7133,7 @@ GameObject:
   - component: {fileID: 1221981970241478634}
   - component: {fileID: 5078073553102398561}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Title_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7224,7 +7241,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7296666239452750607}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: Title
         m_Mode: 1
@@ -7465,7 +7482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6990208775559187397}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7502,7 +7519,7 @@ GameObject:
   - component: {fileID: 3978312624997139080}
   - component: {fileID: 7698403527251643431}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Option_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7729,8 +7746,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4535220863780785083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7785,7 +7802,7 @@ GameObject:
   - component: {fileID: 3500813032594273760}
   - component: {fileID: 3376276095743718006}
   m_Layer: 5
-  m_Name: Retry
+  m_Name: Retry_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7893,8 +7910,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2020862559215410366}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
+      - m_Target: {fileID: 1727296963717593594}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Retry
         m_Mode: 1
         m_Arguments:
