@@ -230,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6532067620449883149}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.29, y: 0, z: 4.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   interaction: {fileID: 8983069944931723416}
   _data: {fileID: 11400000, guid: a63d3fdb4dad39e45960abf684e64a4a, type: 2}
   resourceCondition: {fileID: 0}
+  _resourceRoot: {fileID: 0}
   capacity: 2
   hitCount: 1
 --- !u!65 &7640637371255890723

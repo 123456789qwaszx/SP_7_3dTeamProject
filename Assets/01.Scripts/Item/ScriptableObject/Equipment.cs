@@ -5,7 +5,6 @@ using UnityEngine;
 public class Equipment : MonoBehaviour
 {
     public EquipmentData _equipedWeapon;
-    int _equipedWeaponIndex = 0;
 
     public float attackRate;
     private bool attacking;

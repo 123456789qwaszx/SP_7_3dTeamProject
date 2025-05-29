@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 8908989890510528377}
   - component: {fileID: 3311460623706509878}
   - component: {fileID: 1171077312687231802}
+  - component: {fileID: 4709820841687693436}
   m_Layer: 9
   m_Name: Object_01_Rock
   m_TagString: Resource
@@ -253,7 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 4332253922940916739}
   _data: {fileID: 11400000, guid: b4052e9f1eed4e245aa2e6866aed472e, type: 2}
-  resourceCondition: {fileID: 0}
+  resourceCondition: {fileID: 4709820841687693436}
+  _dropPosition: {fileID: 0}
   capacity: 3
   hitCount: 1
 --- !u!114 &8908989890510528377
@@ -317,3 +319,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &4709820841687693436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8558839585374080361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42129b868777aa846b7be76e659066aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curValue: 0
+  startValue: 0
+  maxValue: 0
+  passiveValue: 0

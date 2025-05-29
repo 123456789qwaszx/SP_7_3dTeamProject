@@ -52,6 +52,7 @@ MonoBehaviour:
   interaction: {fileID: 3129552004192045460}
   _data: {fileID: 11400000, guid: 684febb720d79c94697096988cb0d3f7, type: 2}
   resourceCondition: {fileID: 0}
+  _resourceRoot: {fileID: 0}
   capacity: 1
   hitCount: 1
 --- !u!114 &2137499423789055425

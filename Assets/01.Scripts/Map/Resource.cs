@@ -2,35 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamagable
-{
-    void TakePhysicalDamage(int damage);
-}
-
-public class Resource : MonoBehaviour, IDamagable
+public class Resource : MonoBehaviour, IDamageable
 {
     public PlayerInteraction interaction;
     public EquipmentData _data;
     public ResourceCondition resourceCondition;
 
-    private Transform _resourceRoot;
-    public Transform ResourceRoot
-    {
-        get
-        {
-            if (_resourceRoot == null)
-            {
-                GameObject go = new GameObject("@ResourceRoot");
-                _resourceRoot = go.transform;
-            }
-            return _resourceRoot;
-        }
-    }
+    public Transform _dropPosition;
+
 
     private float workSpeed = 2;
     public int capacity = 3;
 
-    public int hitCount = 1;
+    public float hitCount = 1;
 
 
     void Start()
@@ -62,8 +46,7 @@ public class Resource : MonoBehaviour, IDamagable
     {
         // 나중에 Ax를 들었을 때만 동작.
         // 혹은 특정 키값입력 or 능력 등등
-        SpawnResource(_data.dropPrefab, ResourceRoot);
-        _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0, 2);
+        SpawnResource(_data);
         capacity -= 1;
         if (capacity <= 0)
         {
@@ -73,15 +56,14 @@ public class Resource : MonoBehaviour, IDamagable
     }
 
 
-    public GameObject SpawnResource(GameObject prefab, Transform resourceRoot)
+    GameObject SpawnResource(EquipmentData data)
     {
-        GameObject go = GameObject.Instantiate(prefab, resourceRoot);
-        go.name = prefab.name;
-        go.transform.parent = resourceRoot;
+        GameObject go = Instantiate(data.dropPrefab, _dropPosition.position, Quaternion.Euler(Vector3.one));
+        go.name = data.name;
         return go;
     }
 
-    public void TakePhysicalDamage(int damage)
+    public void TakeDamage(float damage)
     {
         hitCount -= damage;
     }

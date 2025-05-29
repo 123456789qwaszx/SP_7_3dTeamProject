@@ -9,7 +9,9 @@ public class ResourceCondition : MonoBehaviour
     public float startValue;
     public float maxValue;
     public float passiveValue;
-    public Image uiBar;
+
+    //WorldUI로 obj_resource들 상태 표시하면 재밌을 듯
+    //public Image uiBar;
 
     void Start()
     {
@@ -18,7 +20,7 @@ public class ResourceCondition : MonoBehaviour
 
     void Update()
     {
-        uiBar.fillAmount = GetPercentage();
+        //uiBar.fillAmount = GetPercentage();
     }
 
     float GetPercentage()

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4190125407525237983}
   - component: {fileID: 2295684646585168616}
   - component: {fileID: 7831414760770703613}
+  - component: {fileID: 1958408268877314467}
   m_Layer: 9
   m_Name: Object_02_Iron
   m_TagString: Resource
@@ -170,7 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 4849331255703065423}
   _data: {fileID: 11400000, guid: 38819383212b7d64fb448eff16499cec, type: 2}
-  resourceCondition: {fileID: 0}
+  resourceCondition: {fileID: 1958408268877314467}
+  _dropPosition: {fileID: 0}
   capacity: 3
   hitCount: 1
 --- !u!114 &4190125407525237983
@@ -234,6 +236,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1958408268877314467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131910036002209793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42129b868777aa846b7be76e659066aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curValue: 0
+  startValue: 0
+  maxValue: 0
+  passiveValue: 0
 --- !u!1001 &1052930828056617631
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ public class Interaction : MonoBehaviour
     public GameObject curInteractGameObject;
     private IInteractable curInteractable;
 
-    public TextMeshProUGUI promptText;
-
     void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag("Item"))

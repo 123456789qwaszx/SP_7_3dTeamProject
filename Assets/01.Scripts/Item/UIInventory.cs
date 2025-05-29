@@ -98,8 +98,8 @@ public class UIInventory : MonoBehaviour
             }
        // }
 
-        //ThrowItem(data);
-        //Managers.Player.Player.itemData = null;
+        ThrowItem(data);
+        Managers.Player.Player.itemData = null;
     }
 
 
