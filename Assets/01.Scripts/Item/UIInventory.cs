@@ -11,8 +11,6 @@ public class UIInventory : MonoBehaviour
     public Transform slotPanel;
     public Transform dropPosition;
 
-    public Resource resource;
-
     [Header("Select Item")]
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
