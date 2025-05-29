@@ -16,8 +16,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void Retry()
-    {
-        Time.timeScale = 1;
+    {      
 #if UNITY_EDITOR
         Debug.Log("게임 재시작 (에디터)");
 #endif
@@ -59,7 +58,17 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        uiOpenClose = FindObjectOfType<UIOpenClose>();
         playerInput = FindObjectOfType<PlayerInput>();
+
+        
+
+        Debug.Log("플레이어 상태: " + isGameOver);
+        if (isGameOver)
+        {
+            TogglePause();
+            isGameOver = false;
+        }
     }
 
 
@@ -114,11 +123,10 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        Debug.Log("사망 메뉴 작동 확인(GameManager)");
-
         if (isGameOver) return; // 재시작 시 리턴하면서 
 
         isGameOver = true;
+        uiOpenClose.OCGameOver();
         TogglePause(); // 게임 오버시 인게임 정지
     }
 }
