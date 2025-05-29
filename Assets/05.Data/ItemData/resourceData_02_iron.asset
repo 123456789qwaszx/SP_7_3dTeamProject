@@ -24,4 +24,6 @@ MonoBehaviour:
   canStack: 1
   maxStackAmount: 99
   consumables: []
-  resources: []
+  resources:
+  - type: 3
+    value: 10
