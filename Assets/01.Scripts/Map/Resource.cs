@@ -8,10 +8,8 @@ public class Resource : MonoBehaviour, IDamageable
     public EquipmentData _data;
     public ResourceCondition resourceCondition;
 
-    public Transform _dropPosition;
 
-
-    private float workSpeed = 2;
+    private float workSpeed = 0.1f;
     public int capacity = 3;
 
     public float hitCount = 1;
@@ -46,7 +44,8 @@ public class Resource : MonoBehaviour, IDamageable
     {
         // 나중에 Ax를 들었을 때만 동작.
         // 혹은 특정 키값입력 or 능력 등등
-        SpawnResource(_data);
+        _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0, 2);
+        SpawnResource(_data.dropPrefab);
         capacity -= 1;
         if (capacity <= 0)
         {
@@ -56,10 +55,10 @@ public class Resource : MonoBehaviour, IDamageable
     }
 
 
-    GameObject SpawnResource(EquipmentData data)
+    public GameObject SpawnResource(GameObject prefab)
     {
-        GameObject go = Instantiate(data.dropPrefab, _dropPosition.position, Quaternion.Euler(Vector3.one));
-        go.name = data.name;
+        GameObject go = GameObject.Instantiate(prefab);
+        go.name = prefab.name;
         return go;
     }
 
