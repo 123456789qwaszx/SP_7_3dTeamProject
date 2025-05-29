@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
 
     private Condition _health; 
-    public SFXManager sfxManager;
+    //public SFXManager sfxManager;
     private bool _isDead = false;
     public Condition Health // 체력
 

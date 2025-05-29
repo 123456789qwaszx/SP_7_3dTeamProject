@@ -25,6 +25,7 @@ public class UIInventory : MonoBehaviour
 
     
     private PlayerStats condition;
+    private PlayerController controller;
 
     EquipmentData selectedItem;
     int selectedItemIndex = 0;
@@ -35,6 +36,7 @@ public class UIInventory : MonoBehaviour
     void Start()
     {
         condition = Managers.Player.Player.PlayerStats;
+        controller = Managers.Player.Player.Controller;
 
         Managers.Player.Player.addItem += AddItem;
 
@@ -209,10 +211,10 @@ public class UIInventory : MonoBehaviour
                 switch (selectedItem.consumables[i].type)
                 {
                     case ConsumableType.Health:
-                        condition.Heal(selectedItem.consumables[i].value);
+                        controller.Heal(selectedItem.consumables[i].value);
                         break;
                     case ConsumableType.Hunger:
-                        condition.Eat(selectedItem.consumables[i].value);
+                        controller.Eat(selectedItem.consumables[i].value);
                         break;
                 }
             }
