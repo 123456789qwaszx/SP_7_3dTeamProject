@@ -8,68 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerInput playerInput; //카메라 기능을 일시 비활성할 변수
     [SerializeField] private UIOpenClose uiOpenClose;
     bool isPause = false; // 인게임 정지 상태를 확인하는 변수
-    bool isGameOver = false; // 게임오버 상태를 확인하는 변수
-
-    public void GameStart()
-    {
-        SceneManager.LoadScene("YJHTestScene");
-    }
-
-    public void Retry()
-    {      
-#if UNITY_EDITOR
-        Debug.Log("게임 재시작 (에디터)");
-#endif
-        // 현재 씬을 다시 로드하여 게임 재시작
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
-    }
-
-    public void Title()
-    {
-        SceneManager.LoadScene("YJHTestTitle");
-    }
-
-    public void GameExit()
-    {
-#if UNITY_EDITOR
-        // 에디터 환경에서는 플레이 모드 종료
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif DEVELOPMENT_BUILD
-        // 개발 빌드에서는 로그 출력 후 종료
-        Debug.Log("게임 종료 (개발 빌드)");
-        Application.Quit();
-#else
-        // 릴리즈 빌드에서는 바로 종료
-        Application.Quit();
-#endif
-    }
-
-    //씬 로드하면서 PlayerInput 추가 재할당.
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        uiOpenClose = FindObjectOfType<UIOpenClose>();
-        playerInput = FindObjectOfType<PlayerInput>();
-
-        
-
-        Debug.Log("플레이어 상태: " + isGameOver);
-        if (isGameOver)
-        {
-            TogglePause();
-            isGameOver = false;
-        }
-    }
+    public bool isGameOver = false; // 게임오버 상태를 확인하는 변수
 
 
     private void Start()
@@ -121,12 +60,83 @@ public class GameManager : Singleton<GameManager>
         return isPause;
     }
 
-    public void GameOver()
+    public void GameOver() //게임 오버: UI 호출 및 인게임 정지.
     {
         if (isGameOver) return; // 재시작 시 리턴하면서 
 
         isGameOver = true;
         uiOpenClose.OCGameOver();
         TogglePause(); // 게임 오버시 인게임 정지
+    }
+
+
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene("YJHTestScene");
+    }
+
+    public void Retry()
+    {
+#if UNITY_EDITOR
+        Debug.Log("게임 재시작 (에디터)");
+#endif
+        // 현재 씬을 다시 로드하여 게임 재시작
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void Title()
+    {
+        SceneManager.LoadScene("YJHTestTitle");
+    }
+
+    public void GameExit()
+    {
+#if UNITY_EDITOR
+        // 에디터 환경에서는 플레이 모드 종료
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif DEVELOPMENT_BUILD
+        // 개발 빌드에서는 로그 출력 후 종료
+        Debug.Log("게임 종료 (개발 빌드)");
+        Application.Quit();
+#else
+        // 릴리즈 빌드에서는 바로 종료
+        Application.Quit();
+#endif
+    }
+
+    //게임 재시작 시 추가적으로 재할당.
+    //PlayerInput: 카메라 제어용
+    //UIOpenClose: GameOver UI 제어용
+    //isGameOver: 상태 초기화용
+    //TogglePause: 인게임 시간 흐르게 하는 용도.
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshReferences();
+    }
+
+    public void RefreshReferences()
+    {
+        uiOpenClose = FindObjectOfType<UIOpenClose>();
+        playerInput = FindObjectOfType<PlayerInput>();
+
+        Debug.Log("플레이어 상태: " + isGameOver);
+        if (isGameOver)
+        {
+            TogglePause();
+            isGameOver = !isGameOver;
+        }
     }
 }

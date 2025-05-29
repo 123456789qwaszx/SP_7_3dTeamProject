@@ -2123,9 +2123,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: Retry
+      - m_Target: {fileID: 2762498991251159302}
+        m_TargetAssemblyTypeName: GameOverBtn, Assembly-CSharp
+        m_MethodName: RetryBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3613,9 +3613,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: Title
+      - m_Target: {fileID: 2762498991251159302}
+        m_TargetAssemblyTypeName: GameOverBtn, Assembly-CSharp
+        m_MethodName: TitleBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6265,6 +6265,7 @@ GameObject:
   - component: {fileID: 4233244795361475396}
   - component: {fileID: 1059900371608691638}
   - component: {fileID: 9078965825465574192}
+  - component: {fileID: 2762498991251159302}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
@@ -6351,6 +6352,18 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
   volumeSlider: {fileID: 1142602187323224473}
   muteToggle: {fileID: 7691015877574373607}
+--- !u!114 &2762498991251159302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7128361607028815925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451ec941e83ed0141bcaa61ae216fcbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7179573565204918895
 GameObject:
   m_ObjectHideFlags: 0
@@ -6889,9 +6902,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: GameExit
+      - m_Target: {fileID: 2762498991251159302}
+        m_TargetAssemblyTypeName: GameOverBtn, Assembly-CSharp
+        m_MethodName: ExitBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

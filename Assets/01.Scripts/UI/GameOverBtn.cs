@@ -11,7 +11,12 @@ public class GameOverBtn : MonoBehaviour
 
     public void RetryBtn()
     {
-        GameManager.Instance.Retry();
+        if (!GameManager.Instance.isGameOver) // 인게임 중 재시작 시에만 작동.
+        {
+            GameManager.Instance.TogglePause();
+        }
+
+        GameManager.Instance.Retry(); //
     }
 
     public void TitleBtn()
