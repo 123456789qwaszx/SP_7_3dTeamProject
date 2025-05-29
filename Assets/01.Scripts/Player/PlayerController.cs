@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         if (playerStats.Health.curValue <= 0f)
         {
-            // Die();
+             //Die();
             //게임오버 시 이벤트 호출: 정리 필요.
         }
        

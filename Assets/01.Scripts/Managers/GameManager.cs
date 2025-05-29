@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart()
     {
-        SceneManager.LoadScene("YJHTestScene");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void Retry()
@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Title()
     {
-        SceneManager.LoadScene("YJHTestTitle");
+        SceneManager.LoadScene("TitleScene");
     }
 
     public void GameExit()
