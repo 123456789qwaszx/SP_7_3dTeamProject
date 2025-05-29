@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.VFX;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class PlayerStats : MonoBehaviour
     public float noHungerHealthDecay = 5f;
     public UIStat uiStat;
     [SerializeField]
-    private Condition _health;
-    public Condition Health             // 체력
+
+    private Condition _health; 
+    public SFXManager sfxManager;
+    private bool _isDead = false;
+    public Condition Health // 체력
+
     {
         get { return _health; }
         set { _health = value; }
@@ -63,54 +68,13 @@ public class PlayerStats : MonoBehaviour
     }
     
 
-    void Awake()
-    {
-        //Managers.Player.Player.PlayerStats = this;
-    }
+
     void Update()
     {
+            if (sfxManager != null && sfxManager.playerDieSFX != null)
+            {
+                sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
 
-        // //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
-        // Hunger.Subtract(Hunger.passiveValue * Time.deltaTime);
-        // Hydration.Subtract(Hydration.passiveValue * Time.deltaTime);
-        //
-        // if (Hydration.curValue <= 0f)
-        // {
-        //     Health.Subtract(noHungerHealthDecay * Time.deltaTime);
-        // }
-        // if (Hunger.curValue <= 0f)
-        // {
-        //     Health.Subtract(noHungerHealthDecay * Time.deltaTime);
-        // }
-        // if (Health.curValue <= 0f)
-        // {
-        //     Die();
-        // }
-
+            }
     }
-    // public void Heal(float amount)
-    // {
-    //     Health.Add(amount);
-    // }
-    // public void Drink(float amount)
-    // {
-    //     Hydration.Add(amount);
-    // }
-    // public void Eat(float amount)
-    // {
-    //     Health.Add(amount);
-    // }
-    // public void Die()
-    // {
-    //     // Debug.Log("died.");
-    //     if (uiOpenClose != null)
-    //     {
-    //         GameManager.Instance.GameOver(); // 게임오버: 인게임 정지.
-    //         uiOpenClose.OCGameOver(); // 게임오버 UI 활성화
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("UIOpenClose가 연결되지 않았습니다.");
-    //     }
-    // }
 }

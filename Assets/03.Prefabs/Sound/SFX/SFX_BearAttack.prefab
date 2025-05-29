@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1203628295477915284
+--- !u!1 &2771070566950194900
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8400807530702070067}
-  - component: {fileID: 2613704434981404935}
+  - component: {fileID: 1487475736821551794}
+  - component: {fileID: 4159363755282006849}
   m_Layer: 0
-  m_Name: BGMObject
+  m_Name: SFX_BearAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8400807530702070067
+--- !u!4 &1487475736821551794
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203628295477915284}
+  m_GameObject: {fileID: 2771070566950194900}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0.0076282304, y: 1.4366124, z: 0.0027199984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &2613704434981404935
+--- !u!82 &4159363755282006849
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203628295477915284}
+  m_GameObject: {fileID: 2771070566950194900}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -256840170424104095, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
-  m_audioClip: {fileID: 8300000, guid: e5880838f52113e4a9f35a8e458689f0, type: 3}
+  OutputAudioMixerGroup: {fileID: -208313339038152647, guid: b1206a265f58b8b428eeadceab4925a2, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 891cf464781bf344dae88f773feeafda, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

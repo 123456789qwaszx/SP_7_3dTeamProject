@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Transform groundCheckTr;
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
-    
+
     [Header("카메라")]
     [SerializeField] private Transform cameraContainer;
     [SerializeField] private Transform camTr;
@@ -95,12 +95,11 @@ public class PlayerController : MonoBehaviour, IDamageable
             Gizmos.DrawSphere(groundCheckTr.position, groundDistance);
         }
     }
-
     public void Move()
     {
+        
         Vector3 move = new Vector3(_playerInput.x, 0, _playerInput.y);
         _rigidbody.MovePosition(this.transform.position + move *playerStats.Speed  * Time.deltaTime);
-        
 
     }
 
