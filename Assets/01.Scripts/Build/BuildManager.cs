@@ -41,7 +41,7 @@ public class BuildManager : MonoBehaviour
             Build();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isPreviewActivated)
         {
             Cancel();
         }

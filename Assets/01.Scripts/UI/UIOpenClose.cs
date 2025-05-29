@@ -40,27 +40,21 @@ public class UIOpenClose : MonoBehaviour
 
     public void OCInven()
     {
-        Debug.Log("인벤토리 작동");
-
-        // inven.SetActive(!inven.activeSelf); // 현재 상태의 반대로 토글
-
         if (!isActive)
         {
-            Debug.Log("인벤 단축키 입력 확인");
             isActive = true;
-            inven.SetActive(true);
-            UIManager.Instance.DisableGameCamLook();
+            inven.SetActive(!inven.activeSelf);
+            GameManager.Instance.DisableGameCamLook();
         }
         else
         {
-            Debug.Log("인벤 단축키 취소 확인");
             isActive = false;
             inven.SetActive(!inven.activeSelf);
-            UIManager.Instance.EnableGameCamLook();
+            GameManager.Instance.EnableGameCamLook();
         }
-        
     }
 
+    // 옵션 버튼 누르면 작동:
     public void OCOption()
     {
         Debug.Log(option);
@@ -68,7 +62,7 @@ public class UIOpenClose : MonoBehaviour
         if (option != null)
         {
             option.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
-            UIManager.Instance.TogglePause();
+            GameManager.Instance.TogglePause();
         }
     }
 
@@ -77,12 +71,11 @@ public class UIOpenClose : MonoBehaviour
         if (gameOver != null)
         {
             gameOver.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
+            GameManager.Instance.TogglePause();
         }
         else
         {
             Debug.LogWarning("GameOver UI를 찾을 수 없습니다.");
         }
     }
-
-    
 }
