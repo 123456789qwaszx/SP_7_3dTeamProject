@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public EquipmentData item;
-
     public Button button;
     public Image icon;
     public TextMeshProUGUI quantityText;

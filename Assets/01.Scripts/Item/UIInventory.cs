@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
     public ItemSlot[] slots;
-    public GameObject inventoryWindow;
     public Transform slotPanel;
     public Transform dropPosition;
 
@@ -22,18 +23,21 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
+    
+    private PlayerStats condition;
+
     EquipmentData selectedItem;
     int selectedItemIndex = 0;
 
-    
+
     int curEquipIndex;
 
     void Start()
     {
+        condition = Managers.Player.Player.PlayerStats;
+
         Managers.Player.Player.addItem += AddItem;
 
-
-        inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
 
         for (int i = 0; i < slots.Length; i++)
@@ -43,8 +47,30 @@ public class UIInventory : MonoBehaviour
             slots[i].inventory = this;
         }
 
-        
+
         ClearSelectedItemWindow();
+    }
+
+
+    void UseStackedItem(EquipmentData data, int quantity)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
+            {
+                slots[i].item.quantity -= quantity;
+
+                if (slots[i].item.quantity == 0)
+                {
+                    selectedItem = null;
+                    slots[selectedItemIndex].item = null;
+                    selectedItemIndex = -1;
+                    ClearSelectedItemWindow();
+                }
+            }
+
+            UpdateUI();
+        }
     }
 
 
@@ -62,44 +88,38 @@ public class UIInventory : MonoBehaviour
     }
 
 
-    public void Toggle()
-    {
-        if (IsOpen())
-        {
-            inventoryWindow.SetActive(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-        }
-    }
-    public bool IsOpen()
-    {
-        return inventoryWindow.activeInHierarchy;
-    }
-
     void AddItem()
     {
         EquipmentData data = Managers.Player.Player.itemData;
 
-        // if (data.canStack)
-        // {
-        //     ItemSlot slot = GetItemStack(data);
-             ItemSlot emptySlot = GetEmptySlot(data);
-
-            // 있다면
-            if (emptySlot != null)
+        if (data.canStack)
+        {
+            ItemSlot slot = GetItemStack(data);
+            if (slot != null)
             {
-                emptySlot.item = data;
-                emptySlot.quantity = 1;
+                data.quantity++;
+                slot.quantity++;
                 UpdateUI();
                 Managers.Player.Player.itemData = null;
                 return;
             }
-       // }
+        }
+        ItemSlot emptySlot = GetEmptySlot(data);
 
-        //ThrowItem(data);
-        //Managers.Player.Player.itemData = null;
+        // 있다면
+        if (emptySlot != null)
+        {
+            emptySlot.item = data;
+            data.quantity++;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            Managers.Player.Player.itemData = null;
+            return;
+        }
+
+
+        ThrowItem(data);
+        Managers.Player.Player.itemData = null;
     }
 
 
@@ -158,7 +178,7 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
-        
+
         selectedItem = slots[index].item;
         selectedItemIndex = index;
 
@@ -182,32 +202,34 @@ public class UIInventory : MonoBehaviour
 
     public void OnUseButton()
     {
-        if (selectedItem.type == EquipmentType.Weapon)
+        if (selectedItem.type == EquipmentType.Food)
         {
-            for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
+            for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                switch (selectedItem.weaponDamages[i].type)
+                switch (selectedItem.consumables[i].type)
                 {
-                    case DamageType.ForMonster:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Health:
+                        condition.Heal(selectedItem.consumables[i].value);
                         break;
-                    case DamageType.ForResource:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.consumables[i].value);
                         break;
                 }
             }
+            RemoveSelectedItem();
         }
     }
 
     public void OnDropButton()
     {
         ThrowItem(selectedItem);
-        RemoveSelectedItem();
+        RemoveSelectedItem();      
     }
 
     void RemoveSelectedItem()
     {
         slots[selectedItemIndex].quantity--;
+        slots[selectedItemIndex].item.quantity--;
 
         if (slots[selectedItemIndex].quantity <= 0)
         {
@@ -229,7 +251,7 @@ public class UIInventory : MonoBehaviour
 
         slots[selectedItemIndex].equipped = true;
         curEquipIndex = selectedItemIndex;
-        //CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
+        Managers.Player.Player.interaction.EquipNew(selectedItem);
         UpdateUI();
 
         SelectItem(selectedItemIndex);
@@ -238,7 +260,7 @@ public class UIInventory : MonoBehaviour
     void UnEquip(int index)
     {
         slots[index].equipped = false;
-        //CharacterManager.Instance.Player.equip.UnEquip();
+        Managers.Player.Player.interaction.UnEquip();
         UpdateUI();
 
         if (selectedItemIndex == index)

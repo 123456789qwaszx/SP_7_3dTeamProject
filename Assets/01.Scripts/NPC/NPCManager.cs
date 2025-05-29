@@ -1,14 +1,30 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public class NPCManager : MonoBehaviour
 {
-    public NPC Apple;
+    public GameObject Apple;
+    public GameObject Apple1;
+    public GameObject Apple2;
+    public GameObject Apple3;
+    public GameObject Apple4;
+    public GameObject Apple5;
 
-    // Start is called before the first frame update
+    public GameObject NPCName;
 
-    
+    private bool[] Q = new bool[10];
+    private bool[] QC = new bool[10];
+
+
+    private void QuestBtnClick()
+    {
+
+    }
+
+
+
 
 }

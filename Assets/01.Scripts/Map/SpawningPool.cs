@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SpawningPool : MonoBehaviour
 {
+    public Transform _resourceRoot;
+
     [SerializeField]
-    private GameObject _tree;
+    private Resource _tree;
     [SerializeField]
-    private GameObject _rock;
+    private Resource _rock;
     [SerializeField]
-    private GameObject _iron;
+    private Resource _iron;
     [SerializeField]
-    private GameObject _mushroom;
+    private Resource _mushroom;
 
     [SerializeField]
     int _treeCount = 0;
@@ -44,34 +46,52 @@ public class SpawningPool : MonoBehaviour
     {
         while (_reserveCount + _treeCount < _keepTreeCount)
         {
-            StartCoroutine(CoResourceSpawn(_tree));
+            StartCoroutine(CoOBJresourceSpawn(_tree));
             _treeCount++;
 
         }
         while (_reserveCount + _rockCount < _KeepRockCount)
         {
-            StartCoroutine(CoResourceSpawn(_rock));
+            StartCoroutine(CoOBJresourceSpawn(_rock));
             _rockCount++;
         }
         while (_reserveCount + _ironCount < _keepIronCount)
         {
-            StartCoroutine(CoResourceSpawn(_iron));
+            StartCoroutine(CoOBJresourceSpawn(_iron));
             _ironCount++;
         }
         while (_reserveCount + _mushroomCount < _keepMushroomCount)
         {
-            StartCoroutine(CoResourceSpawn(_mushroom));
+            StartCoroutine(CoOBJresourceSpawn(_mushroom));
             _mushroomCount++;
         }
     }
 
     
-    IEnumerator CoResourceSpawn(GameObject Prefab)
+    IEnumerator CoOBJresourceSpawn(Resource prefab)
     {
         _reserveCount++;
 
         yield return new WaitForSeconds(_spawnTime);
-        GameObject go = Instantiate(Prefab);
+        Resource go = Instantiate(prefab);
+
+        switch (go._data.resourcetype)
+            {
+                case ResourceType.Tree:
+                    go.hitCount = 3;
+                    break;
+                case ResourceType.Rock:
+                    go.hitCount = 5;
+                    break;
+                case ResourceType.Iron:
+                    go.hitCount = 10;
+                    break;
+                case ResourceType.Mushroom:
+                    go.hitCount = 1;
+                    break;
+            }
+        go.name = prefab.name;
+        go.transform.parent = _resourceRoot;
 
         Vector3 randPos;
         Vector3 randDir = Random.insideUnitSphere * Random.Range(10, _spawnRadius);
