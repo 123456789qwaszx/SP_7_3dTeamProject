@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75595045, y: 0.75595045, z: 0.75595045}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2822496923584448264}
@@ -53,7 +53,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 684febb720d79c94697096988cb0d3f7, type: 2}
   resourceCondition: {fileID: 0}
   spawningPool: {fileID: 0}
-  capacity: 2
+  capacity: 1
   hitCount: 1
 --- !u!114 &4515628552153148294
 MonoBehaviour:
@@ -85,7 +85,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.49112293, y: 0.8207374, z: 0.45167905}
   m_Center: {x: 0.052897885, y: 0.3942788, z: -0.0016533434}
@@ -239,8 +239,8 @@ Transform:
   m_GameObject: {fileID: 3266772759748756091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.635, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.07, y: 0.42, z: 0}
+  m_LocalScale: {x: 0.53154, y: 0.46363044, z: 0.53154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1390666145575947158}
@@ -262,7 +262,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.51360106, y: 0.55422217, z: 0.5111995}
   m_Center: {x: 0.01971668, y: -0.22288892, z: 0.011833504}
@@ -343,7 +343,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4264292132880254666}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2938726513263939952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: a63d3fdb4dad39e45960abf684e64a4a, type: 2}
   resourceCondition: {fileID: 0}
   spawningPool: {fileID: 0}
-  capacity: 5
+  capacity: 3
   hitCount: 3
 --- !u!65 &2915683256935508268
 BoxCollider:

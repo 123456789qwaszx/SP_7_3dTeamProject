@@ -9,7 +9,7 @@ public class Resource : MonoBehaviour, IDamageable
     public ResourceCondition resourceCondition;
     public SpawningPool spawningPool;
 
-    private float workSpeed = 0.5f;
+    private float workSpeed = 1.5f;
 
     public int capacity = 3;
     public float hitCount;
