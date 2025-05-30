@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public PlayerStats PlayerStats;
     public Interaction interaction;
 
-
+    public BuildData SelectedBuildData;
     public EquipmentData itemData;
     public Action addItem;
 

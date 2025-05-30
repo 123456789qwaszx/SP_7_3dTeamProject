@@ -10,4 +10,5 @@ public class BuildData : ScriptableObject
     public GameObject previewPrefab; // 미리보기 프리팹
     public Sprite icon; // UI용 아이콘
     public int cost; // 건축 비용
+    public ResourceType costType; // 소모되는 건축재료
 }

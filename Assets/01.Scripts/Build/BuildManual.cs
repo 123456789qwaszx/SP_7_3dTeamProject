@@ -30,6 +30,7 @@ public class BuildManual : MonoBehaviour
     public void SlotClick(int _slotNumber)
     {
         BuildManager.Instance.SelectedBuilding(buildList[_slotNumber]);
+        Managers.Player.Player.SelectedBuildData = buildList[_slotNumber];
         CloseWindow();
     }
 
