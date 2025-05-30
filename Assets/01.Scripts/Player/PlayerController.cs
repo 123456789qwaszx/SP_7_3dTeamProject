@@ -32,8 +32,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Vector2 lookInput;
     private float xRotation = 0f;
     public float mouseSensitivity = 1f;
+
     [Header("SFX")]
     public SFXManager sfxManager;
+
+    [Header("UIOpenClose")]
+    [SerializeField] private UIOpenClose uiOpenClose;
 
     private bool isDead = false;//다이상태인지 체크
     private bool isJumping = false;//점프상태인지 체크
@@ -69,12 +73,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
         }
-        if (playerStats.Health.curValue <= 0f)
-        {
-            // isDead = true;
-            sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
-            GameManager.Instance.GameOver();
-        }
+        // if (playerStats.Health.curValue <= 0f && !isDead)
+        // {
+        //     isDead = true;
+        //     sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
+        //     Debug.Log("Update 데미지 게임오버");
+        //     GameManager.Instance.GameOver();
+        // }
         
     }
 
@@ -176,7 +181,12 @@ public class PlayerController : MonoBehaviour, IDamageable
             Debug.Log("UI 클릭이므로 공격 안 함");
             return;
         }
-
+        if ((uiOpenClose.option != null && uiOpenClose.option.activeSelf) ||
+        (uiOpenClose.inven != null && uiOpenClose.inven.activeSelf))
+        {
+            Debug.Log("UI 창이 열려 있어서 공격 소리 차단");
+            return;
+        }
         if (context.performed)
         {
             Debug.Log("마우스 좌클릭 (공격)");
@@ -267,9 +277,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         playerStats.Health.Subtract(damage);
-        
-        if (playerStats.Health.curValue <= 0f)
+        sfxManager.PlaySFX(sfxManager.playerHitSFX, transform.position);
+        if (playerStats.Health.curValue <= 0f && !isDead)
         {
+            isDead = true;
+            Debug.Log("TakeDamage 게임오버");
             GameManager.Instance.GameOver();
         }
     }

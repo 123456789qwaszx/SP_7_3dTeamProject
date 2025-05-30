@@ -28,13 +28,22 @@ public class UIOpenClose : MonoBehaviour
             else
                 Debug.LogWarning("Option 찾을 수 없습니다.");
         }
+
+        for (int i = 0; i <= 1; i++)
+        {
+            Debug.Log("인벤 활성화");
+            OCInven();
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I) && gameOver != null)
         {
-            OCInven();
+            if (!BuildManager.Instance.isPreviewActivated)
+            {
+                OCInven();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && gameOver != null)
@@ -43,6 +52,20 @@ public class UIOpenClose : MonoBehaviour
             {
                 OCOption();
             }
+        }
+        if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            GameManager.Instance.DisableGameCamLook();
+        }
+
+        // Alt 키를 떼면 커서 비활성화
+        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            GameManager.Instance.EnableGameCamLook();
         }
     }
 
@@ -53,21 +76,20 @@ public class UIOpenClose : MonoBehaviour
             Debug.Log("다른 UI가 열려 있어서 인벤토리를 열 수 없습니다.");
             return;
         }
-        
-        if (!isActive)
+
+        if (inven != null)
         {
             isActive = !isActive;
-        }
+            inven.SetActive(!inven.activeSelf);
 
-        inven.SetActive(!inven.activeSelf);
-
-        if (isActive) // 카메라 제어만.
-        {
-            GameManager.Instance.DisableGameCamLook();
-        }
-        else
-        {
-            GameManager.Instance.EnableGameCamLook();
+            if (isActive) // 카메라 제어만.
+            {
+                GameManager.Instance.DisableGameCamLook();
+            }
+            else
+            {
+                GameManager.Instance.EnableGameCamLook();
+            }
         }
     }
 
@@ -80,7 +102,7 @@ public class UIOpenClose : MonoBehaviour
             return;
         }
 
-        if (option != null) // 카메라 제어 + 시간 정지까지.
+        if (option != null && gameOver != null) // 카메라 제어 + 시간 정지까지.
         {
             option.SetActive(!option.activeSelf);
             GameManager.Instance.TogglePause();
