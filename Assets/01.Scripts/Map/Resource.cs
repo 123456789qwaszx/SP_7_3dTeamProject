@@ -6,6 +6,7 @@ public class Resource : MonoBehaviour, IDamageable
 {
     public PlayerInteraction interaction;
     public EquipmentData _data;
+    public ResourceCondition resourceCondition;
     public SpawningPool spawningPool;
 
     private float workSpeed = 0.5f;
