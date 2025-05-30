@@ -254,19 +254,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _ironCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _rockCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _spawnTime
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _treeCount
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _spawnRadius
@@ -286,15 +286,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _keepTreeCount
-      value: 70
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _mushroomCount
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8279036658232530614, guid: 4194b1b5d9f7bd943b7d3f75f6ed5944, type: 3}
       propertyPath: _keepMushroomCount
-      value: 50
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1809,6 +1809,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6553996975921583627, guid: 7f3a3349b9ddb7145a7c07baeaa81a44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642576141324670986, guid: 7f3a3349b9ddb7145a7c07baeaa81a44, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
