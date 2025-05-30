@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interaction: {fileID: 6336757116371328242}
-  qwe: {fileID: 0}
+  amount: 50
 --- !u!1 &9126725671813016572
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,10 +32,17 @@ public class UIOpenClose : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) && gameOver != null)
         {
-            Debug.Log("인벤토리 작동: I");
             OCInven();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && gameOver != null)
+        {
+            if (!BuildManager.Instance.isPreviewActivated)
+            {
+                OCOption();
+            }
         }
     }
 
@@ -44,7 +51,7 @@ public class UIOpenClose : MonoBehaviour
         isActive = !isActive;
         inven.SetActive(!inven.activeSelf);
 
-        if (isActive)
+        if (isActive) // 카메라 제어만.
         {
             GameManager.Instance.DisableGameCamLook();
         }
@@ -57,21 +64,19 @@ public class UIOpenClose : MonoBehaviour
     // 옵션 버튼 누르면 작동:
     public void OCOption()
     {
-        Debug.Log(option);
-
-        if (option != null)
+        if (option != null) // 카메라 제어 + 시간 정지까지.
         {
-            option.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
+            option.SetActive(!option.activeSelf);
             GameManager.Instance.TogglePause();
         }
     }
 
     public void OCGameOver()
     {
-        if (gameOver != null)
+        if (gameOver != null) // UI호출만.
         {
             Debug.Log("UI gameover 메서드 작동");
-            gameOver.SetActive(!gameOver.activeSelf); // 현재 상태의 반대로 토글
+            gameOver.SetActive(!gameOver.activeSelf);
         }
         else
         {
