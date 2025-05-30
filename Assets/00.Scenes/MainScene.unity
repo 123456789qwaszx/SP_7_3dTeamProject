@@ -1320,6 +1320,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1771741045}
     - target: {fileID: 5798115979141030318, guid: 4833501437fee844281605554067f16a, type: 3}
+      propertyPath: _uiInventory
+      value: 
+      objectReference: {fileID: 1771741045}
+    - target: {fileID: 5798115979141030318, guid: 4833501437fee844281605554067f16a, type: 3}
       propertyPath: tf_PlayerCam
       value: 
       objectReference: {fileID: 514320381}
