@@ -106,7 +106,7 @@ public class MonsterBase : MonoBehaviour, IDamageable
         monsterData = data;
     }
     public void OnSpawnFromPool()
-    {
+    { 
         if (!isInitialized)
         {
             isInitialized = true;

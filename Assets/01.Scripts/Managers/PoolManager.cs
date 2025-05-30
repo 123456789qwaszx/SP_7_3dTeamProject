@@ -127,4 +127,21 @@ public class PoolManager
         return _pool[name].Original;
     }
 
+    public void ClearAllPools()
+    {
+        foreach (var pool in _pool.Values)
+        {
+            if (pool.Root != null)
+                GameObject.Destroy(pool.Root.gameObject); // Root 자체도 삭제
+        }
+
+        _pool.Clear();
+
+        if (_root != null)
+        {
+            GameObject.Destroy(_root); // 전체 루트도 정리
+            _root = null;
+        }
+    }
+
 }

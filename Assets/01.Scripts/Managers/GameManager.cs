@@ -10,11 +10,12 @@ public class GameManager : Singleton<GameManager>
     bool isPause = false; // 인게임 정지 상태를 확인하는 변수
     public bool isGameOver = false; // 게임오버 상태를 확인하는 변수
 
+    private MonsterSpawner monsterSpawner;
     private void Start()
     {
         uiOpenClose = FindObjectOfType<UIOpenClose>(); // GameManager 인게임 생성
         playerInput = FindObjectOfType<PlayerInput>(); // 자동으로 PlayerInput/UIOpenClose을 찾아 등록.
-
+        monsterSpawner = GetComponent<MonsterSpawner>();
         //EnableGameCamLook();
 
         if (playerInput == null)
@@ -66,6 +67,7 @@ public class GameManager : Singleton<GameManager>
 
         isGameOver = true;
         TogglePause(); // 게임 오버시 인게임 정지
+        monsterSpawner.ClearAllMonsters();
         Debug.Log($"isPause: {isPause}, isGameOver: {isGameOver}");
         uiOpenClose.OCGameOver(); // 게임 오버 UI 호출용.
     }
@@ -82,6 +84,8 @@ public class GameManager : Singleton<GameManager>
 #if UNITY_EDITOR
         Debug.Log("게임 재시작 (에디터)");
 #endif
+        monsterSpawner.ClearAllMonsters();
+        Managers.Pool.ClearAllPools();
         // 현재 씬을 다시 로드하여 게임 재시작
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
