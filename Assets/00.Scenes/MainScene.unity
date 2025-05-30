@@ -490,7 +490,6 @@ GameObject:
   m_Component:
   - component: {fileID: 679931207}
   - component: {fileID: 679931206}
-  - component: {fileID: 679931208}
   m_Layer: 0
   m_Name: '@GameManager'
   m_TagString: Untagged
@@ -526,27 +525,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679931208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679931205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1dd8e8e3b65d1c468b17ee2518c6f7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnDatas:
-  - monsterPrefab: {fileID: 7758462764035481989, guid: 7198627e82627864d8173249253ac53b, type: 3}
-    monsterData: {fileID: 11400000, guid: d13430ea7aaa18a4eb0c293e0cfc43f8, type: 2}
-    maxCount: 2
-    spawnRate: 5
-    spawnRadius: 10
-  spawnPoints: []
-  playerCheckRadius: 20
-  initialPoolSize: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +919,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1099473544}
   m_SourcePrefab: {fileID: 100100000, guid: f8a132baba968f4469a5dbe369a0fc3d, type: 3}
+--- !u!4 &1534605986 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7192519793733693129, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+  m_PrefabInstance: {fileID: 573317276906612641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1595066580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1356,6 +1339,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1194962173620376949, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: modelTransform
+      value: 
+      objectReference: {fileID: 1534605986}
     - target: {fileID: 2404234221295657825, guid: e844501743b638a43939d964e3f0cc51, type: 3}
       propertyPath: _health
       value: 
@@ -1372,10 +1359,38 @@ PrefabInstance:
       propertyPath: sfxManager
       value: 
       objectReference: {fileID: 2122694474}
+    - target: {fileID: 3500539604719306898, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500539604719306898, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500539604719306898, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500539604719306898, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: 3693675602058906241, guid: e844501743b638a43939d964e3f0cc51, type: 3}
       propertyPath: interaction
       value: 
       objectReference: {fileID: 857594841}
+    - target: {fileID: 7192519793733693129, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192519793733693129, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192519793733693129, guid: e844501743b638a43939d964e3f0cc51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8483126281844716264, guid: e844501743b638a43939d964e3f0cc51, type: 3}
       propertyPath: m_Name
       value: Player2

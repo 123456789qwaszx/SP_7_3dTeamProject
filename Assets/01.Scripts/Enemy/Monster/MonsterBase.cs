@@ -5,13 +5,13 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MonsterBase : MonoBehaviour
+public class MonsterBase : MonoBehaviour, IDamageable
 {
     public MonsterData monsterData;
 
     protected NavMeshAgent agent;
     protected Animator animator;
-    protected Transform player;
+    protected GameObject player;
 
     [Header("몬스터 스탯")]
     public float currentHp;
@@ -39,6 +39,7 @@ public class MonsterBase : MonoBehaviour
     private bool isInitialized = false;
     private Poolable poolable;
 
+
     protected void Awake()
     {
         poolable = GetComponent<Poolable>();
@@ -48,12 +49,7 @@ public class MonsterBase : MonoBehaviour
 
     protected void OnEnable()
     {
-        //풀에서 활성화 할때마다 호출
-        if (poolable != null && poolable.IsUsing)
-        {
-            ResetMonster();
-            OnMonsterStart();
-        }
+        GetComponents();
     }
 
     protected void OnDisable()
@@ -67,13 +63,10 @@ public class MonsterBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        
-        
         //생성된 경우에 초기화
         if (poolable == null || !poolable.IsUsing)
         {
-            ResetMonster();
-            OnMonsterStart();
+            Initialize();
         }
     }
 
@@ -81,7 +74,7 @@ public class MonsterBase : MonoBehaviour
     {
         if (isDead) return;
         
-        playerDistance = Vector3.Distance(transform.position, player.position);       
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);       
         float speed = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("Blend", speed);
 
@@ -100,18 +93,39 @@ public class MonsterBase : MonoBehaviour
         }
         OnMonsterUpdate();
     }
-
+    
+    public void SetMonsterData(MonsterData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError($"[SetMonsterData] MonsterData가 null입니다! ({gameObject.name})");
+            return;
+        }
+        
+        monsterData = data;
+    }
     public void OnSpawnFromPool()
     {
         if (!isInitialized)
         {
-            GetComponents();
             isInitialized = true;
         }
         ResetMonster();
+        GetData();
         OnMonsterStart();
     }
-
+    
+    private void Initialize()
+    {
+        if (!isInitialized)
+        {
+            GetComponents();
+        }
+        
+        ResetMonster();
+        GetData();
+        OnMonsterStart();
+    }
     public void OnReturnToPool()
     {
         StopAllCoroutines();
@@ -126,8 +140,9 @@ public class MonsterBase : MonoBehaviour
     private void ResetMonster()
     {
         isDead = false;
-        
-        GetData();
+        lastAttackTime = 0;
+        currentState = AIState.Idle;
+
         if (agent != null)
         {
             agent.enabled = true;
@@ -153,6 +168,7 @@ public class MonsterBase : MonoBehaviour
         lastAttackTime = 0;
     }
     
+    
     // 시작시 필요 컴포넌트 불러오기
     private void GetComponents()
     {
@@ -160,10 +176,8 @@ public class MonsterBase : MonoBehaviour
         animator = GetComponent<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        isInitialized = true;
     }
     
     
@@ -260,7 +274,7 @@ public class MonsterBase : MonoBehaviour
     }
     private void FleeingUpdate()
     {
-        Vector3 fleeDirection = (transform.position - player.position).normalized;
+        Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
         Vector3 fleeTarget = transform.position + fleeDirection * 10f;
         
         NavMeshHit hit;
@@ -285,8 +299,8 @@ public class MonsterBase : MonoBehaviour
             if (Time.time - lastAttackTime > monsterData.attackRate)
             {
                 lastAttackTime = Time.time;
-                //Managers.Player.Player.Controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
-
+                Managers.Player.Player.Controller.GetComponent<IDamageable>().TakeDamage(currentDamage);
+                
                 int index = Random.Range(0, 4);
                 animator.SetInteger("AttackIndex", index);
                 
@@ -299,9 +313,9 @@ public class MonsterBase : MonoBehaviour
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
-                if (agent.CalculatePath(player.position, path))
+                if (agent.CalculatePath(player.transform.position, path))
                 {
-                    agent.SetDestination(player.position);
+                    agent.SetDestination(player.transform.position);
                 }
                 else
                 {
@@ -320,12 +334,12 @@ public class MonsterBase : MonoBehaviour
     }
     bool IsPlayerInFieldOfView()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         return angle < fieldOfView * 0.5f;
     }
 
-    public void TakePhysicalDamage(float damage)
+    public void TakeDamage(float damage)
     {
          currentHp -= damage;
         
@@ -359,8 +373,6 @@ public class MonsterBase : MonoBehaviour
             meshRenderers[i].material.color = Color.white;
         }
     }
-    
-    
     void Die()
     {
         isDead = true;

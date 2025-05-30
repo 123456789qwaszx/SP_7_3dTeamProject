@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         HandleLook();
         
         //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
-        playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
+       playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
         playerStats.Hydration.Subtract(playerStats.Hydration.passiveValue * Time.deltaTime);
-
+        
         if (playerStats.Hydration.curValue <= 0f)
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             //Die();
             //게임오버 시 이벤트 호출: 정리 필요.
         }
-       
+        
     }
 
     void FixedUpdate()
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         Vector3 camForwad = camTr.forward;
         Vector3 camRight = camTr.right;
-
+        
         camForwad.y = 0f;
         camRight.y = 0f;
         
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetBool("IsRun", isMoving);
         
         Vector3 velocity = new Vector3(move.x * playerStats.Speed, _rigidbody.velocity.y, move.z * playerStats.Speed);
-        
+
         _rigidbody.velocity = velocity;
 
     }
