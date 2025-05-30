@@ -97,9 +97,7 @@ public class MonsterSpawner : MonoBehaviour
 
         monsterObj.transform.position = spawnPosition;
         monsterObj.transform.rotation = Quaternion.identity;
-
-        monster.monsterData = spawnData.monsterData;
-
+        
         monster.SetMonsterData(spawnData.monsterData);
         
         monster.OnSpawnFromPool();

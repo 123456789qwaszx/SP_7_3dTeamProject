@@ -75,7 +75,8 @@ public class MonsterBase : MonoBehaviour, IDamageable
     {
         if (isDead) return;
         
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);       
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);  
+        
         float speed = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("Blend", speed);
 
@@ -344,6 +345,7 @@ public class MonsterBase : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return; 
          currentHp -= damage;
         
         onTakeDamage?.Invoke();
@@ -378,10 +380,11 @@ public class MonsterBase : MonoBehaviour, IDamageable
     }
     void Die()
     {
+        if (isDead) return;
         isDead = true;
         
         sfxManager.PlaySFX(sfxManager.bearDieSFX, transform.position);
-        if (agent != null)
+        if (agent != null && agent.isOnNavMesh)
         {
             agent.isStopped = true;
             agent.enabled = false;
