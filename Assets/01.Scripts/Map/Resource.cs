@@ -7,6 +7,7 @@ public class Resource : MonoBehaviour, IDamageable
     public PlayerInteraction interaction;
     public EquipmentData _data;
     public ResourceCondition resourceCondition;
+    public SpawningPool spawningPool;
 
     private float workSpeed = 0.5f;
 
@@ -16,23 +17,25 @@ public class Resource : MonoBehaviour, IDamageable
 
     void Start()
     {
+        spawningPool = GetComponentInParent<SpawningPool>();
         interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
     }
+    
 
     void OnPlayerResourceInteraction(Player pc)
     {
-        // 나중에 Ax를 들었을 때만 동작.
-        // 혹은 특정 키값입력 or 능력 등등
-        _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0, 2.2f);
-        // 이 때 나오는 건, drop프리팹을 공유하는게 아니라, 별도로 dotTween을 활용한 애니메이션을 사용한 뒤 destroy 시키기
-        SpawnResource(_data.dropPrefab);
-        capacity -= 1;
-        if (capacity <= 0)
+        if (capacity > 0)
         {
-            DestroyResource();
+            _data.dropPrefab.transform.position = pc.transform.position + new Vector3(0, 2.2f);
+            // 이 때 나오는 건, drop프리팹을 공유하는게 아니라, 별도로 dotTween을 활용한 애니메이션을 사용한 뒤 destroy 시키기
+            SpawnResource(_data.dropPrefab);
+            capacity -= 1;
         }
-        // 생성하고 나무위치로 이동
+        else
+        {
+            ResourceDestory();
+        }
     }
 
 
@@ -43,14 +46,33 @@ public class Resource : MonoBehaviour, IDamageable
         return go;
     }
 
-    public void TakeDamage(float damage)
+
+    void ResourceDestory()
     {
-        hitCount -= damage;
+        Destroy(gameObject);
+
+        switch (_data.resourcetype)
+            {
+                case ResourceType.Tree:
+                    spawningPool._treeCount -= 1;
+                    break;
+                case ResourceType.Rock:
+                    spawningPool._rockCount -= 1;
+                    break;
+                case ResourceType.Iron:
+                    spawningPool._ironCount -= 1;
+                    break;
+                case ResourceType.Mushroom:
+                    spawningPool._mushroomCount -= 1;
+                    break;
+                default:
+                    break;
+            }
     }
 
 
-    public void DestroyResource()
+    public void TakeDamage(float damage)
     {
-        Destroy(gameObject);
+        hitCount -= damage;
     }
 }

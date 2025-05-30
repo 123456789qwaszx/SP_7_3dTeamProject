@@ -16,13 +16,13 @@ public class SpawningPool : MonoBehaviour
     private Resource _mushroom;
 
     [SerializeField]
-    int _treeCount = 0;
+    public int _treeCount = 0;
     [SerializeField]
-    int _rockCount = 0;
+    public int _rockCount = 0;
     [SerializeField]
-    int _ironCount = 0;
+    public int _ironCount = 0;
     [SerializeField]
-    int _mushroomCount = 0;
+    public int _mushroomCount = 0;
 
     [SerializeField]
     int _keepTreeCount = 15;
@@ -48,7 +48,6 @@ public class SpawningPool : MonoBehaviour
         {
             StartCoroutine(CoOBJresourceSpawn(_tree));
             _treeCount++;
-
         }
         while (_reserveCount + _rockCount < _KeepRockCount)
         {

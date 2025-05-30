@@ -54,26 +54,26 @@ public class UIInventory : MonoBehaviour
     }
 
 
-    void UseStackedItem(EquipmentData data, int quantity)
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
-            {
-                slots[i].item.quantity -= quantity;
+    // void UseStackedItem(EquipmentData data, int quantity)
+    // {
+    //     for (int i = 0; i < slots.Length; i++)
+    //     {
+    //         if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
+    //         {
+    //             slots[i].item.quantity -= quantity;
 
-                if (slots[i].item.quantity == 0)
-                {
-                    selectedItem = null;
-                    slots[selectedItemIndex].item = null;
-                    selectedItemIndex = -1;
-                    ClearSelectedItemWindow();
-                }
-            }
+    //             if (slots[i].item.quantity == 0)
+    //             {
+    //                 selectedItem = null;
+    //                 slots[selectedItemIndex].item = null;
+    //                 selectedItemIndex = -1;
+    //                 ClearSelectedItemWindow();
+    //             }
+    //         }
 
-            UpdateUI();
-        }
-    }
+    //         UpdateUI();
+    //     }
+    // }
 
 
     void ClearSelectedItemWindow()
@@ -99,7 +99,6 @@ public class UIInventory : MonoBehaviour
             ItemSlot slot = GetItemStack(data);
             if (slot != null)
             {
-                data.quantity++;
                 slot.quantity++;
                 UpdateUI();
                 Managers.Player.Player.itemData = null;
@@ -112,7 +111,6 @@ public class UIInventory : MonoBehaviour
         if (emptySlot != null)
         {
             emptySlot.item = data;
-            data.quantity++;
             emptySlot.quantity = 1;
             UpdateUI();
             Managers.Player.Player.itemData = null;
@@ -238,7 +236,6 @@ public class UIInventory : MonoBehaviour
     void RemoveSelectedItem()
     {
         slots[selectedItemIndex].quantity--;
-        slots[selectedItemIndex].item.quantity--;
 
         if (slots[selectedItemIndex].quantity <= 0)
         {
