@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 4742940664656499871}
   - component: {fileID: 1547459268594154100}
   - component: {fileID: 6560184977289297256}
-  - component: {fileID: 2159536349114801652}
   m_Layer: 9
   m_Name: Object_02_Iron
   m_TagString: Resource
@@ -133,7 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 5366683091281627981}
   _data: {fileID: 11400000, guid: 38819383212b7d64fb448eff16499cec, type: 2}
-  resourceCondition: {fileID: 2159536349114801652}
+  resourceCondition: {fileID: 0}
+  spawningPool: {fileID: 0}
   capacity: 5
   hitCount: 10
 --- !u!114 &1547459268594154100
@@ -170,22 +170,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.145421, y: 3.8752804, z: 6.460664}
   m_Center: {x: -0.41095018, y: 1.437639, z: 0.4204316}
---- !u!114 &2159536349114801652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3237189665329862858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42129b868777aa846b7be76e659066aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
 --- !u!1 &5069386915765102177
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +300,7 @@ GameObject:
   - component: {fileID: 584285595918145517}
   - component: {fileID: 2831008081149628592}
   - component: {fileID: 8036547944560481444}
+  - component: {fileID: 4593452629937186605}
   m_Layer: 9
   m_Name: Iron
   m_TagString: Untagged
@@ -389,3 +374,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &4593452629937186605
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5242730330389564990}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.003, y: 0.004, z: 0.002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.001}
+  m_TimeToStationary: 0.5

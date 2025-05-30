@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1624135598506490121}
   - component: {fileID: 4515628552153148294}
   - component: {fileID: 777657630379014367}
-  - component: {fileID: 9028494737772510551}
   m_Layer: 9
   m_Name: Object_20_Mushroom
   m_TagString: Resource
@@ -52,7 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interaction: {fileID: 1010738793706452536}
   _data: {fileID: 11400000, guid: 684febb720d79c94697096988cb0d3f7, type: 2}
-  resourceCondition: {fileID: 9028494737772510551}
+  resourceCondition: {fileID: 0}
+  spawningPool: {fileID: 0}
   capacity: 2
   hitCount: 1
 --- !u!114 &4515628552153148294
@@ -89,22 +89,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.49112293, y: 0.8207374, z: 0.45167905}
   m_Center: {x: 0.052897885, y: 0.3942788, z: -0.0016533434}
---- !u!114 &9028494737772510551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331963517807321746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42129b868777aa846b7be76e659066aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curValue: 0
-  startValue: 0
-  maxValue: 0
-  passiveValue: 0
 --- !u!1 &1631499024639012766
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +101,7 @@ GameObject:
   - component: {fileID: 6524850490000229859}
   - component: {fileID: 3422796182695833089}
   - component: {fileID: 7922811971031661442}
+  - component: {fileID: 8497766540804172424}
   m_Layer: 9
   m_Name: Mushroom 1
   m_TagString: Untagged
@@ -211,6 +196,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &8497766540804172424
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631499024639012766}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3266772759748756091
 GameObject:
   m_ObjectHideFlags: 0
