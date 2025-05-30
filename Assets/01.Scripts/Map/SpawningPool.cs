@@ -35,7 +35,7 @@ public class SpawningPool : MonoBehaviour
 
 
     [SerializeField]
-    float _spawnRadius = 150f;
+    float _spawnRadius = 140f;
     [SerializeField]
     float _spawnTime = 5f;
     [SerializeField]
@@ -93,7 +93,7 @@ public class SpawningPool : MonoBehaviour
         go.transform.parent = _resourceRoot;
 
         Vector3 randPos;
-        Vector3 randDir = Random.insideUnitSphere * Random.Range(10, _spawnRadius);
+        Vector3 randDir = Random.insideUnitSphere * Random.Range(20, _spawnRadius);
         randDir.y = 0;
         randPos = _spawnPos + randDir;
         // randPos가 갈 수 있는지 없는지 체크 언덕 or 이미 생성된 나무 or 건물 등

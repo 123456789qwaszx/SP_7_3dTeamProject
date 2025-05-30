@@ -9,9 +9,9 @@ public class Resource : MonoBehaviour, IDamageable
     public ResourceCondition resourceCondition;
     public SpawningPool spawningPool;
 
-    private float workSpeed = 1.5f;
+    private float workSpeed = 1f;
 
-    public int capacity = 3;
+    public int capacity = 1;
     public float hitCount;
 
 
@@ -20,6 +20,24 @@ public class Resource : MonoBehaviour, IDamageable
         spawningPool = GetComponentInParent<SpawningPool>();
         interaction.InteractInterval = workSpeed;
         interaction.OnPlayerInteraction = OnPlayerResourceInteraction;
+
+        switch (_data.resourcetype)
+            {
+                case ResourceType.Tree:
+                    capacity = 3;
+                    break;
+                case ResourceType.Rock:
+                    capacity = 10;
+                    break;
+                case ResourceType.Iron:
+                    capacity = 7;
+                    break;
+                case ResourceType.Mushroom:
+                    capacity = 1;
+                    break;
+                default:
+                    break;
+            }
     }
     
 
@@ -31,6 +49,10 @@ public class Resource : MonoBehaviour, IDamageable
             // 이 때 나오는 건, drop프리팹을 공유하는게 아니라, 별도로 dotTween을 활용한 애니메이션을 사용한 뒤 destroy 시키기
             SpawnResource(_data.dropPrefab);
             capacity -= 1;
+            if (capacity == 0)
+            {
+                ResourceDestory();
+            }
         }
         else
         {

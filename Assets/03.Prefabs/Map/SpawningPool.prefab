@@ -54,12 +54,12 @@ MonoBehaviour:
   _rockCount: 0
   _ironCount: 0
   _mushroomCount: 0
-  _keepTreeCount: 15
-  _KeepRockCount: 6
-  _keepIronCount: 3
-  _keepMushroomCount: 20
-  _spawnRadius: 150
-  _spawnTime: 5
+  _keepTreeCount: 60
+  _KeepRockCount: 8
+  _keepIronCount: 10
+  _keepMushroomCount: 120
+  _spawnRadius: 140
+  _spawnTime: 0.1
   _reserveCount: 0
 --- !u!1 &6234451745878516754
 GameObject:

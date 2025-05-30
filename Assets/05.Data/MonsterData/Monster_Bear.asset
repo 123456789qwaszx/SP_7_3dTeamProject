@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: Bear
   health: 150
-  damage: 15
+  damage: 10
   attackRate: 1.5
   detectDistance: 20
-  attackDistance: 2.5
+  attackDistance: 1.8
   walkSpeed: 3
   runSpeed: 6
   abilities: []
