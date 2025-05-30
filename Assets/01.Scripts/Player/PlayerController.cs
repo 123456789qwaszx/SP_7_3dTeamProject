@@ -69,9 +69,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
         }
-        if (!isDead && playerStats.Health.curValue <= 0f)
+        if (playerStats.Health.curValue <= 0f)
         {
-            isDead = true;
+            // isDead = true;
             sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
             GameManager.Instance.GameOver();
         }
