@@ -47,6 +47,7 @@ public class UIOpenClose : MonoBehaviour
                 OCOption();
             }
         }
+        // Alt 키를 누르면 커서 활성화
         if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
         {
             Cursor.visible = true;
@@ -57,6 +58,16 @@ public class UIOpenClose : MonoBehaviour
         // Alt 키를 떼면 커서 비활성화
         if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
         {
+            GameObject inventoryUI = GameObject.Find("InventoryUI");
+            GameObject OptionUI = GameObject.Find("OptionUI");
+            if (inventoryUI != null && inventoryUI.activeSelf) //인벤 열려있을경우
+            {
+                return;//무시
+            }
+            if (OptionUI != null && OptionUI.activeSelf) //인벤 설정 열려있을경우
+            {
+                return;//무시
+            }
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             GameManager.Instance.EnableGameCamLook();
