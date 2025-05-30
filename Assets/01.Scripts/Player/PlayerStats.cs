@@ -12,8 +12,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
 
     private Condition _health; 
-    public SFXManager sfxManager;
-    private bool _isDead = false;
     public Condition Health // 체력
 
     {
@@ -71,9 +69,6 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-            if (sfxManager != null && sfxManager.playerDieSFX != null && _isDead)
-            {
-                sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
-            }
+           
     }
 }

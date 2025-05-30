@@ -40,6 +40,11 @@ public class UIOpenClose : MonoBehaviour
 
     public void OCInven()
     {
+        if ((option != null && option.activeSelf) || (gameOver != null && gameOver.activeSelf))
+        {
+            Debug.Log("다른 UI가 열려 있어서 인벤토리를 열 수 없습니다.");
+            return;
+        }
         if (!isActive)
         {
             isActive = true;
@@ -58,7 +63,11 @@ public class UIOpenClose : MonoBehaviour
     public void OCOption()
     {
         Debug.Log(option);
-
+        if ((inven != null && inven.activeSelf) || (gameOver != null && gameOver.activeSelf))
+        {
+            Debug.Log("다른 UI가 열려 있어서 옵션을 열 수 없습니다.");
+            return;
+        }
         if (option != null)
         {
             option.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -32,9 +33,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Vector2 lookInput;
     private float xRotation = 0f;
     public float mouseSensitivity = 1f;
+    [Header("SFX")]
+    public SFXManager sfxManager;
 
-    
-    
+    private bool isDead = false;//다이상태인지 체크
+    private bool isJumping = false;//점프상태인지 체크
+
+
     void Start()
     {
     
@@ -65,9 +70,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
         }
-        if (playerStats.Health.curValue <= 0f)
+        if (!isDead && playerStats.Health.curValue <= 0f)
         {
-            // Die();
+            isDead = true;
+            sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
+            //Die();
             //게임오버 시 이벤트 호출: 정리 필요.
         }
        
@@ -84,6 +91,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         IsGround = Physics.CheckSphere(groundCheckTr.position, groundDistance, groundMask);
         if (!IsGround)
         {
+            isJumping = false;
             animator.SetBool("IsJump", false);
         }
     }
@@ -115,16 +123,17 @@ public class PlayerController : MonoBehaviour, IDamageable
             _playerInput = Vector2.zero;                     // 입력 받은 값이 없으면 Vector2.zeor를 _playerInput 넣어줌
         }
     }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         Debug.Log("Jump입력 됨");
-        if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
+        //if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
+        if (isJumping || !IsGround || !context.performed) return;
         {
             Debug.Log("true로 못 들어오는 중");
-            
+
             animator.SetBool("IsJump", true);          // 점프 애니메이션을 true로 바꿔줌
-            
+            //sfxManager.PlaySFX(sfxManager.playerJumpSFX, transform.position);
+            //isJumping = true;
         }
         Debug.Log("현재 땅이 아닙니다.");
     }
@@ -132,7 +141,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyJump()                                // 애니메이션에서 클립 위치에 이벤트 줄 메서드
     {
         _rigidbody.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse); // 점프 기능
-       
     }
     
  
@@ -157,12 +165,26 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void OnAttacking(InputAction.CallbackContext context)
     {
-        if (context.performed)                              // 마우스 클릭이 실행 됐을 때
+        //if (context.performed)                              // 마우스 클릭이 실행 됐을 때
+        //{
+        //    Debug.Log("마우스 좌클릭");
+        //    animator.SetTrigger("IsAttack");           // 클릭이 실행 되면 "어택 애니메이션" 실행
+        //    sfxManager.PlaySFX(sfxManager.playerAttackSFX, transform.position);
+        //}
+        //Debug.Log("마우스 좌클릭이 안됨");
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("마우스 좌클릭");
-            animator.SetTrigger("IsAttack");           // 클릭이 실행 되면 "어택 애니메이션" 실행
+            // UI 위 클릭이면 무시
+            Debug.Log("UI 클릭이므로 공격 안 함");
+            return;
         }
-        Debug.Log("마우스 좌클릭이 안됨");
+
+        if (context.performed)
+        {
+            Debug.Log("마우스 좌클릭 (공격)");
+            animator.SetTrigger("IsAttack");
+            sfxManager.PlaySFX(sfxManager.playerAttackSFX, transform.position);
+        }
     }
 
     public void ApplyDamage()
@@ -280,5 +302,8 @@ public class PlayerController : MonoBehaviour, IDamageable
             );
         }
     }
-    
+    public void PlayJumpSFX()
+    {
+        sfxManager.PlaySFX(sfxManager.playerJumpSFX, transform.position);
+    }
 }
