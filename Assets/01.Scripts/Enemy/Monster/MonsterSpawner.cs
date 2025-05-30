@@ -26,7 +26,8 @@ public class MonsterSpawner : MonoBehaviour
     private Dictionary<string, float> lastSpawnTimes = new Dictionary<string, float>();
 
     private Dictionary<string, List<MonsterBase>> activeMonsters = new Dictionary<string, List<MonsterBase>>();
-    
+
+    public SFXManager sfxManager;
     void Start()
     {
         InitializeSpawnManager();
@@ -155,7 +156,7 @@ public class MonsterSpawner : MonoBehaviour
     }
     private void OnMonsterTakeDamage(MonsterBase monster)
     {
-        
+        sfxManager.PlaySFX(sfxManager.bearHitSFX, monster.transform.position);
     }
 
     public void SpawnMonsterImmediate(string monsterName, Vector3 position)
