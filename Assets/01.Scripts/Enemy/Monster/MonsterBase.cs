@@ -12,6 +12,7 @@ public class MonsterBase : MonoBehaviour, IDamageable
     protected NavMeshAgent agent;
     protected Animator animator;
     protected GameObject player;
+    public SFXManager sfxManager;
 
     [Header("몬스터 스탯")]
     public float currentHp;
@@ -105,7 +106,7 @@ public class MonsterBase : MonoBehaviour, IDamageable
         monsterData = data;
     }
     public void OnSpawnFromPool()
-    {
+    { 
         if (!isInitialized)
         {
             isInitialized = true;
@@ -301,6 +302,8 @@ public class MonsterBase : MonoBehaviour, IDamageable
                 lastAttackTime = Time.time;
                 Managers.Player.Player.Controller.GetComponent<IDamageable>().TakeDamage(currentDamage);
                 
+                sfxManager.PlaySFX(sfxManager.bearAttackSFX, transform.position);
+                
                 int index = Random.Range(0, 4);
                 animator.SetInteger("AttackIndex", index);
                 
@@ -376,6 +379,8 @@ public class MonsterBase : MonoBehaviour, IDamageable
     void Die()
     {
         isDead = true;
+        
+        sfxManager.PlaySFX(sfxManager.bearDieSFX, transform.position);
         if (agent != null)
         {
             agent.isStopped = true;
