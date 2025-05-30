@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         Cursor.visible = false;
     }
 
-    public bool TogglePause() // 인게임 정지상태에 따라 카메라 움직임도 같이 제어.
+    public void TogglePause() // 인게임 정지상태에 따라 카메라 움직임도 같이 제어.
     {
         isPause = !isPause;
         Time.timeScale = isPause ? 0 : 1;
@@ -59,8 +59,6 @@ public class GameManager : Singleton<GameManager>
         {
             EnableGameCamLook();
         }
-
-        return isPause;
     }
 
     public void GameOver() //게임 오버: UI 호출 및 인게임 정지.
@@ -68,8 +66,9 @@ public class GameManager : Singleton<GameManager>
         if (isGameOver) return; // 재시작 시 게임 오버 중첩 방지 코드
 
         isGameOver = true;
-        uiOpenClose.OCGameOver(); // 게임 오버 UI 호출용.
         TogglePause(); // 게임 오버시 인게임 정지
+        Debug.Log($"isPause: {isPause}, isGameOver: {isGameOver}");
+        uiOpenClose.OCGameOver(); // 게임 오버 UI 호출용.
     }
 
 

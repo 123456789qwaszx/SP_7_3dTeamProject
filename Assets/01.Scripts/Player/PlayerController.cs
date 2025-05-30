@@ -69,12 +69,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
         }
-        if (playerStats.Health.curValue <= 0f && !isDead)
-        {
-            isDead = true;
-            sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
-            GameManager.Instance.GameOver();
-        }
+        // if (playerStats.Health.curValue <= 0f && !isDead)
+        // {
+        //     isDead = true;
+        //     sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
+        //     Debug.Log("Update 데미지 게임오버");
+        //     GameManager.Instance.GameOver();
+        // }
         
     }
 
@@ -268,8 +269,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         playerStats.Health.Subtract(damage);
         sfxManager.PlaySFX(sfxManager.playerHitSFX, transform.position);
-        if (playerStats.Health.curValue <= 0f)
+        if (playerStats.Health.curValue <= 0f && !isDead)
         {
+            isDead = true;
+            Debug.Log("TakeDamage 게임오버");
             GameManager.Instance.GameOver();
         }
     }
