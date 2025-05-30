@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     public void OnJump(InputAction.CallbackContext context)
     {
+        GameObject NPCTextBoard = GameObject.Find("NPCTextBoard"); if (NPCTextBoard != null && NPCTextBoard.activeSelf) { return; }
         Debug.Log("Jump입력 됨");
         //if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
         if (isJumping || !IsGround || !context.performed) return;
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void OnAttacking(InputAction.CallbackContext context)
     {
+        GameObject NPCTextBoard = GameObject.Find("NPCTextBoard"); if (NPCTextBoard != null && NPCTextBoard.activeSelf) { return; }
         //if (context.performed)                              // 마우스 클릭이 실행 됐을 때
         //{
         //    Debug.Log("마우스 좌클릭");
