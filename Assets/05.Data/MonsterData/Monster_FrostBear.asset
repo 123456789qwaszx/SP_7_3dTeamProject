@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: FrostBear
   health: 300
-  damage: 30
+  damage: 20
   attackRate: 1
-  detectDistance: 50
+  detectDistance: 30
   attackDistance: 2.5
-  walkSpeed: 3
-  runSpeed: 6
+  walkSpeed: 3.5
+  runSpeed: 7
   abilities:
   - abilityName: Rage
     duration: 10
