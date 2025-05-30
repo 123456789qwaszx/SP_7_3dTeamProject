@@ -18,7 +18,7 @@ MonoBehaviour:
   type: 2
   resourcetype: 4
   dropPrefab: {fileID: 8053056388732155770, guid: 44ad3d55d5fa196438358e11f6db6beb, type: 3}
-  quantity: 4
+  quantity: 0
   equipPrefab: {fileID: 0}
   weaponDamages: []
   canStack: 1
