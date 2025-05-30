@@ -28,6 +28,12 @@ public class UIOpenClose : MonoBehaviour
             else
                 Debug.LogWarning("Option 찾을 수 없습니다.");
         }
+
+        for (int i = 0; i <= 1; i++)
+        {
+            Debug.Log("인벤 활성화");
+            OCInven();
+        }
     }
 
     void Update()
