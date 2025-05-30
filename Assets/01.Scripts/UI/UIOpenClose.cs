@@ -77,12 +77,6 @@ public class UIOpenClose : MonoBehaviour
 
     public void OCGameOver()
     {
-        if (inven != null && inven.activeSelf)
-        {
-            inven.SetActive(false);
-            GameManager.Instance.EnableGameCamLook();  // 인벤토리 닫을 때 카메라 회전 재활성화
-            isActive = false; // isActive 상태도 초기화
-        }
         if (gameOver != null)
         {
             gameOver.SetActive(!option.activeSelf); // 현재 상태의 반대로 토글
