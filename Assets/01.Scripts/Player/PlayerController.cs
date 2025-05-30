@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
         playerStats.Health.Subtract(damage);
-        
+        sfxManager.PlaySFX(sfxManager.playerHitSFX, transform.position);
         if (playerStats.Health.curValue <= 0f)
         {
             GameManager.Instance.GameOver();

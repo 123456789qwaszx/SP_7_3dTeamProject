@@ -47,6 +47,20 @@ public class UIOpenClose : MonoBehaviour
                 OCOption();
             }
         }
+        if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            GameManager.Instance.DisableGameCamLook();
+        }
+
+        // Alt 키를 떼면 커서 비활성화
+        if (Input.GetKeyUp(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.RightAlt))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            GameManager.Instance.EnableGameCamLook();
+        }
     }
 
     public void OCInven()
