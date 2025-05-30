@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
         uiOpenClose = FindObjectOfType<UIOpenClose>(); // GameManager 인게임 생성
         playerInput = FindObjectOfType<PlayerInput>(); // 자동으로 PlayerInput/UIOpenClose을 찾아 등록.
 
-        EnableGameCamLook();
+        //EnableGameCamLook();
 
         if (playerInput == null)
         {
