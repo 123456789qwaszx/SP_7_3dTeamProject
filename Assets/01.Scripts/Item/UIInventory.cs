@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
     public ItemSlot[] slots;
-    public GameObject inventoryWindow;
     public Transform slotPanel;
     public Transform dropPosition;
-
-    public Resource resource;
 
     [Header("Select Item")]
     public TextMeshProUGUI selectedItemName;
@@ -22,18 +21,25 @@ public class UIInventory : MonoBehaviour
     public GameObject unequipButton;
     public GameObject dropButton;
 
+    bool equipped = false;
+
+
+    private PlayerStats condition;
+    private PlayerController controller;
+
     EquipmentData selectedItem;
     int selectedItemIndex = 0;
 
-    
+
     int curEquipIndex;
 
     void Start()
     {
+        condition = Managers.Player.Player.PlayerStats;
+        controller = Managers.Player.Player.Controller;
+
         Managers.Player.Player.addItem += AddItem;
 
-
-        inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
 
         for (int i = 0; i < slots.Length; i++)
@@ -43,9 +49,31 @@ public class UIInventory : MonoBehaviour
             slots[i].inventory = this;
         }
 
-        
+
         ClearSelectedItemWindow();
     }
+
+
+    // void UseStackedItem(EquipmentData data, int quantity)
+    // {
+    //     for (int i = 0; i < slots.Length; i++)
+    //     {
+    //         if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
+    //         {
+    //             slots[i].item.quantity -= quantity;
+
+    //             if (slots[i].item.quantity == 0)
+    //             {
+    //                 selectedItem = null;
+    //                 slots[selectedItemIndex].item = null;
+    //                 selectedItemIndex = -1;
+    //                 ClearSelectedItemWindow();
+    //             }
+    //         }
+
+    //         UpdateUI();
+    //     }
+    // }
 
 
     void ClearSelectedItemWindow()
@@ -62,44 +90,36 @@ public class UIInventory : MonoBehaviour
     }
 
 
-    public void Toggle()
-    {
-        if (IsOpen())
-        {
-            inventoryWindow.SetActive(false);
-        }
-        else
-        {
-            inventoryWindow.SetActive(true);
-        }
-    }
-    public bool IsOpen()
-    {
-        return inventoryWindow.activeInHierarchy;
-    }
-
     void AddItem()
     {
         EquipmentData data = Managers.Player.Player.itemData;
 
-        // if (data.canStack)
-        // {
-        //     ItemSlot slot = GetItemStack(data);
-             ItemSlot emptySlot = GetEmptySlot(data);
-
-            // 있다면
-            if (emptySlot != null)
+        if (data.canStack)
+        {
+            ItemSlot slot = GetItemStack(data);
+            if (slot != null)
             {
-                emptySlot.item = data;
-                emptySlot.quantity = 1;
+                slot.quantity++;
                 UpdateUI();
                 Managers.Player.Player.itemData = null;
                 return;
             }
-       // }
+        }
+        ItemSlot emptySlot = GetEmptySlot(data);
 
-        //ThrowItem(data);
-        //Managers.Player.Player.itemData = null;
+        // 있다면
+        if (emptySlot != null)
+        {
+            emptySlot.item = data;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            Managers.Player.Player.itemData = null;
+            return;
+        }
+
+
+        ThrowItem(data);
+        Managers.Player.Player.itemData = null;
     }
 
 
@@ -158,7 +178,7 @@ public class UIInventory : MonoBehaviour
             return;
         }
 
-        
+
         selectedItem = slots[index].item;
         selectedItemIndex = index;
 
@@ -182,27 +202,35 @@ public class UIInventory : MonoBehaviour
 
     public void OnUseButton()
     {
-        if (selectedItem.type == EquipmentType.Weapon)
+        if (selectedItem.type == EquipmentType.Food)
         {
-            for (int i = 0; i < selectedItem.weaponDamages.Length; i++)
+            for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                switch (selectedItem.weaponDamages[i].type)
+                switch (selectedItem.consumables[i].type)
                 {
-                    case DamageType.ForMonster:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Health:
+                        controller.Heal(selectedItem.consumables[i].value);
                         break;
-                    case DamageType.ForResource:
-                        resource.resourceCondition.Add(selectedItem.weaponDamages[i].value);
+                    case ConsumableType.Hunger:
+                        controller.Eat(selectedItem.consumables[i].value);
                         break;
                 }
             }
+            RemoveSelectedItem();
         }
     }
 
     public void OnDropButton()
     {
+        if (equipped)
+        {
+            UnEquip(selectedItemIndex);
+            equipped = false;
+
+        }
         ThrowItem(selectedItem);
         RemoveSelectedItem();
+
     }
 
     void RemoveSelectedItem()
@@ -229,16 +257,17 @@ public class UIInventory : MonoBehaviour
 
         slots[selectedItemIndex].equipped = true;
         curEquipIndex = selectedItemIndex;
-        //CharacterManager.Instance.Player.equip.EquipNew(selectedItem);
+        Managers.Player.Player.interaction.EquipNew(selectedItem);
         UpdateUI();
 
         SelectItem(selectedItemIndex);
+        equipped = true;
     }
 
     void UnEquip(int index)
     {
         slots[index].equipped = false;
-        //CharacterManager.Instance.Player.equip.UnEquip();
+        Managers.Player.Player.interaction.UnEquip();
         UpdateUI();
 
         if (selectedItemIndex == index)
@@ -250,5 +279,6 @@ public class UIInventory : MonoBehaviour
     public void OnUnEquipButton()
     {
         UnEquip(selectedItemIndex);
+        equipped = false;
     }
 }

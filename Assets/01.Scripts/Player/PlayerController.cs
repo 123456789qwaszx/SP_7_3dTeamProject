@@ -1,11 +1,12 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
   
     private Rigidbody _rigidbody;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private Collider attackRange;
+    [SerializeField] private Transform modelTransform;
 
     private List<IDamageable> targetsInRange = new();
     
@@ -23,21 +25,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundCheckTr;
     [SerializeField] private float groundDistance = 0.3f;
     [SerializeField] private LayerMask groundMask;
-    
+
     [Header("카메라")]
     [SerializeField] private Transform cameraContainer;
     [SerializeField] private Transform camTr;
     private Vector2 lookInput;
     private float xRotation = 0f;
     public float mouseSensitivity = 1f;
+    [Header("SFX")]
+    public SFXManager sfxManager;
 
-    
-    
+    private bool isDead = false;//다이상태인지 체크
+    private bool isJumping = false;//점프상태인지 체크
+
+
     void Start()
     {
     
     }
-    
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -50,12 +56,32 @@ public class PlayerController : MonoBehaviour
     {
         CheckGround();
         HandleLook();
-       
+        
+        //Hunger.Subtract(noHungerHealthDecay * Time.deltaTime);
+       playerStats.Hunger.Subtract(playerStats.Hunger.passiveValue * Time.deltaTime);
+        playerStats.Hydration.Subtract(playerStats.Hydration.passiveValue * Time.deltaTime);
+        
+        if (playerStats.Hydration.curValue <= 0f)
+        {
+            playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
+        }
+        if (playerStats.Hunger.curValue <= 0f)
+        {
+            playerStats.Health.Subtract(playerStats.noHungerHealthDecay * Time.deltaTime);
+        }
+        if (playerStats.Health.curValue <= 0f)
+        {
+            // isDead = true;
+            sfxManager.PlaySFX(sfxManager.playerDieSFX, transform.position);
+            GameManager.Instance.GameOver();
+        }
+        
     }
 
     void FixedUpdate()
     {
         HandleMove();
+        RotateModel();
     }
 
     public void CheckGround()
@@ -63,6 +89,7 @@ public class PlayerController : MonoBehaviour
         IsGround = Physics.CheckSphere(groundCheckTr.position, groundDistance, groundMask);
         if (!IsGround)
         {
+            isJumping = false;
             animator.SetBool("IsJump", false);
         }
     }
@@ -75,12 +102,11 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawSphere(groundCheckTr.position, groundDistance);
         }
     }
-
     public void Move()
     {
+        
         Vector3 move = new Vector3(_playerInput.x, 0, _playerInput.y);
         _rigidbody.MovePosition(this.transform.position + move *playerStats.Speed  * Time.deltaTime);
-        
 
     }
 
@@ -95,16 +121,17 @@ public class PlayerController : MonoBehaviour
             _playerInput = Vector2.zero;                     // 입력 받은 값이 없으면 Vector2.zeor를 _playerInput 넣어줌
         }
     }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         Debug.Log("Jump입력 됨");
-        if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
+        //if (context.performed && IsGround)                   // 입력 받은 값이 맞고 IsGround가 True면 "점프 애니메이션" 실행
+        if (isJumping || !IsGround || !context.performed) return;
         {
             Debug.Log("true로 못 들어오는 중");
-            
+
             animator.SetBool("IsJump", true);          // 점프 애니메이션을 true로 바꿔줌
-            
+            //sfxManager.PlaySFX(sfxManager.playerJumpSFX, transform.position);
+            //isJumping = true;
         }
         Debug.Log("현재 땅이 아닙니다.");
     }
@@ -112,7 +139,6 @@ public class PlayerController : MonoBehaviour
     public void ApplyJump()                                // 애니메이션에서 클립 위치에 이벤트 줄 메서드
     {
         _rigidbody.AddForce(Vector3.up * playerStats.JumpForce, ForceMode.Impulse); // 점프 기능
-       
     }
     
  
@@ -137,12 +163,26 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttacking(InputAction.CallbackContext context)
     {
-        if (context.performed)                              // 마우스 클릭이 실행 됐을 때
+        //if (context.performed)                              // 마우스 클릭이 실행 됐을 때
+        //{
+        //    Debug.Log("마우스 좌클릭");
+        //    animator.SetTrigger("IsAttack");           // 클릭이 실행 되면 "어택 애니메이션" 실행
+        //    sfxManager.PlaySFX(sfxManager.playerAttackSFX, transform.position);
+        //}
+        //Debug.Log("마우스 좌클릭이 안됨");
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("마우스 좌클릭");
-            animator.SetTrigger("IsAttack");           // 클릭이 실행 되면 "어택 애니메이션" 실행
+            // UI 위 클릭이면 무시
+            Debug.Log("UI 클릭이므로 공격 안 함");
+            return;
         }
-        Debug.Log("마우스 좌클릭이 안됨");
+
+        if (context.performed)
+        {
+            Debug.Log("마우스 좌클릭 (공격)");
+            animator.SetTrigger("IsAttack");
+            sfxManager.PlaySFX(sfxManager.playerAttackSFX, transform.position);
+        }
     }
 
     public void ApplyDamage()
@@ -161,7 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 camForwad = camTr.forward;
         Vector3 camRight = camTr.right;
-
+        
         camForwad.y = 0f;
         camRight.y = 0f;
         
@@ -174,7 +214,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsRun", isMoving);
         
         Vector3 velocity = new Vector3(move.x * playerStats.Speed, _rigidbody.velocity.y, move.z * playerStats.Speed);
-        
+
         _rigidbody.velocity = velocity;
 
     }
@@ -208,5 +248,49 @@ public class PlayerController : MonoBehaviour
         {
             targetsInRange.Remove(damageable);
         }
+    }
+    
+    public void Heal(float amount)
+    {
+        playerStats.Health.Add(amount);
+    }
+    public void Drink(float amount)
+    {
+        playerStats.Hydration.Add(amount);
+    }
+    public void Eat(float amount)
+    {
+        playerStats.Health.Add(amount);
+        playerStats.Hunger.Add(amount);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        playerStats.Health.Subtract(damage);
+        
+        if (playerStats.Health.curValue <= 0f)
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
+
+    private void RotateModel()
+    {
+        Vector3 moveDir = _rigidbody.velocity;
+        moveDir.y = 0;
+
+        if (moveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(moveDir);
+            modelTransform.rotation = Quaternion.Slerp(
+                modelTransform.rotation,
+                targetRot,
+                Time.deltaTime * 10f
+            );
+        }
+    }
+    public void PlayJumpSFX()
+    {
+        sfxManager.PlaySFX(sfxManager.playerJumpSFX, transform.position);
     }
 }

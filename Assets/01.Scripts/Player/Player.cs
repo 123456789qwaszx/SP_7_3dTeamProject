@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public PlayerController Controller;
     public PlayerStats PlayerStats;
+    public Interaction interaction;
 
 
     public EquipmentData itemData;

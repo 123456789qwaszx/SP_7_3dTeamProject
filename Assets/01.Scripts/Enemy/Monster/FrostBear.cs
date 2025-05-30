@@ -11,12 +11,17 @@ public class FrostBear : MonsterBase//, IDamageable
     private bool isRaging = false;
     private float rageStartTime;
     private float originalDamage;
-    private float originalSpeed; 
+    private float originalSpeed;
+    private float originalAttackRate;
+    private Vector3 originalScale;
+    private Vector3 rageScale;
     private bool hasRaged = false;
     protected override void OnMonsterStart()
     {
+        originalScale = transform.localScale;
         originalDamage = monsterData.damage;
         originalSpeed = monsterData.runSpeed;
+        originalAttackRate = monsterData.attackRate;
     }
     protected override void OnMonsterUpdate()
     {
@@ -41,8 +46,10 @@ public class FrostBear : MonsterBase//, IDamageable
         rageStartTime = Time.time;
         
         // 능력치 강화
-        currentDamage *= 1.5f;
-        agent.speed = monsterData.runSpeed * 1.5f; 
+        StartCoroutine(IncreaseScale());
+        currentDamage = originalDamage * 1.5f;
+        agent.speed = monsterData.runSpeed * 1.5f;
+        currentAttackRate = monsterData.attackRate * 0.66f;
         
         animator.SetTrigger("Rage");
         
@@ -52,7 +59,9 @@ public class FrostBear : MonsterBase//, IDamageable
     void EndRage()
     {
         isRaging = false;
+        transform.localScale = originalScale;
         currentDamage = originalDamage;
+        currentAttackRate = originalAttackRate;
         agent.speed = originalSpeed;
         Debug.Log("Rage 비활성화");
     }
@@ -68,12 +77,24 @@ public class FrostBear : MonsterBase//, IDamageable
                 return ability;
             }
         }
-        
         return monsterData.abilities[0];
+    }
+    private IEnumerator IncreaseScale()
+    {
+        rageScale = originalScale * 1.5f;
+        float elapsed = 0;
+        float time = 1.5f;
+        while (elapsed < time)
+        {
+            elapsed += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(originalScale, rageScale, elapsed / time);
+            yield return null;
+        }
+        transform.localScale = rageScale;
     }
     void TakeTestDamage(float amount)
     {
-        TakePhysicalDamage(amount);
+        TakeDamage(amount);
         Debug.Log($"테스트 데미지: {amount}, 현재 체력: {currentHp}");
     }
 }

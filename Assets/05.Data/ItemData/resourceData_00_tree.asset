@@ -16,12 +16,14 @@ MonoBehaviour:
   description: "\uAC74\uCD95\uC7AC"
   icon: {fileID: 21300000, guid: f29646425f688a94f88d27492cca9762, type: 3}
   type: 1
+  resourcetype: 1
   dropPrefab: {fileID: 311559682905318926, guid: 556f9541574b8be4fb29661e49522cf2, type: 3}
+  quantity: 0
   equipPrefab: {fileID: 0}
   weaponDamages: []
   canStack: 1
   maxStackAmount: 99
   consumables: []
-  resourceHp:
-  - type: 0
+  resources:
+  - type: 1
     value: 3

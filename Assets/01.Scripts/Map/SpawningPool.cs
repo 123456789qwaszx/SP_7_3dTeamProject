@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class SpawningPool : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _tree;
-    [SerializeField]
-    private GameObject _rock;
-    [SerializeField]
-    private GameObject _iron;
-    [SerializeField]
-    private GameObject _mushroom;
+    public Transform _resourceRoot;
 
     [SerializeField]
-    int _treeCount = 0;
+    private Resource _tree;
     [SerializeField]
-    int _rockCount = 0;
+    private Resource _rock;
     [SerializeField]
-    int _ironCount = 0;
+    private Resource _iron;
     [SerializeField]
-    int _mushroomCount = 0;
+    private Resource _mushroom;
+
+    [SerializeField]
+    public int _treeCount = 0;
+    [SerializeField]
+    public int _rockCount = 0;
+    [SerializeField]
+    public int _ironCount = 0;
+    [SerializeField]
+    public int _mushroomCount = 0;
 
     [SerializeField]
     int _keepTreeCount = 15;
@@ -44,34 +46,51 @@ public class SpawningPool : MonoBehaviour
     {
         while (_reserveCount + _treeCount < _keepTreeCount)
         {
-            StartCoroutine(CoResourceSpawn(_tree));
+            StartCoroutine(CoOBJresourceSpawn(_tree));
             _treeCount++;
-
         }
         while (_reserveCount + _rockCount < _KeepRockCount)
         {
-            StartCoroutine(CoResourceSpawn(_rock));
+            StartCoroutine(CoOBJresourceSpawn(_rock));
             _rockCount++;
         }
         while (_reserveCount + _ironCount < _keepIronCount)
         {
-            StartCoroutine(CoResourceSpawn(_iron));
+            StartCoroutine(CoOBJresourceSpawn(_iron));
             _ironCount++;
         }
         while (_reserveCount + _mushroomCount < _keepMushroomCount)
         {
-            StartCoroutine(CoResourceSpawn(_mushroom));
+            StartCoroutine(CoOBJresourceSpawn(_mushroom));
             _mushroomCount++;
         }
     }
 
     
-    IEnumerator CoResourceSpawn(GameObject Prefab)
+    IEnumerator CoOBJresourceSpawn(Resource prefab)
     {
         _reserveCount++;
 
         yield return new WaitForSeconds(_spawnTime);
-        GameObject go = Instantiate(Prefab);
+        Resource go = Instantiate(prefab);
+
+        switch (go._data.resourcetype)
+            {
+                case ResourceType.Tree:
+                    go.hitCount = 3;
+                    break;
+                case ResourceType.Rock:
+                    go.hitCount = 5;
+                    break;
+                case ResourceType.Iron:
+                    go.hitCount = 10;
+                    break;
+                case ResourceType.Mushroom:
+                    go.hitCount = 1;
+                    break;
+            }
+        go.name = prefab.name;
+        go.transform.parent = _resourceRoot;
 
         Vector3 randPos;
         Vector3 randDir = Random.insideUnitSphere * Random.Range(10, _spawnRadius);

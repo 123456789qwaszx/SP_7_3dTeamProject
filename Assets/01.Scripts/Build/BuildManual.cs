@@ -13,14 +13,13 @@ public class Building
 public class BuildManual : MonoBehaviour
 {
     [SerializeField] private GameObject go_BaseUI; // 건축 UI
-    // [SerializeField] private Building[] builds; // 설치물 저장
     private bool isActivated = false; // UI 활성 상태
 
     [SerializeField] private BuildData[] buildList; // 건축물(SO) 리스트
-    // go_Preview, go_Prefab, tf_PlayerCam, isPreviewActivated
 
     void Update()
     {
+        // 미리보기 프리팹 비활성 상태일 때 Tab키를 누르면 제작 메뉴 작동.
         if (Input.GetKeyDown(KeyCode.Tab) && !BuildManager.Instance.isPreviewActivated)
         {
             Window();
@@ -30,7 +29,6 @@ public class BuildManual : MonoBehaviour
 
     public void SlotClick(int _slotNumber)
     {
-        // BuildManager.Instance.SelectedBuilding(builds[_slotNumber]);
         BuildManager.Instance.SelectedBuilding(buildList[_slotNumber]);
         CloseWindow();
     }
@@ -40,6 +38,7 @@ public class BuildManual : MonoBehaviour
         if (!isActivated)
         {
             OpenWindow();
+            
         }
         else
         {
@@ -49,12 +48,14 @@ public class BuildManual : MonoBehaviour
 
     private void OpenWindow() // 제작탭 열기
     {
+        GameManager.Instance.DisableGameCamLook(); // 카메라 잠금
         isActivated = true;
         go_BaseUI.SetActive(true);
     }
 
     private void CloseWindow() // 제작탭 닫기
     {
+        GameManager.Instance.EnableGameCamLook(); // 카메라 잠금 해제
         isActivated = false;
         go_BaseUI.SetActive(false);
     }

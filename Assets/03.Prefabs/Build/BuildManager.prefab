@@ -49,4 +49,4 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  rayRange: 12
+  rayRange: 15

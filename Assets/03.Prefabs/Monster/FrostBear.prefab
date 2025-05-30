@@ -1853,6 +1853,7 @@ GameObject:
   - component: {fileID: 5706338535210763873}
   - component: {fileID: 4014439883878140226}
   - component: {fileID: 3703150639674816376}
+  - component: {fileID: 5087364028958623916}
   m_Layer: 0
   m_Name: FrostBear
   m_TagString: Enemy
@@ -1931,7 +1932,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1955,12 +1956,27 @@ MonoBehaviour:
   monsterData: {fileID: 11400000, guid: d13430ea7aaa18a4eb0c293e0cfc43f8, type: 2}
   currentHp: 0
   currentDamage: 0
+  currentAttackRate: 0
   minWanderDistance: 5
   maxWanderDistance: 10
   minWanderWaitTime: 1
   maxWanderWaitTime: 5
+  monsterHealthBar: {fileID: 0}
   fieldOfView: 120
   currentState: 0
+--- !u!114 &5087364028958623916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758462764035481989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780b25efa4c9284ba5f7f58281922fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsUsing: 0
 --- !u!1 &7888448810738113656
 GameObject:
   m_ObjectHideFlags: 0

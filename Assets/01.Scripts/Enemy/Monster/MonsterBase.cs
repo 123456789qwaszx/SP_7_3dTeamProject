@@ -2,26 +2,31 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MonsterBase : MonoBehaviour
+public class MonsterBase : MonoBehaviour, IDamageable
 {
     public MonsterData monsterData;
 
     protected NavMeshAgent agent;
     protected Animator animator;
-    protected Transform player;
+    protected GameObject player;
 
+    [Header("몬스터 스탯")]
     public float currentHp;
     public float currentDamage;
+    public float currentAttackRate;
     private float playerDistance;
     private float lastAttackTime;
 
+    [Header("몬스터 AI")]
     public float minWanderDistance = 5f;
     public float maxWanderDistance = 10f;
     public float minWanderWaitTime = 1f;
     public float maxWanderWaitTime = 5f;
-    
+
+    public MonsterCondition monsterHealthBar;
     public float fieldOfView = 120f;
     private SkinnedMeshRenderer[] meshRenderers;
     public enum AIState {Idle, Wandering, Attacking, Fleeing}
@@ -30,18 +35,46 @@ public class MonsterBase : MonoBehaviour
     public event Action onTakeDamage;
 
     protected bool isDead = false;
-    protected virtual void Start()
+
+    private bool isInitialized = false;
+    private Poolable poolable;
+
+
+    protected void Awake()
+    {
+        poolable = GetComponent<Poolable>();
+        if (poolable == null)
+            poolable = gameObject.AddComponent<Poolable>();
+    }
+
+    protected void OnEnable()
     {
         GetComponents();
-        GetData();
-        OnMonsterStart();
+    }
+
+    protected void OnDisable()
+    {
+        //풀로 반환할 때 정리
+        if (poolable != null && poolable.IsUsing)
+        {
+            OnReturnToPool();
+        }
+    }
+
+    protected virtual void Start()
+    {
+        //생성된 경우에 초기화
+        if (poolable == null || !poolable.IsUsing)
+        {
+            Initialize();
+        }
     }
 
     protected virtual void Update()
     {
         if (isDead) return;
         
-        playerDistance = Vector3.Distance(transform.position, player.position);       
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);       
         float speed = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("Blend", speed);
 
@@ -60,8 +93,82 @@ public class MonsterBase : MonoBehaviour
         }
         OnMonsterUpdate();
     }
+    
+    public void SetMonsterData(MonsterData data)
+    {
+        if (data == null)
+        {
+            Debug.LogError($"[SetMonsterData] MonsterData가 null입니다! ({gameObject.name})");
+            return;
+        }
+        
+        monsterData = data;
+    }
+    public void OnSpawnFromPool()
+    {
+        if (!isInitialized)
+        {
+            isInitialized = true;
+        }
+        ResetMonster();
+        GetData();
+        OnMonsterStart();
+    }
+    
+    private void Initialize()
+    {
+        if (!isInitialized)
+        {
+            GetComponents();
+        }
+        
+        ResetMonster();
+        GetData();
+        OnMonsterStart();
+    }
+    public void OnReturnToPool()
+    {
+        StopAllCoroutines();
+        
+        CancelInvoke();
 
+        onTakeDamage = null;
+        
+        OnDeath();
+    }
 
+    private void ResetMonster()
+    {
+        isDead = false;
+        lastAttackTime = 0;
+        currentState = AIState.Idle;
+
+        if (agent != null)
+        {
+            agent.enabled = true;
+            agent.isStopped = false;
+            agent.ResetPath();
+        }
+
+        if (animator != null)
+        {
+            animator.SetFloat("Blend",0);
+            animator.ResetTrigger("Death");
+            animator.ResetTrigger("Attack");
+        }
+        
+        if (meshRenderers != null)
+        {
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                meshRenderers[i].material.color = Color.white;
+            }
+        }
+
+        lastAttackTime = 0;
+    }
+    
+    
     // 시작시 필요 컴포넌트 불러오기
     private void GetComponents()
     {
@@ -69,17 +176,29 @@ public class MonsterBase : MonoBehaviour
         animator = GetComponent<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        isInitialized = true;
     }
+    
+    
     //시작 시 몬스터 데이터 가져오기
     private void GetData()
     {
+        if (monsterData == null)
+        {
+            Debug.LogError("[GetData] monsterData is NULL!");
+            return;
+        }
+
+        if (agent == null)
+        {
+            Debug.LogError($"[GetData] NavMeshAgent가 {gameObject.name}에 없습니다!");
+            return;
+        }
         currentHp = monsterData.health;
         currentDamage = monsterData.damage;
         agent.speed = monsterData.walkSpeed;
+        currentAttackRate = monsterData.attackRate;
         
         currentState = AIState.Wandering;
     }
@@ -109,7 +228,6 @@ public class MonsterBase : MonoBehaviour
             default: break;
         }
     }
-
     
     private void PassiveUpdate()
     {
@@ -156,7 +274,7 @@ public class MonsterBase : MonoBehaviour
     }
     private void FleeingUpdate()
     {
-        Vector3 fleeDirection = (transform.position - player.position).normalized;
+        Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
         Vector3 fleeTarget = transform.position + fleeDirection * 10f;
         
         NavMeshHit hit;
@@ -181,8 +299,8 @@ public class MonsterBase : MonoBehaviour
             if (Time.time - lastAttackTime > monsterData.attackRate)
             {
                 lastAttackTime = Time.time;
-                //Managers.Player.Player.Controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
-
+                Managers.Player.Player.Controller.GetComponent<IDamageable>().TakeDamage(currentDamage);
+                
                 int index = Random.Range(0, 4);
                 animator.SetInteger("AttackIndex", index);
                 
@@ -195,9 +313,9 @@ public class MonsterBase : MonoBehaviour
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
-                if (agent.CalculatePath(player.position, path))
+                if (agent.CalculatePath(player.transform.position, path))
                 {
-                    agent.SetDestination(player.position);
+                    agent.SetDestination(player.transform.position);
                 }
                 else
                 {
@@ -216,12 +334,12 @@ public class MonsterBase : MonoBehaviour
     }
     bool IsPlayerInFieldOfView()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         return angle < fieldOfView * 0.5f;
     }
 
-    public void TakePhysicalDamage(float damage)
+    public void TakeDamage(float damage)
     {
          currentHp -= damage;
         
@@ -238,9 +356,7 @@ public class MonsterBase : MonoBehaviour
                 SetState(AIState.Fleeing);
             }
         }
-        
         StartCoroutine((DamageFlash()));
-
     }
 
     IEnumerator DamageFlash()
@@ -257,8 +373,6 @@ public class MonsterBase : MonoBehaviour
             meshRenderers[i].material.color = Color.white;
         }
     }
-    
-    
     void Die()
     {
         isDead = true;
@@ -268,6 +382,15 @@ public class MonsterBase : MonoBehaviour
             agent.enabled = false;
         }
         animator.SetTrigger("Death");
+        
+        DropItems();
+        StartCoroutine(DelayDeath());
+    }
+
+    protected virtual void DropItems()
+    {
+        if (monsterData.dropItems == null || monsterData.dropItems.Length == 0) return;
+        
         for (int i = 0; i <monsterData.dropItems.Length; i++)
         {
             if (Random.value <= monsterData.dropItems[i].dropRate)
@@ -275,20 +398,40 @@ public class MonsterBase : MonoBehaviour
                 int quantity = Random.Range(monsterData.dropItems[i].minQuantity, monsterData.dropItems[i].maxQuantity + 1);
                 for (int j = 0; j < quantity; j++)
                 {
-                    Instantiate(monsterData.dropItems[i].itemPrefab, transform.position+ Vector3.up *2, Quaternion.identity);
+                    GameObject item = Instantiate(
+                        monsterData.dropItems[i].itemPrefab,
+                        transform.position+ Vector3.up *2,
+                        Quaternion.identity);
+
+                    Rigidbody rb = item.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.AddForce(Vector3.up * 3f , ForceMode.Impulse);
+                    }
                 }
             }
         }
-        StartCoroutine(DelayDeath());
     }
 
     IEnumerator DelayDeath()
     {
         yield return new WaitForSeconds(2f);
         
-        OnDeath();
-        Destroy(gameObject);
+        ReturnToPool();
      }
+
+    private void ReturnToPool()
+    {
+        if (poolable != null)
+        {
+            //풀로 반환
+            Managers.Pool.Push(poolable);
+        }
+        else
+        { 
+            Destroy(gameObject);
+        }
+    }
     
     protected virtual void OnMonsterStart() { }
     protected virtual void OnMonsterUpdate() { }

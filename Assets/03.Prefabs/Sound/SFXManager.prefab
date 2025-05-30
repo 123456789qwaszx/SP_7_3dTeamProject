@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1265670393761643269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5078460682201316808}
+  - component: {fileID: 9035369774277145674}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5078460682201316808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265670393761643269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9035369774277145674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265670393761643269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97aa1e29477d3fa489d8026968e05cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bearAttackSFX: {fileID: 2771070566950194900, guid: 8ddc97a2265a8164390b3aa2c3273be7, type: 3}
+  bearDieSFX: {fileID: 4304518152987575881, guid: dee9ede4f64579047a4044bb5c08f78f, type: 3}
+  bearHitSFX: {fileID: 2736905301848062813, guid: e5bf5f8c789c2ae4aaf719299efac4da, type: 3}
+  playerAttackSFX: {fileID: 3221715897915648560, guid: a9a9f6b6f60d2db4fb76d8861bf9ff10, type: 3}
+  playerDieSFX: {fileID: 2097806283197830960, guid: 925e3bd5edcf008499909ebd6f0bf6c7, type: 3}
+  playerHitSFX: {fileID: 123334005096316661, guid: 25d1653d6f726ab448e78a6b2c6ac687, type: 3}
+  playerJumpSFX: {fileID: 8383640168943881197, guid: 823e3c392991c2c40b615e4b4077fc53, type: 3}

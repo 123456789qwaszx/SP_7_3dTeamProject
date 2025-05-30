@@ -23,4 +23,8 @@ MonoBehaviour:
   abilities:
   - abilityName: Rage
     duration: 10
-  dropItems: []
+  dropItems:
+  - itemPrefab: {fileID: 6769927984663270225, guid: 169c30adfd237fa4193b298740b2ad54, type: 3}
+    dropRate: 1
+    minQuantity: 1
+    maxQuantity: 1
