@@ -717,7 +717,7 @@ MonoBehaviour:
   - monsterPrefab: {fileID: 1501444363667589754, guid: 19175cea81c0c854bb122409b93ecb2a, type: 3}
     monsterData: {fileID: 11400000, guid: 65fa83089955f6a48b1edd828ce40525, type: 2}
     maxCount: 3
-    spawnRate: 30
+    spawnRate: 15
     spawnRadius: 30
   spawnPoints: []
   playerCheckRadius: 10
