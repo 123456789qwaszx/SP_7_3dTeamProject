@@ -5,15 +5,13 @@ using UnityEngine.UI;
 
 public class MonsterCondition : MonoBehaviour
 {
-    public MonsterData data;
     public float curValue;
     public float maxValue;
     public Image uiBar;
 
     private void Start()
     {
-        curValue = data.health;
-        maxValue = data.health;
+        curValue = maxValue;
     }
 
     private void Update()

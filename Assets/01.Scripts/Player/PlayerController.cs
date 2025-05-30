@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         Vector3 camForwad = camTr.forward;
         Vector3 camRight = camTr.right;
-
+        
         camForwad.y = 0f;
         camRight.y = 0f;
         
@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetBool("IsRun", isMoving);
         
         Vector3 velocity = new Vector3(move.x * playerStats.Speed, _rigidbody.velocity.y, move.z * playerStats.Speed);
-        
+
         _rigidbody.velocity = velocity;
 
     }

@@ -5,13 +5,13 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class MonsterBase : MonoBehaviour
+public class MonsterBase : MonoBehaviour, IDamageable
 {
     public MonsterData monsterData;
 
     protected NavMeshAgent agent;
     protected Animator animator;
-    protected Transform player;
+    protected GameObject player;
 
     [Header("몬스터 스탯")]
     public float currentHp;
@@ -38,6 +38,7 @@ public class MonsterBase : MonoBehaviour
 
     private bool isInitialized = false;
     private Poolable poolable;
+
 
     protected void Awake()
     {
@@ -73,7 +74,7 @@ public class MonsterBase : MonoBehaviour
     {
         if (isDead) return;
         
-        playerDistance = Vector3.Distance(transform.position, player.position);       
+        playerDistance = Vector3.Distance(transform.position, player.transform.position);       
         float speed = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("Blend", speed);
 
@@ -175,9 +176,7 @@ public class MonsterBase : MonoBehaviour
         animator = GetComponent<Animator>();
         meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
         
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
+        player = GameObject.FindGameObjectWithTag("Player");
         isInitialized = true;
     }
     
@@ -275,7 +274,7 @@ public class MonsterBase : MonoBehaviour
     }
     private void FleeingUpdate()
     {
-        Vector3 fleeDirection = (transform.position - player.position).normalized;
+        Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
         Vector3 fleeTarget = transform.position + fleeDirection * 10f;
         
         NavMeshHit hit;
@@ -300,8 +299,8 @@ public class MonsterBase : MonoBehaviour
             if (Time.time - lastAttackTime > monsterData.attackRate)
             {
                 lastAttackTime = Time.time;
-                //Managers.Player.Player.Controller.GetComponent<IDamageable>().TakePhysicalDamage(damage);
-
+                Managers.Player.Player.Controller.GetComponent<IDamageable>().TakeDamage(currentDamage);
+                
                 int index = Random.Range(0, 4);
                 animator.SetInteger("AttackIndex", index);
                 
@@ -314,9 +313,9 @@ public class MonsterBase : MonoBehaviour
             {
                 agent.isStopped = false;
                 NavMeshPath path = new NavMeshPath();
-                if (agent.CalculatePath(player.position, path))
+                if (agent.CalculatePath(player.transform.position, path))
                 {
-                    agent.SetDestination(player.position);
+                    agent.SetDestination(player.transform.position);
                 }
                 else
                 {
@@ -335,12 +334,12 @@ public class MonsterBase : MonoBehaviour
     }
     bool IsPlayerInFieldOfView()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         return angle < fieldOfView * 0.5f;
     }
 
-    public void TakePhysicalDamage(float damage)
+    public void TakeDamage(float damage)
     {
          currentHp -= damage;
         

@@ -94,7 +94,7 @@ public class FrostBear : MonsterBase//, IDamageable
     }
     void TakeTestDamage(float amount)
     {
-        TakePhysicalDamage(amount);
+        TakeDamage(amount);
         Debug.Log($"테스트 데미지: {amount}, 현재 체력: {currentHp}");
     }
 }
