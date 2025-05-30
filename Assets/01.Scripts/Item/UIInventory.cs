@@ -27,7 +27,7 @@ public class UIInventory : MonoBehaviour
     private PlayerStats condition;
     private PlayerController controller;
 
-    EquipmentData selectedItem;
+    public EquipmentData selectedItem;
     int selectedItemIndex = 0;
 
 
@@ -53,30 +53,40 @@ public class UIInventory : MonoBehaviour
         ClearSelectedItemWindow();
     }
 
+    bool canbuild = false;
 
-    // void UseStackedItem(EquipmentData data, int quantity)
-    // {
-    //     for (int i = 0; i < slots.Length; i++)
-    //     {
-    //         if (slots[i].icon == data.icon && slots[i].item.quantity < quantity)
-    //         {
-    //             slots[i].item.quantity -= quantity;
+    void Canbuild(UIInventory uIInventory, EquipmentData data, BuildData build)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].icon == data.icon && slots[i].quantity < build.cost)
+                canbuild = true;
+        }
+    }
 
-    //             if (slots[i].item.quantity == 0)
-    //             {
-    //                 selectedItem = null;
-    //                 slots[selectedItemIndex].item = null;
-    //                 selectedItemIndex = -1;
-    //                 ClearSelectedItemWindow();
-    //             }
-    //         }
+    void UseStackedItem(EquipmentData data, BuildData build)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].icon == data.icon && slots[i].quantity < build.cost)
+            {
+                slots[i].item.quantity -= build.cost;
 
-    //         UpdateUI();
-    //     }
-    // }
+                if (slots[i].item.quantity == 0)
+                {
+                    selectedItem = null;
+                    slots[selectedItemIndex].item = null;
+                    selectedItemIndex = -1;
+                    ClearSelectedItemWindow();
+                }
+            }
+
+            UpdateUI();
+        }
+    }
 
 
-    void ClearSelectedItemWindow()
+    public void ClearSelectedItemWindow()
     {
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
@@ -100,6 +110,7 @@ public class UIInventory : MonoBehaviour
             if (slot != null)
             {
                 slot.quantity++;
+                slot.resourceType = data.resourcetype;
                 UpdateUI();
                 Managers.Player.Player.itemData = null;
                 return;
@@ -111,6 +122,8 @@ public class UIInventory : MonoBehaviour
         if (emptySlot != null)
         {
             emptySlot.item = data;
+            
+            emptySlot.resourceType = data.resourcetype;
             emptySlot.quantity = 1;
             UpdateUI();
             Managers.Player.Player.itemData = null;
@@ -123,7 +136,7 @@ public class UIInventory : MonoBehaviour
     }
 
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         for (int i = 0; i < slots.Length; i++)
         {

@@ -17,6 +17,15 @@ public class BuildManager : MonoBehaviour
     [SerializeField] private LayerMask layerMask; // 설치 가능or불가능 필터링할 레이어
     [SerializeField] private float rayRange;
 
+    // 강언덕 추가
+    // 아마 직접 연결해줘야할듯
+    public UIInventory _uiInventory;
+    public ItemSlot[] _slots;
+    [SerializeField]
+    BuildData _selectedBuildData;
+
+    bool canBuild = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -31,6 +40,8 @@ public class BuildManager : MonoBehaviour
 
     void Update()
     {
+        _selectedBuildData = Managers.Player.Player.SelectedBuildData;
+
         if (isPreviewActivated)
         {
             PreviewPosUpdate();
@@ -38,7 +49,7 @@ public class BuildManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && isPreviewActivated)
         {
-            Build();
+            Build(_selectedBuildData, _slots);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && isPreviewActivated)
@@ -51,6 +62,7 @@ public class BuildManager : MonoBehaviour
     {
         go_Preview = Instantiate(
             buildList.previewPrefab,
+
             tf_PlayerCam.position + tf_PlayerCam.forward,
             Quaternion.identity
         );
@@ -58,21 +70,46 @@ public class BuildManager : MonoBehaviour
         go_Prefab = buildList.prefab;
         isPreviewActivated = true;
     }
-    private void Build()
+    private void Build(BuildData buildData, ItemSlot[] slots)
     {
         Quaternion lockRot = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
 
-        //미리보기 활성화 되고 미리보기 오브젝트가 설치 가능한 상태일 때
-        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].resourceType == buildData.costType && buildData.cost < slots[i].quantity)
+            {
+                canBuild = true;
+            }
+            Debug.Log($"가지고있는타입{slots[i].resourceType}");
+            Debug.Log($"소모자원{buildData.costType}");
+            Debug.Log($"인벤수량{slots[i].quantity}");
+            Debug.Log($"필요한양{buildData.cost}");
+        }
+        //미리보기 활성화 되고 미리보기 오브젝트가 설치 가능한 상태일 때, 인벤토리의 아이템이 충분할 때
+        if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable() && canBuild)
         {
             Debug.Log("건축 완료");
 
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (slots[i].resourceType == buildData.costType)
+                {
+                    slots[i].quantity -= buildData.cost;
+                    _uiInventory.UpdateUI();
+                }
+            }
             Instantiate(go_Prefab, hitInfo.point, lockRot);
             Destroy(go_Preview);
 
             isPreviewActivated = false;
             go_Preview = null;
             go_Prefab = null;
+            canBuild = false;
+
+        }
+        else if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable())
+        {
+            Debug.Log("건축 불가: 자원 부족");
         }
         else
         {

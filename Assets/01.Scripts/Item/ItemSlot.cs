@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI quantityText;
     private Outline outline;
+    public ResourceType resourceType;
 
     public UIInventory inventory;
 
