@@ -73,22 +73,21 @@ public class BuildManager : MonoBehaviour
     {
         Quaternion lockRot = Quaternion.Euler(0, tf_PlayerCam.rotation.eulerAngles.y, 0); // 건축물 회전 잠금
         
-        ResourceType costType = buildData.costType;
-        int needCost= buildData.cost;
+        // ResourceType costType = buildData.costType;
+        // int needCost= buildData.cost;
 
         for (int i = 0; i < slots.Length; i++)
         {
-            ResourceType InvenItemType = slots[i].resourceType;
-            int capacity = slots[i].quantity;
-            Debug.Log($"가지고있는타입{InvenItemType}" );
-            Debug.Log($"소모자원{costType}" );
-            Debug.Log($"인벤수량{capacity}" );
-            Debug.Log($"필요한양{needCost}");
-
-            if (InvenItemType == costType && needCost < capacity)
+            // ResourceType InvenItemType = slots[i].resourceType;
+            // int capacity = slots[i].quantity;
+            if (slots[i].resourceType == buildData.costType && buildData.cost < slots[i].quantity)
             {
                 canBuild = true;
             }
+            Debug.Log($"가지고있는타입{slots[i].resourceType}" );
+            Debug.Log($"소모자원{buildData.costType}" );
+            Debug.Log($"인벤수량{slots[i].quantity}" );
+            Debug.Log($"필요한양{buildData.cost}");
         }
         //미리보기 활성화 되고 미리보기 오브젝트가 설치 가능한 상태일 때
         if (isPreviewActivated && go_Preview.GetComponent<PreviewObject>().IsBuildable() && canBuild)
