@@ -182,10 +182,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 592675701905318194, guid: 4e36e482a3aeb16478e6a1ad59a5afc1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 567165026}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88140a54f5516864b9297e248e34bbaf, type: 3}
 --- !u!114 &58772469 stripped
 MonoBehaviour:
@@ -330,6 +327,7 @@ MonoBehaviour:
   spawnPoints: []
   playerCheckRadius: 10
   initialPoolSize: 10
+  sfxManager: {fileID: 0}
 --- !u!1001 &243497410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -637,27 +635,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7631623214226830326, guid: e844501743b638a43939d964e3f0cc51, type: 3}
   m_PrefabInstance: {fileID: 573317276906612641}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &567165023 stripped
+--- !u!1 &567165023
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 592675701905318194, guid: 4e36e482a3aeb16478e6a1ad59a5afc1, type: 3}
-  m_PrefabInstance: {fileID: 141003945}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &567165026
-NavMeshObstacle:
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567165024}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &567165024
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567165023}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 5, y: 0.5, z: 5}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655546385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7938213820486359463, guid: 49c970804f427824196b3cd0bfebf7b0, type: 3}
@@ -695,6 +703,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   uiOpenClose: {fileID: 0}
   isGameOver: 0
+  monsterSpawner: {fileID: 0}
 --- !u!4 &679931207
 Transform:
   m_ObjectHideFlags: 0
@@ -1710,6 +1719,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3703150639674816376, guid: 7198627e82627864d8173249253ac53b, type: 3}
+      propertyPath: sfxManager
+      value: 
+      objectReference: {fileID: 9035369774277145674, guid: ba6758e47282dbc43a3e9a580338f6f8, type: 3}
+    - target: {fileID: 3703150639674816376, guid: 7198627e82627864d8173249253ac53b, type: 3}
       propertyPath: maxWanderDistance
       value: 100
       objectReference: {fileID: 0}
@@ -2159,6 +2172,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 567165024}
   - {fileID: 705507995}
   - {fileID: 239510143}
   - {fileID: 679931207}

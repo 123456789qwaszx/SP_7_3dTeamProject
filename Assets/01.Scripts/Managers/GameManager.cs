@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
     bool isPause = false; // 인게임 정지 상태를 확인하는 변수
     public bool isGameOver = false; // 게임오버 상태를 확인하는 변수
 
-
     private void Start()
     {
         uiOpenClose = FindObjectOfType<UIOpenClose>(); // GameManager 인게임 생성
