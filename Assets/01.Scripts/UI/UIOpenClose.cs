@@ -11,29 +11,28 @@ public class UIOpenClose : MonoBehaviour
     public GameObject gameOver;
     bool isActive = false;
 
-
-    void Start()
+    void Awake()
     {
-
-        // if (inven == null)
-        //     inven = GameObject.Find("UI_Inventory");
-
-        if (option == null)
-        {
-            GameObject foundInven = GameObject.Find("Option");
-            if (foundInven != null)
-            {
-                option = foundInven;
-            }
-            else
-                Debug.LogWarning("Option 찾을 수 없습니다.");
-        }
-
-        for (int i = 0; i <= 1; i++)
+        for (int i = 0; i < 2; i++)
         {
             Debug.Log("인벤 활성화");
             OCInven();
         }
+    }
+
+    void Start()
+    {
+        // if (inven == null)
+        //     inven = GameObject.Find("UI_Inventory");
+
+        // if (option == null)
+        // {
+        //     GameObject foundInven = GameObject.Find("Option");
+        //     if (foundInven != null)
+        //     {
+        //         option = foundInven;
+        //     }
+        // }
     }
 
     void Update()
@@ -115,10 +114,6 @@ public class UIOpenClose : MonoBehaviour
         {
             Debug.Log("UI gameover 메서드 작동");
             gameOver.SetActive(!gameOver.activeSelf);
-        }
-        else
-        {
-            Debug.LogWarning("GameOver UI를 찾을 수 없습니다.");
         }
     }
 }

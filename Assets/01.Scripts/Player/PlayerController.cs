@@ -43,11 +43,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool isJumping = false;//점프상태인지 체크
 
 
-    void Start()
-    {
-    
-    }
-
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
