@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
+    public GameObject inventoryWindow;
+
     public ItemSlot[] slots;
     public Transform slotPanel;
     public Transform dropPosition;
@@ -48,6 +50,8 @@ public class UIInventory : MonoBehaviour
             slots[i].index = i;
             slots[i].inventory = this;
         }
+
+        inventoryWindow.SetActive(false);
 
 
         ClearSelectedItemWindow();
@@ -122,7 +126,6 @@ public class UIInventory : MonoBehaviour
         if (emptySlot != null)
         {
             emptySlot.item = data;
-            
             emptySlot.resourceType = data.resourcetype;
             emptySlot.quantity = 1;
             UpdateUI();
