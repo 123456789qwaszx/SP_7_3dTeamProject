@@ -78,7 +78,7 @@ AnimatorStateMachine:
     m_Position: {x: 610, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8376576226048873383}
-    m_Position: {x: 510, y: 380, z: 0}
+    m_Position: {x: 70, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9179480305409094223}
     m_Position: {x: 1020, y: -40, z: 0}
@@ -90,7 +90,7 @@ AnimatorStateMachine:
     m_Position: {x: 220, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6433695435497927738}
-    m_Position: {x: 210, y: 240, z: 0}
+    m_Position: {x: 220, y: 200, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -6858194139364824564}
@@ -402,37 +402,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: AttackIndex
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Blend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Rage
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Death
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
