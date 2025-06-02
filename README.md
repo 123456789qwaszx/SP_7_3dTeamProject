@@ -9,12 +9,15 @@
   -캐릭터 점프 : 스페이스바   
   -인벤토리 : I   
   -건축메뉴 : Tap   
+![image](https://github.com/user-attachments/assets/1aa2f398-b825-43d4-99e1-5a3b644022f7)
 
 
 
 - 컨텐츠_자원   
   -생성된 자원물(나무, 돌, 철, 버섯)에 접근 시, 건축재료 및 음식 드랍   
   -채취시 자원물 파괴, 일정 시간 후 재생성   
+
+![image](https://github.com/user-attachments/assets/1c4c5156-7e19-467a-897e-f225e8545442)
 
 - 컨텐츠_빌드   
    -건축메뉴(Tap)을 열고, 원하는 건축 아이콘을 클릭 시 '빌드 Preview'를 생성   
@@ -23,6 +26,7 @@
    -생성 된 건축물은 몬스터의 접근을 막는데 사용.   
    -건축 된 집 안에 있을 시 Hp 회복.
 
+![image](https://github.com/user-attachments/assets/92e49592-71bd-4e06-b1ee-34f7e38c7f0e)
 
 
 - 컨텐츠_몬스터   
@@ -36,12 +40,19 @@
 
    -곰을 사냥하는데 성공 시, 아이템 드랍   
    -드랍 된 아이템은 인벤토리 내에서 장착 가능   
+![image](https://github.com/user-attachments/assets/d1a45304-e45a-4633-9506-15bdea9e54ed)
+![image](https://github.com/user-attachments/assets/6cd48ff5-6271-42f5-9c5f-009d159cb647)
 
 
 
 - 컨텐츠_UI 및 사운드   
   -화면 우측 상단 톱니바퀴 버튼을 누르면 옵션 조절 가능. BGM 및 효과음 크기, 재시작 게임끄기 등   
   -Hp가 0이 될 시 GameOver UI에서 플레이 선택가능   
+
+![image](https://github.com/user-attachments/assets/087c29bd-d913-46d1-93b1-e1fe1880196f)
+
+![image](https://github.com/user-attachments/assets/2f11cb1f-6252-40ec-af69-b973c8597f37)
+
 
 - 컨텐츠_NPC   
   -맵 내에 Npc에게 접근 시 대화 가능     
